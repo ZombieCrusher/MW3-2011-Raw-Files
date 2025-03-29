@@ -1,0 +1,778 @@
+{
+    menuDef
+    {
+        name                        "main_selection"
+        fullscreen                  1
+        rect                        0 0 640 480 0 0
+        focuscolor                  1 1 1 1
+        soundLoop                   "music_opening"
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        onOpen
+        {
+            setLocalVarInt ui_sp_stat_progression_easy 0;
+            setLocalVarInt ui_sp_stat_progression_easy (((int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 0)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 1)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 2)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 3)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 4)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 5)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 6)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 7)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 8)) >= 1)));
+            setLocalVarInt ui_sp_stat_progression_easy (localvarint("ui_sp_stat_progression_easy") + ((int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 9)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 10)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 11)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 12)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 13)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 14)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 15)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 16)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 17)) >= 1)));
+            setLocalVarInt ui_buttonNavGroupOffset 0;
+            setLocalVarInt ui_buttonNavGroupCurrent 0;
+            setLocalVarString ui_buttonNavGroupName "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            focusfirst;
+            setBackgroundVideo ( "" );
+            if (!getprofiledata("hasEverPlayed_MainMenu"))
+            {
+                setLocalVarBool ui_show_recommendation 1;
+                open offensive_warning;
+            }
+            setLocalVarInt ui_open_time milliseconds();
+            setLocalVarString ui_so_time_text (select((gettimeplayed("so", "days") > 0), gettimeplayed("so", "dhms"), gettimeplayed("so", "hms")));
+            setLocalVarString ui_so_comp_text (select((int((min(1, int(int(getprofiledata("percentCompleteSO")) % 100) / int(tablelookup("sp/rankTable.csv", 0, "maxrank", 1))) * 100 * 10) % 10) == 0), (locstring("@MENU_SP_STAT_NUM_PERCENT_COMPLETE", int(min(1, int(int(getprofiledata("percentCompleteSO")) % 100) / int(tablelookup("sp/rankTable.csv", 0, "maxrank", 1))) * 100))), (locstring("@MENU_SP_STAT_NUM_DOT_PERCENT_COMPLETE", int(min(1, int(int(getprofiledata("percentCompleteSO")) % 100) / int(tablelookup("sp/rankTable.csv", 0, "maxrank", 1))) * 100), int((min(1, int(int(getprofiledata("percentCompleteSO")) % 100) / int(tablelookup("sp/rankTable.csv", 0, "maxrank", 1))) * 100 * 10) % 10)))));
+            setLocalVarString ui_sp_time_text (select((gettimeplayed("sp", "days") > 0), gettimeplayed("sp", "dhms"), gettimeplayed("sp", "hms")));
+            setLocalVarString ui_sp_comp_text (select((int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) == 0), (locstring("@MENU_SP_STAT_NUM_PERCENT_COMPLETE", int((getprofiledata("percentCompleteSP") / 100)))), (locstring("@MENU_SP_STAT_NUM_DOT_PERCENT_COMPLETE", int((getprofiledata("percentCompleteSP") / 100)), int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10)))));
+            setLocalVarString ui_mp_time_text (select((gettimeplayed("mp", "days") > 0), gettimeplayed("mp", "dhms"), gettimeplayed("mp", "hms")));
+            setLocalVarString ui_mp_comp_text (locstring("@MENU_SP_STAT_NUM_PERCENT_COMPLETE", (getprofiledata("percentCompleteMP"))));
+        }
+        onClose
+        {
+        }
+        onESC
+        {
+            open quit_popmenu;
+        }
+        onFocusDueToClose
+        {
+            setLocalVarString ui_hint_text "";
+            focusfirst;
+            setBackgroundVideo ( "" );
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image_blur_less"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(!(dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(getfocuseditemname() != "game_select_button_1");
+            textscale                   0.55
+            background                  "game_select_so_bw"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) - (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  (select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(getfocuseditemname() == "game_select_button_1");
+            textscale                   0.55
+            background                  "game_select_so_color"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) - (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  (select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333;
+            exp forecolor a             select((getfocuseditemname() == "game_select_button_1"), 1, 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) - (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  12;
+            exp forecolor a             select((getfocuseditemname() == "game_select_button_1"), 1, 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) - (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333) + ((select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333) - (12);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  0 - (12);
+            exp forecolor a             select((getfocuseditemname() == "game_select_button_1"), 1, 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) - (5 + dvarbool(widescreen) * 11));
+            exp rect y                  150;
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+            exp forecolor a             select((getfocuseditemname() == "game_select_button_1"), 1, 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       1
+            decoration                  
+            visible                     when(getfocuseditemname() != "game_select_button_1");
+            textalign                   9
+            textscale                   0.375
+            textfont                    9
+            forecolor                   0.5 0.5 0.5 1
+            exp text                    "@MENU_SP_SPECIAL_OPS_CAPS";
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) - (5 + dvarbool(widescreen) * 11));
+            exp rect y                  150;
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       1
+            decoration                  
+            visible                     when(getfocuseditemname() == "game_select_button_1");
+            textalign                   9
+            textscale                   0.375
+            textfont                    9
+            exp text                    "@MENU_SP_SPECIAL_OPS_CAPS";
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) - (5 + dvarbool(widescreen) * 11));
+            exp rect y                  150;
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(getfocuseditemname() != "game_select_button_1");
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) - (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333) + ((select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(getfocuseditemname() == "game_select_button_1");
+            textscale                   0.55
+            forecolor                   0.51 0.537 0.51 1
+            background                  "white"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) - (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333) + ((select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            name                        "game_select_button_1_vscroll"
+            rect                        0 0 0 0 2 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            type                        21
+            visible                     when(getfocuseditemname() == "game_select_button_1");
+            textalign                   9
+            textaligny                  -1
+            textscale                   0.375
+            exp text                    localvarstring("ui_so_comp_text") + "\n" + localvarstring("ui_so_time_text");
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) - (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333) + ((select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            name                        "game_select_button_1"
+            rect                        0 0 0 0 2 1
+            style                       1
+            type                        1
+            visible                     1
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarString ui_info_desc "@MENU_SP_DESC_SPECIALOPS";
+                uiScript resetvscroll game_select_button_1_vscroll;
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarbool("ui_show_recommendation"))
+                {
+                    open popmenu_recommendation_so;
+                }
+                else
+                {
+                    open main_specops;
+                }
+            }
+            execKeyInt 31
+            {
+                setFocus game_select_button_2;
+            }
+            execKeyInt 23
+            {
+                setFocus game_select_button_2;
+            }
+            execKeyInt 30
+            {
+                setFocus game_select_button_3;
+            }
+            execKeyInt 22
+            {
+                setFocus game_select_button_3;
+            }
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) - (5 + dvarbool(widescreen) * 11));
+            exp rect y                  150;
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  select(dvarbool(widescreen), 158.667, 158.667 * 0.91);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(getfocuseditemname() != "game_select_button_2");
+            textscale                   0.55
+            background                  "game_select_sp_bw"
+            exp rect x                  (0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2);
+            exp rect y                  (150) + (17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  (select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(getfocuseditemname() == "game_select_button_2");
+            textscale                   0.55
+            background                  "game_select_sp_color"
+            exp rect x                  (0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2);
+            exp rect y                  (150) + (17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  (select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333;
+            exp forecolor a             select((getfocuseditemname() == "game_select_button_2"), 1, 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2);
+            exp rect y                  (150) + (17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  12;
+            exp forecolor a             select((getfocuseditemname() == "game_select_button_2"), 1, 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2);
+            exp rect y                  (150) + (17.333) + ((select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333) - (12);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  0 - (12);
+            exp forecolor a             select((getfocuseditemname() == "game_select_button_2"), 1, 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  (0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2);
+            exp rect y                  150;
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+            exp forecolor a             select((getfocuseditemname() == "game_select_button_2"), 1, 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       1
+            decoration                  
+            visible                     when(getfocuseditemname() != "game_select_button_2");
+            textalign                   9
+            textscale                   0.375
+            textfont                    9
+            forecolor                   0.5 0.5 0.5 1
+            exp text                    "@MENU_SP_CAMPAIGN";
+            exp rect x                  (0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2);
+            exp rect y                  150;
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       1
+            decoration                  
+            visible                     when(getfocuseditemname() == "game_select_button_2");
+            textalign                   9
+            textscale                   0.375
+            textfont                    9
+            exp text                    "@MENU_SP_CAMPAIGN";
+            exp rect x                  (0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2);
+            exp rect y                  150;
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(getfocuseditemname() != "game_select_button_2");
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  (0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2);
+            exp rect y                  (150) + (17.333) + ((select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(getfocuseditemname() == "game_select_button_2");
+            textscale                   0.55
+            forecolor                   0.51 0.537 0.51 1
+            background                  "white"
+            exp rect x                  (0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2);
+            exp rect y                  (150) + (17.333) + ((select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            name                        "game_select_button_2_vscroll"
+            rect                        0 0 0 0 2 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            type                        21
+            visible                     when(getfocuseditemname() == "game_select_button_2");
+            textalign                   9
+            textaligny                  -1
+            textscale                   0.375
+            exp text                    localvarstring("ui_sp_comp_text") + "\n" + localvarstring("ui_sp_time_text");
+            exp rect x                  (0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2);
+            exp rect y                  (150) + (17.333) + ((select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            name                        "game_select_button_2"
+            rect                        0 0 0 0 2 1
+            style                       1
+            type                        1
+            visible                     1
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarString ui_info_desc "@MENU_SP_DESC_MW3_SINGLEPLAYER";
+                uiScript resetvscroll game_select_button_2_vscroll;
+            }
+            action
+            {
+                play mouse_click;
+                open main_campaign;
+            }
+            execKeyInt 31
+            {
+                setFocus game_select_button_3;
+            }
+            execKeyInt 23
+            {
+                setFocus game_select_button_3;
+            }
+            execKeyInt 30
+            {
+                setFocus game_select_button_1;
+            }
+            execKeyInt 22
+            {
+                setFocus game_select_button_1;
+            }
+            exp rect x                  (0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2);
+            exp rect y                  150;
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  select(dvarbool(widescreen), 158.667, 158.667 * 0.91);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(getfocuseditemname() != "game_select_button_3");
+            textscale                   0.55
+            background                  "game_select_mp_bw"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) + select(dvarbool(widescreen), 202.667, 202.667 * 0.91) + (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  (select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(getfocuseditemname() == "game_select_button_3");
+            textscale                   0.55
+            background                  "game_select_mp_color"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) + select(dvarbool(widescreen), 202.667, 202.667 * 0.91) + (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  (select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333;
+            exp forecolor a             select((getfocuseditemname() == "game_select_button_3"), 1, 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) + select(dvarbool(widescreen), 202.667, 202.667 * 0.91) + (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  12;
+            exp forecolor a             select((getfocuseditemname() == "game_select_button_3"), 1, 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) + select(dvarbool(widescreen), 202.667, 202.667 * 0.91) + (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333) + ((select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333) - (12);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  0 - (12);
+            exp forecolor a             select((getfocuseditemname() == "game_select_button_3"), 1, 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) + select(dvarbool(widescreen), 202.667, 202.667 * 0.91) + (5 + dvarbool(widescreen) * 11));
+            exp rect y                  150;
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+            exp forecolor a             select((getfocuseditemname() == "game_select_button_3"), 1, 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       1
+            decoration                  
+            visible                     when(getfocuseditemname() != "game_select_button_3");
+            textalign                   9
+            textscale                   0.375
+            textfont                    9
+            forecolor                   0.5 0.5 0.5 1
+            exp text                    "@MENU_MULTIPLAYER_CAPS";
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) + select(dvarbool(widescreen), 202.667, 202.667 * 0.91) + (5 + dvarbool(widescreen) * 11));
+            exp rect y                  150;
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       1
+            decoration                  
+            visible                     when(getfocuseditemname() == "game_select_button_3");
+            textalign                   9
+            textscale                   0.375
+            textfont                    9
+            exp text                    "@MENU_MULTIPLAYER_CAPS";
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) + select(dvarbool(widescreen), 202.667, 202.667 * 0.91) + (5 + dvarbool(widescreen) * 11));
+            exp rect y                  150;
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(getfocuseditemname() != "game_select_button_3");
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) + select(dvarbool(widescreen), 202.667, 202.667 * 0.91) + (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333) + ((select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 2 1
+            style                       3
+            decoration                  
+            visible                     when(getfocuseditemname() == "game_select_button_3");
+            textscale                   0.55
+            forecolor                   0.51 0.537 0.51 1
+            background                  "white"
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) + select(dvarbool(widescreen), 202.667, 202.667 * 0.91) + (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333) + ((select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            name                        "game_select_button_3_vscroll"
+            rect                        0 0 0 0 2 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            type                        21
+            visible                     when(getfocuseditemname() == "game_select_button_3");
+            textalign                   9
+            textaligny                  -1
+            textscale                   0.375
+            exp text                    localvarstring("ui_mp_comp_text") + "\n" + localvarstring("ui_mp_time_text");
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) + select(dvarbool(widescreen), 202.667, 202.667 * 0.91) + (5 + dvarbool(widescreen) * 11));
+            exp rect y                  (150) + (17.333) + ((select(dvarbool(widescreen), 158.667, 158.667 * 0.91)) - 17.333 - 17.333);
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  17.333;
+        }
+        itemDef
+        {
+            name                        "game_select_button_3"
+            rect                        0 0 0 0 2 1
+            style                       1
+            type                        1
+            visible                     1
+            textscale                   0.55
+            onFocus
+            {
+                play mouse_over;
+                setLocalVarString ui_info_desc "@MENU_SP_DESC_MULTIPLAYER";
+                uiScript resetvscroll game_select_button_3_vscroll;
+            }
+            action
+            {
+                play mouse_click;
+                if (localvarbool("ui_show_recommendation"))
+                {
+                    open popmenu_recommendation_mp;
+                }
+                else
+                {
+                    uiScript startMultiplayer;
+                }
+            }
+            execKeyInt 31
+            {
+                setFocus game_select_button_1;
+            }
+            execKeyInt 23
+            {
+                setFocus game_select_button_1;
+            }
+            execKeyInt 30
+            {
+                setFocus game_select_button_2;
+            }
+            execKeyInt 22
+            {
+                setFocus game_select_button_2;
+            }
+            exp rect x                  ((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) + select(dvarbool(widescreen), 202.667, 202.667 * 0.91) + (5 + dvarbool(widescreen) * 11));
+            exp rect y                  150;
+            exp rect w                  select(dvarbool(widescreen), 202.667, 202.667 * 0.91);
+            exp rect h                  select(dvarbool(widescreen), 158.667, 158.667 * 0.91);
+        }
+        itemDef
+        {
+            rect                        0 0 232.8 116.4 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "mw3_logo_large"
+            exp rect x                  (((0 - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) / 2) - select(dvarbool(widescreen), 202.667, 202.667 * 0.91) - (5 + dvarbool(widescreen) * 11))) - 17;
+            exp rect y                  0 - 16.4;
+            exp forecolor a             min(float(milliseconds() - localvarint("ui_open_time")) * 0.002, 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 72 2 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     1
+            textalign                   5
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_info_desc");
+            exp rect x                  (0 - ((select(dvarbool(widescreen), 202.667, 202.667 * 0.91)) * 3 + (5 + dvarbool(widescreen) * 11) * 2) / 2);
+            exp rect y                  (150 + select(dvarbool(widescreen), 158.667, 158.667 * 0.91) + 8) + (18) + 6;
+            exp rect w                  (select(dvarbool(widescreen), 202.667, 202.667 * 0.91)) * 3 + (5 + dvarbool(widescreen) * 11) * 2;
+        }
+        itemDef
+        {
+            name                        "legal"
+            text                        "@MENU_SP_IIS_LEGAL"
+            rect                        -260 -30 520 60 2 3
+            decoration                  
+            autowrapped                 
+            visible                     1
+            textalign                   13
+            textscale                   0.3
+            textfont                    3
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "main_selection";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                open quit_popmenu;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@MENU_QUIT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@MENU_QUIT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((1) && (!0) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "main_selection"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@MENU_QUIT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@MENU_QUIT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "main_selection"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@MENU_QUIT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@MENU_QUIT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_QUIT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@MENU_QUIT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@MENU_QUIT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "main_selection"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "main_selection"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "main_selection"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+        }
+    }
+}

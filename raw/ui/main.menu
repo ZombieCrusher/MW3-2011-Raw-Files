@@ -1,0 +1,39 @@
+{
+    menuDef
+    {
+        name                        "main"
+        fullscreen                  1
+        rect                        0 0 640 480 0 0
+        focuscolor                  1 1 1 1
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        onOpen
+        {
+            setLocalVarString ui_setfocus_to "";
+            if (dvarstring(gameMode) == "sp")
+            {
+                close self;
+                open main_campaign;
+            }
+            if (dvarstring(gameMode) == "so")
+            {
+                close self;
+                open main_specops;
+            }
+            if (dvarstring(gameMode) != "so" && dvarstring(gameMode) != "sp")
+            {
+                close self;
+                open main_selection;
+            }
+        }
+        onClose
+        {
+            close main_specops;
+            close main_campaign;
+        }
+        onESC
+        {
+        }
+    }
+}

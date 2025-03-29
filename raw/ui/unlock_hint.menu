@@ -1,0 +1,237 @@
+{
+    menuDef
+    {
+        name                        "unlock_hint"
+        rect                        -2 -34 0 0 10 9
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        legacySplitScreenScale      
+        visible                     when((dvarint(specialops) && getplayerdata("surHUD", "unlock")) && !ui_active() && !dvarbool(splitscreen));
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   1 1 1 0.85
+            background                  "gradient_fadein"
+            exp rect y                  (0 - 16 - 4) + (60 * (!dvarbool(so_survival)));
+            exp rect w                  300;
+            exp rect h                  16;
+            exp rect x                  (((0) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             0.35 * max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_0", "name") != "");
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "gradient_fadein"
+            exp rect y                  (0 * (16 + 1) - 4) + (60 * (!dvarbool(so_survival)));
+            exp rect w                  300;
+            exp rect h                  2 * (16 + 1);
+            exp rect x                  (((0) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             0.75 * max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_0", "icon") != "");
+            textscale                   0.55
+            forecolor                   1 0.8 0.8 1
+            exp material                "ui_scrollbar_arrow_right";
+            exp rect w                  16;
+            exp rect h                  8;
+            exp rect y                  ((0) * 16 + 10) + (60 * (!dvarbool(so_survival)));
+            exp rect x                  (((300 - 28 - 12) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_0", "icon") != "");
+            textscale                   0.55
+            exp material                getplayerdata("surHUD_unlock_hint_0", "icon");
+            exp rect w                  28;
+            exp rect h                  28;
+            exp rect y                  ((0) * 16) + (60 * (!dvarbool(so_survival)));
+            exp rect x                  (((300 - 28 - 2) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_0", "name") != "");
+            textalign                   2
+            textaligny                  8
+            textscale                   0.33
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    "@" + getplayerdata("surHUD_unlock_hint_0", "name");
+            exp rect y                  ((0 + 1) * 16 + (0 - 2)) + (60 * (!dvarbool(so_survival)));
+            exp rect x                  (((300 - (28 * (getplayerdata("surHUD_unlock_hint_0", "icon") != "")) - 18) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_1", "name") != "");
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "gradient_fadein"
+            exp rect y                  (2 * (16 + 1) - 4) + (60 * (!dvarbool(so_survival)));
+            exp rect w                  300;
+            exp rect h                  2 * (16 + 1);
+            exp rect x                  (((0) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             0.75 * max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_1", "icon") != "");
+            textscale                   0.55
+            forecolor                   1 0.8 0.8 1
+            exp material                "ui_scrollbar_arrow_right";
+            exp rect w                  16;
+            exp rect h                  8;
+            exp rect y                  ((2) * 16 + 10) + (60 * (!dvarbool(so_survival)));
+            exp rect x                  (((300 - 28 - 12) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_1", "icon") != "");
+            textscale                   0.55
+            exp material                getplayerdata("surHUD_unlock_hint_1", "icon");
+            exp rect w                  28;
+            exp rect h                  28;
+            exp rect y                  ((2) * 16) + (60 * (!dvarbool(so_survival)));
+            exp rect x                  (((300 - 28 - 2) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_1", "name") != "");
+            textalign                   2
+            textaligny                  8
+            textscale                   0.33
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    "@" + getplayerdata("surHUD_unlock_hint_1", "name");
+            exp rect y                  ((2 + 1) * 16 + (0 - 2)) + (60 * (!dvarbool(so_survival)));
+            exp rect x                  (((300 - (28 * (getplayerdata("surHUD_unlock_hint_1", "icon") != "")) - 18) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_2", "name") != "");
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "gradient_fadein"
+            exp rect y                  (4 * (16 + 1) - 4) + (60 * (!dvarbool(so_survival)));
+            exp rect w                  300;
+            exp rect h                  2 * (16 + 1);
+            exp rect x                  (((0) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             0.75 * max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_2", "icon") != "");
+            textscale                   0.55
+            forecolor                   1 0.8 0.8 1
+            exp material                "ui_scrollbar_arrow_right";
+            exp rect w                  16;
+            exp rect h                  8;
+            exp rect y                  ((4) * 16 + 10) + (60 * (!dvarbool(so_survival)));
+            exp rect x                  (((300 - 28 - 12) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_2", "icon") != "");
+            textscale                   0.55
+            exp material                getplayerdata("surHUD_unlock_hint_2", "icon");
+            exp rect w                  28;
+            exp rect h                  28;
+            exp rect y                  ((4) * 16) + (60 * (!dvarbool(so_survival)));
+            exp rect x                  (((300 - 28 - 2) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_2", "name") != "");
+            textalign                   2
+            textaligny                  8
+            textscale                   0.33
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    "@" + getplayerdata("surHUD_unlock_hint_2", "name");
+            exp rect y                  ((4 + 1) * 16 + (0 - 2)) + (60 * (!dvarbool(so_survival)));
+            exp rect x                  (((300 - (28 * (getplayerdata("surHUD_unlock_hint_2", "icon") != "")) - 18) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_0", "mode") == "mission" || dvarbool(so_survival));
+            textalign                   2
+            textscale                   0.35
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.85
+            exp text                    "@SPECIAL_OPS_NEW_MISSION_UNLOCK";
+            exp rect y                  (60 * (!dvarbool(so_survival))) - 4;
+            exp rect x                  (((300 - 4) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(getplayerdata("surHUD_unlock_hint_0", "mode") == "survival" && !dvarbool(so_survival));
+            textalign                   2
+            textscale                   0.35
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.85
+            exp text                    "@SPECIAL_OPS_NEW_SURVIVAL_UNLOCK";
+            exp rect y                  (60 * (!dvarbool(so_survival))) - 4;
+            exp rect x                  (((300 - 4) - (300)) + (max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + 0) / 250), 1), 0) * 300)) + (min(max((milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 250, 0), 1) * 2 * 300);
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_unlock_animate") + (6000 + ((2000) * ((getplayerdata("surHUD_unlock_hint_0", "name") != "") + (getplayerdata("surHUD_unlock_hint_1", "name") != "") + (getplayerdata("surHUD_unlock_hint_2", "name") != ""))))) / 1000), 1), 0);
+        }
+    }
+}

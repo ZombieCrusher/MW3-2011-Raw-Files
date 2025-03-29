@@ -1,0 +1,47 @@
+{
+    menuDef
+    {
+        name                        "heatmeter"
+        rect                        0 0 0 0 10 10
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        hiddenDuringFlashbang       
+        visible                     when(weaponheatactive() && !ui_active() && (dvarstring(mapname) == "hamburg"));
+        itemDef
+        {
+            rect                        -14.5 -176 9 100 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 0 0 1
+            background                  "white"
+            exp rect h                  79 * weaponheatvalue();
+            exp rect y                  ((- 176) + 2) + ((1 - weaponheatvalue()) * 79);
+            exp forecolor r             0 + weaponheatvalue();
+            exp forecolor g             1 - weaponheatvalue();
+            exp forecolor b             0.5 - weaponheatvalue();
+        }
+        itemDef
+        {
+            rect                        -20 -176 20 100 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "hud_temperature_gauge"
+        }
+        itemDef
+        {
+            rect                        -20 -176 20 100 0 0
+            style                       3
+            decoration                  
+            visible                     when(weaponheatoverheated());
+            textscale                   0.55
+            forecolor                   1 0 0 1
+            background                  "hud_temperature_gauge"
+            exp forecolor a             weaponheatvalue() - 0.5;
+        }
+    }
+}

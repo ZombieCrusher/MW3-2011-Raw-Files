@@ -1,0 +1,46 @@
+{
+    menuDef
+    {
+        name                        "levels_challenge"
+        fullscreen                  1
+        rect                        0 0 640 480 0 0
+        style                       1
+        focuscolor                  1 1 1 1
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        onOpen
+        {
+            if (dvarbool(survival_chaos))
+            {
+                open popmenu_specops_chaos;
+            }
+            else
+            {
+                if (dvarbool(so_survival))
+                {
+                    if (dvarbool(ui_is_so_dlc))
+                    {
+                        open popmenu_specops_survival_dlc;
+                    }
+                    else
+                    {
+                        open popmenu_specops_survival;
+                    }
+                }
+                else
+                {
+                    if (dvarbool(ui_is_so_dlc))
+                    {
+                        open popmenu_specops_mission_dlc;
+                    }
+                    else
+                    {
+                        open popmenu_specops_mission;
+                    }
+                }
+            }
+            close self;
+        }
+    }
+}

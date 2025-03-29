@@ -1,0 +1,24 @@
+{
+    menuDef
+    {
+        name                        "waves"
+        rect                        2 136 0 0 8 8
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        legacySplitScreenScale      
+        visible                     when((dvarint(so_survival) && getplayerdata("surHUD", "wave")) && !ui_active() && !dvarbool(splitscreen));
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(1);
+            textscale                   0.33
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.75
+            exp text                    locstring("@SO_SURVIVAL_WAVE_TIME", getplayerdata("surHUD_wave"));
+            exp rect y                  (int((dvarint(so_survival) && getplayerdata("surHUD", "enemy")) && !ui_active()) - 1) * (136 - 120);
+        }
+    }
+}

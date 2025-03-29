@@ -1,0 +1,41 @@
+{
+    menuDef
+    {
+        name                        "challenge"
+        decoration                  
+        rect                        300 0 640 480 1 1
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        visible                     when(!(player("number") + 1 == dvarint(ui_remotemissile_playernum)) && (dvarbool(hud_missionFailed) == 0) && (dvarstring(createfx) != "on") && !flashbanged() && !usingvehicle() && !ui_active());
+        itemDef
+        {
+            name                        "challenge_title_tiered"
+            rect                        0 -180 0 0 2 2
+            decoration                  
+            visible                     when((int(max(getplayerdata("challengeState", tablelookupbyrow("sp/splashTable.csv", splashrownum(0), 0)), 1)) - 1) > 0);
+            textalign                   2
+            textscale                   0.375
+            textstyle                   3
+            textfont                    4
+            exp text                    locstring("@" + tablelookup("sp/allChallengesTable.csv", 0, tablelookupbyrow("sp/splashTable.csv", splashrownum(0), 0), 1)) + locstring("@" + tablelookup("sp/allChallengesTable.csv", 0, tablelookupbyrow("sp/splashTable.csv", splashrownum(0), 0), 3) + "_" + (int(max(getplayerdata("challengeState", tablelookupbyrow("sp/splashTable.csv", splashrownum(0), 0)), 1)) - 1));
+            exp glowcolor r             tablelookupbyrow("sp/splashTable.csv", splashrownum(0), 5);
+            exp glowcolor g             tablelookupbyrow("sp/splashTable.csv", splashrownum(0), 6);
+            exp glowcolor b             tablelookupbyrow("sp/splashTable.csv", splashrownum(0), 7);
+            exp glowcolor a             tablelookupbyrow("sp/splashTable.csv", splashrownum(0), 8);
+            decodeEffect                100 3000 500
+        }
+        itemDef
+        {
+            name                        "challenge_description"
+            rect                        0 -160 0 0 2 2
+            decoration                  
+            visible                     1
+            textalign                   2
+            textscale                   0.2916
+            textstyle                   3
+            exp text                    getsplashdescription(0);
+            decodeEffect                50 3000 500
+        }
+    }
+}

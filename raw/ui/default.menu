@@ -1,0 +1,243 @@
+{
+    functionDef
+    {
+        name                        "FUNC_0"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 14) * (player("teamname") == "TEAM_ALLIES")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 14) * (player("teamname") == "TEAM_AXIS"));
+    }
+    functionDef
+    {
+        name                        "FUNC_1"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 15) * (player("teamname") == "TEAM_ALLIES")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 15) * (player("teamname") == "TEAM_AXIS"));
+    }
+    functionDef
+    {
+        name                        "FUNC_2"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 16) * (player("teamname") == "TEAM_ALLIES")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 16) * (player("teamname") == "TEAM_AXIS"));
+    }
+    functionDef
+    {
+        name                        "FUNC_3"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 14) * (player("teamname") == "TEAM_AXIS")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 14) * (player("teamname") == "TEAM_ALLIES"));
+    }
+    functionDef
+    {
+        name                        "FUNC_4"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 15) * (player("teamname") == "TEAM_AXIS")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 15) * (player("teamname") == "TEAM_ALLIES"));
+    }
+    functionDef
+    {
+        name                        "FUNC_5"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 16) * (player("teamname") == "TEAM_AXIS")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 16) * (player("teamname") == "TEAM_ALLIES"));
+    }
+    functionDef
+    {
+        name                        "FUNC_6"
+        value                       team("name") == "TEAM_ALLIES";
+    }
+    functionDef
+    {
+        name                        "FUNC_7"
+        value                       team("name") == "TEAM_AXIS";
+    }
+    functionDef
+    {
+        name                        "FUNC_8"
+        value                       ((team("name") == "TEAM_AXIS") * 1) + ((team("name") == "TEAM_ALLIES") * 2);
+    }
+    functionDef
+    {
+        name                        "FUNC_9"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 14);
+    }
+    functionDef
+    {
+        name                        "FUNC_10"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 15);
+    }
+    functionDef
+    {
+        name                        "FUNC_11"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 16);
+    }
+    functionDef
+    {
+        name                        "FUNC_12"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 14);
+    }
+    functionDef
+    {
+        name                        "FUNC_13"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 15);
+    }
+    functionDef
+    {
+        name                        "FUNC_14"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 16);
+    }
+    functionDef
+    {
+        name                        "FUNC_15"
+        value                       (FUNC_12() * FUNC_7()) + (FUNC_9() * FUNC_6());
+    }
+    functionDef
+    {
+        name                        "FUNC_16"
+        value                       (FUNC_13() * FUNC_7()) + (FUNC_10() * FUNC_6());
+    }
+    functionDef
+    {
+        name                        "FUNC_17"
+        value                       (FUNC_14() * FUNC_7()) + (FUNC_11() * FUNC_6());
+    }
+    functionDef
+    {
+        name                        "FUNC_18"
+        value                       (FUNC_12() * !(FUNC_7())) + (FUNC_9() * (!FUNC_6()));
+    }
+    functionDef
+    {
+        name                        "FUNC_19"
+        value                       (FUNC_13() * !(FUNC_7())) + (FUNC_10() * (!FUNC_6()));
+    }
+    functionDef
+    {
+        name                        "FUNC_20"
+        value                       (FUNC_14() * !(FUNC_7())) + (FUNC_11() * (!FUNC_6()));
+    }
+    functionDef
+    {
+        name                        "FUNC_21"
+        value                       max(0, (localvarint("ui_ac130timer") - milliseconds()) / 1000);
+    }
+    functionDef
+    {
+        name                        "FUNC_22"
+        value                       max(0, (localvarint("ui_remoteTankTimer") - milliseconds()) / 1000);
+    }
+    functionDef
+    {
+        name                        "FUNC_23"
+        value                       (getplayercardinfo(0, 0, 7) != 0) && (getplayercardinfo(8, 0, 7) && getplayercardinfo(8, 0, 7) == FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_24"
+        value                       (getplayercardinfo(0, 0, 8) != 0) && (getplayercardinfo(8, 0, 8) && getplayercardinfo(8, 0, 8) == FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_25"
+        value                       (getplayercardinfo(0, 0, 5) != 0) && (getplayercardinfo(8, 0, 5) && getplayercardinfo(8, 0, 5) == FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_26"
+        value                       (getplayercardinfo(0, 0, 7) != 0) && (!getplayercardinfo(8, 0, 7) || getplayercardinfo(8, 0, 7) != FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_27"
+        value                       (getplayercardinfo(0, 0, 8) != 0) && (!getplayercardinfo(8, 0, 8) || getplayercardinfo(8, 0, 8) != FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_28"
+        value                       (getplayercardinfo(0, 0, 5) != 0) && (!getplayercardinfo(8, 0, 5) || getplayercardinfo(8, 0, 5) != FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_29"
+        value                       !isusingmatchrulesdata() || getmatchrulesdata("commonOption", "allowCustomClasses");
+    }
+    functionDef
+    {
+        name                        "FUNC_30"
+        value                       dvarbool(ui_multiplayer) && (dvarbool(cl_ingame) || dvarbool(sv_running));
+    }
+    functionDef
+    {
+        name                        "FUNC_31"
+        value                       dvarbool(cl_ingame) || dvarbool(sv_running) || inlobby();
+    }
+    functionDef
+    {
+        name                        "FUNC_32"
+        value                       (dvarstring(gameMode) == "so" && FUNC_31()) || (dvarstring(gameMode) == "mp" && FUNC_31());
+    }
+    functionDef
+    {
+        name                        "FUNC_33"
+        value                       FUNC_29() && (getplayerdata(localvarstring("ui_customClassLoc"), 0, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 1, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 2, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 3, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 4, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 5, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 6, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 7, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 8, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 9, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 10, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 11, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 12, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 13, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 14, "inUse"));
+    }
+    functionDef
+    {
+        name                        "FUNC_34"
+        value                       localvarbool("ui_swfSelectionBarVis") || localvarbool("ui_swfPopupSelectionBarVis");
+    }
+    functionDef
+    {
+        name                        "FUNC_35"
+        value                       (localvarstring("ui_team") == "marines") || (team("name") == "TEAM_ALLIES");
+    }
+    functionDef
+    {
+        name                        "FUNC_36"
+        value                       (localvarstring("ui_team") == "opfor") || (team("name") == "TEAM_AXIS");
+    }
+    functionDef
+    {
+        name                        "FUNC_37"
+        value                       isusingmatchrulesdata() && ((FUNC_36() && getmatchrulesdata("defaultClasses", "axis", 0, "class", "inUse")) || (FUNC_35() && getmatchrulesdata("defaultClasses", "allies", 0, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_38"
+        value                       isusingmatchrulesdata() && ((FUNC_36() && getmatchrulesdata("defaultClasses", "axis", 1, "class", "inUse")) || (FUNC_35() && getmatchrulesdata("defaultClasses", "allies", 1, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_39"
+        value                       isusingmatchrulesdata() && ((FUNC_36() && getmatchrulesdata("defaultClasses", "axis", 2, "class", "inUse")) || (FUNC_35() && getmatchrulesdata("defaultClasses", "allies", 2, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_40"
+        value                       isusingmatchrulesdata() && ((FUNC_36() && getmatchrulesdata("defaultClasses", "axis", 3, "class", "inUse")) || (FUNC_35() && getmatchrulesdata("defaultClasses", "allies", 3, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_41"
+        value                       isusingmatchrulesdata() && ((FUNC_36() && getmatchrulesdata("defaultClasses", "axis", 4, "class", "inUse")) || (FUNC_35() && getmatchrulesdata("defaultClasses", "allies", 4, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_42"
+        value                       isusingmatchrulesdata() && (FUNC_37() || FUNC_38() || FUNC_39() || FUNC_40() || FUNC_41());
+    }
+    functionDef
+    {
+        name                        "FUNC_43"
+        value                       sin(localclientuimilliseconds() / 80) * 0.3 + 1;
+    }
+    functionDef
+    {
+        name                        "FUNC_44"
+        value                       sin(milliseconds() / 80) * 0.3 + 1;
+    }
+    functionDef
+    {
+        name                        "FUNC_45"
+        value                       sin(localclientuimilliseconds() / 90) * (0 - 0.35);
+    }
+    functionDef
+    {
+        name                        "FUNC_46"
+        value                       sin(milliseconds() / 90) * (0 - 0.35);
+    }
+    functionDef
+    {
+        name                        "FUNC_47"
+        value                       0.3 + (sin(milliseconds() / 80) + 1) * 0.7;
+    }
+    loadMenu { "ui/default_menu.menu" }
+}

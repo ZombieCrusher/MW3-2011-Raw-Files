@@ -1,0 +1,1590 @@
+{
+    menuDef
+    {
+        name                        "stats"
+        rect                        0 0 640 480 0 0
+        focuscolor                  1 1 1 1
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        onOpen
+        {
+            setLocalVarInt ui_sp_stat_progression_easy 0;
+            setLocalVarInt ui_sp_stat_progression_easy (((int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 0)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 1)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 2)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 3)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 4)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 5)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 6)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 7)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 8)) >= 1)));
+            setLocalVarInt ui_sp_stat_progression_easy (localvarint("ui_sp_stat_progression_easy") + ((int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 9)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 10)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 11)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 12)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 13)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 14)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 15)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 16)) >= 1) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 17)) >= 1)));
+            setLocalVarInt ui_sp_stat_progression_regular 0;
+            setLocalVarInt ui_sp_stat_progression_regular (((int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 0)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 1)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 2)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 3)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 4)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 5)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 6)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 7)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 8)) >= 2)));
+            setLocalVarInt ui_sp_stat_progression_regular (localvarint("ui_sp_stat_progression_regular") + ((int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 9)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 10)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 11)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 12)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 13)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 14)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 15)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 16)) >= 2) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 17)) >= 2)));
+            setLocalVarInt ui_sp_stat_progression_hardened 0;
+            setLocalVarInt ui_sp_stat_progression_hardened (((int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 0)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 1)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 2)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 3)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 4)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 5)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 6)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 7)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 8)) >= 3)));
+            setLocalVarInt ui_sp_stat_progression_hardened (localvarint("ui_sp_stat_progression_hardened") + ((int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 9)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 10)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 11)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 12)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 13)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 14)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 15)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 16)) >= 3) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 17)) >= 3)));
+            setLocalVarInt ui_sp_stat_progression_veteran 0;
+            setLocalVarInt ui_sp_stat_progression_veteran (((int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 0)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 1)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 2)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 3)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 4)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 5)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 6)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 7)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 8)) >= 4)));
+            setLocalVarInt ui_sp_stat_progression_veteran (localvarint("ui_sp_stat_progression_veteran") + ((int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 9)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 10)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 11)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 12)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 13)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 14)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 15)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 16)) >= 4) + (int(getcharbyindex(getprofiledata("missionHighestDifficulty"), 17)) >= 4)));
+            setLocalVarInt ui_player1_num 0;
+            setLocalVarInt ui_player2_num 1;
+            setLocalVarString ui_timeplayed_so gettimeplayed("so");
+            setLocalVarString ui_timeplayed_sp gettimeplayed("sp");
+            setLocalVarString ui_timeplayed_mp gettimeplayed("mp");
+            setLocalVarString ui_timeplayed_total gettimeplayed("total");
+        }
+        onClose
+        {
+        }
+        onESC
+        {
+            close self;
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image_blur_less"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(!(dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        436 -36 500 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled") && dvarbool(widescreen));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+            exp rect w                  localvarbool("ui_shelfEnabled") * select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5));
+        }
+        itemDef
+        {
+            rect                        -64 -36 800 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled") && !dvarbool(widescreen));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        436 -36 13 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(dvarbool(widescreen));
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  ((0 - 64) + 500) + (localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5))));
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+        }
+        itemDef
+        {
+            rect                        436 -36 13 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled") && dvarbool(widescreen));
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  (0 - 64) + 500;
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+            exp forecolor a             localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0.75, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75)));
+        }
+        itemDef
+        {
+            rect                        -64 -36 500 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(dvarbool(widescreen));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 -36 800 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(!dvarbool(widescreen));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_STATS_CAPS");
+            exp forecolor a             select((getTextWidth(locstring("@MENU_STATS_CAPS"), 9, 0.5) <= 200), 1, 0);
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.4
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_STATS_CAPS");
+            exp forecolor a             select(((getTextWidth(locstring("@MENU_STATS_CAPS"), 9, 0.5) > 200) && (getTextWidth(locstring("@MENU_STATS_CAPS"), 9, 0.4) <= 200)), 1, 0);
+        }
+        itemDef
+        {
+            rect                        -64 1 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.3
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_STATS_CAPS");
+            exp forecolor a             select((getTextWidth(locstring("@MENU_STATS_CAPS"), 9, 0.4) > 200), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 48 350 18 1 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.15
+            exp material                "line_horizontal";
+        }
+        itemDef
+        {
+            rect                        0 88 350 18 1 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.15
+            exp material                "line_horizontal";
+        }
+        itemDef
+        {
+            rect                        0 128 350 18 1 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.15
+            exp material                "line_horizontal";
+        }
+        itemDef
+        {
+            rect                        0 188 350 18 1 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.15
+            exp material                "line_horizontal";
+        }
+        itemDef
+        {
+            rect                        0 228 350 18 1 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.15
+            exp material                "line_horizontal";
+        }
+        itemDef
+        {
+            rect                        0 288 350 18 1 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   1 1 1 0.15
+            exp material                "line_horizontal";
+        }
+        itemDef
+        {
+            rect                        50 33 216 1 1 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "line_horizontal"
+            exp rect w                  200;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_SP_PLAY_TIME"
+            rect                        -64 48 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_TIME_FORMAT"
+            rect                        -64 48 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  75
+            textaligny                  -10
+            textscale                   0.25
+            textfont                    3
+            forecolor                   0.6 0.6 0.6 1
+        }
+        itemDef
+        {
+            rect                        -64 48 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  100
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_timeplayed_sp");
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_SP_EASY_REGULAR_PROGRESSION"
+            rect                        -64 68 336 20 1 1
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 10) % 10) != 0);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            name                        "percentage_frame"
+            rect                        -64 75 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 10) % 10) != 0);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 75 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 10) % 10) != 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, ((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select(((localvarint("ui_sp_stat_progression_easy") / 18) * 100) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select(((localvarint("ui_sp_stat_progression_easy") / 18) * 100) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select(((localvarint("ui_sp_stat_progression_easy") / 18) * 100) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 75 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 10) % 10) != 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            rect                        -64 68 336 20 1 1
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 10) % 10) != 0);
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_SP_STAT_NUM_DOT_PERCENT", int(((localvarint("ui_sp_stat_progression_easy") / 18) * 100)), int((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 10) % 10));
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  16;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_SP_EASY_REGULAR_PROGRESSION"
+            rect                        -64 68 336 20 1 1
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 10) % 10) == 0);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            name                        "percentage_frame"
+            rect                        -64 75 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 10) % 10) == 0);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 75 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 10) % 10) == 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, ((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select(((localvarint("ui_sp_stat_progression_easy") / 18) * 100) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select(((localvarint("ui_sp_stat_progression_easy") / 18) * 100) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select(((localvarint("ui_sp_stat_progression_easy") / 18) * 100) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 75 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 10) % 10) == 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            rect                        -64 68 336 20 1 1
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 10) % 10) == 0);
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_SP_STAT_NUM_PERCENT", int(((localvarint("ui_sp_stat_progression_easy") / 18) * 100)));
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  16;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_HARDENED_PROGRESS"
+            rect                        -64 88 336 20 1 1
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 10) % 10) != 0);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            name                        "percentage_frame"
+            rect                        -64 95 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 10) % 10) != 0);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 95 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 10) % 10) != 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, ((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select(((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select(((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select(((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 95 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 10) % 10) != 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            rect                        -64 88 336 20 1 1
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 10) % 10) != 0);
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_SP_STAT_NUM_DOT_PERCENT", int(((localvarint("ui_sp_stat_progression_hardened") / 18) * 100)), int((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 10) % 10));
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  16;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_HARDENED_PROGRESS"
+            rect                        -64 88 336 20 1 1
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 10) % 10) == 0);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            name                        "percentage_frame"
+            rect                        -64 95 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 10) % 10) == 0);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 95 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 10) % 10) == 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, ((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select(((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select(((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select(((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 95 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 10) % 10) == 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            rect                        -64 88 336 20 1 1
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 10) % 10) == 0);
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_SP_STAT_NUM_PERCENT", int(((localvarint("ui_sp_stat_progression_hardened") / 18) * 100)));
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  16;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_VETERAN_PROGRESS"
+            rect                        -64 108 336 20 1 1
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 10) % 10) != 0);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            name                        "percentage_frame"
+            rect                        -64 115 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 10) % 10) != 0);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 115 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 10) % 10) != 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, ((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select(((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select(((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select(((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 115 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 10) % 10) != 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            rect                        -64 108 336 20 1 1
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 10) % 10) != 0);
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_SP_STAT_NUM_DOT_PERCENT", int(((localvarint("ui_sp_stat_progression_veteran") / 18) * 100)), int((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 10) % 10));
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  16;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_VETERAN_PROGRESS"
+            rect                        -64 108 336 20 1 1
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 10) % 10) == 0);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            name                        "percentage_frame"
+            rect                        -64 115 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 10) % 10) == 0);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 115 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 10) % 10) == 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, ((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select(((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select(((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select(((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 115 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 10) % 10) == 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            rect                        -64 108 336 20 1 1
+            decoration                  
+            visible                     when(int((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 10) % 10) == 0);
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_SP_STAT_NUM_PERCENT", int(((localvarint("ui_sp_stat_progression_veteran") / 18) * 100)));
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  16;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_INTEL_ITEMS"
+            rect                        -64 128 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            rect                        -64 128 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textscale                   0.375
+            textfont                    3
+            exp text                    locstring("@MENU_SP_STAT_NUM_RATIO", int(getprofiledata("cheatPoints")), 45);
+            exp rect x                  350 - 64;
+            exp rect w                  14;
+            exp rect h                  14;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_SP_PROGRESSION"
+            rect                        -64 148 336 20 1 1
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) != 0);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            name                        "percentage_frame"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) != 0);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) != 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, (((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) != 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) != 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  ((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, (((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) != 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  ((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) != 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) + (((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25)) * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, (((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 0.1) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 0.1) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 0.1) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 0.1) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) != 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) + (((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25)) * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) != 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) + (((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25) + (((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 0.1)) * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, (int((int(getprofiledata("cheatPoints")) / 45) * 100) * 0.15) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select((int((int(getprofiledata("cheatPoints")) / 45) * 100) * 0.15) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select((int((int(getprofiledata("cheatPoints")) / 45) * 100) * 0.15) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select((int((int(getprofiledata("cheatPoints")) / 45) * 100) * 0.15) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) != 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) + (((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25) + (((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 0.1)) * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            rect                        -64 148 336 20 1 1
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) != 0);
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_SP_STAT_NUM_DOT_PERCENT", int((getprofiledata("percentCompleteSP") / 100)), int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10));
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  16;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_SP_PROGRESSION"
+            rect                        -64 148 336 20 1 1
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) == 0);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            name                        "percentage_frame"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) == 0);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) == 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, (((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) == 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) == 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  ((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, (((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select((((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) == 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  ((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) == 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) + (((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25)) * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, (((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 0.1) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 0.1) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 0.1) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select((((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 0.1) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) == 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) + (((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25)) * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) == 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) + (((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25) + (((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 0.1)) * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, (int((int(getprofiledata("cheatPoints")) / 45) * 100) * 0.15) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select((int((int(getprofiledata("cheatPoints")) / 45) * 100) * 0.15) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select((int((int(getprofiledata("cheatPoints")) / 45) * 100) * 0.15) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select((int((int(getprofiledata("cheatPoints")) / 45) * 100) * 0.15) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 155 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) == 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (((((localvarint("ui_sp_stat_progression_easy") / 18) * 100) * 0.5) + (((localvarint("ui_sp_stat_progression_hardened") / 18) * 100) * 0.25) + (((localvarint("ui_sp_stat_progression_veteran") / 18) * 100) * 0.1)) * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            rect                        -64 148 336 20 1 1
+            decoration                  
+            visible                     when(int(((getprofiledata("percentCompleteSP") / 100) * 10) % 10) == 0);
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_SP_STAT_NUM_PERCENT", int((getprofiledata("percentCompleteSP") / 100)));
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  16;
+        }
+        itemDef
+        {
+            rect                        60 178 216 1 1 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "line_horizontal"
+            exp rect w                  175;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_SO_PLAY_TIME"
+            rect                        -64 188 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_TIME_FORMAT"
+            rect                        -64 188 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  75
+            textaligny                  -10
+            textscale                   0.25
+            textfont                    3
+            forecolor                   0.6 0.6 0.6 1
+        }
+        itemDef
+        {
+            rect                        -64 188 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  100
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_timeplayed_so");
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_SO_PROGRESSION"
+            rect                        -64 208 336 20 1 1
+            decoration                  
+            visible                     when(int((((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 * 10) % 10) != 0);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            name                        "percentage_frame"
+            rect                        -64 215 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 * 10) % 10) != 0);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 215 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 * 10) % 10) != 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, ((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select(((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select(((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select(((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 215 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 * 10) % 10) != 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            rect                        -64 208 336 20 1 1
+            decoration                  
+            visible                     when(int((((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 * 10) % 10) != 0);
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_SP_STAT_NUM_DOT_PERCENT", int(((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100), int((((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 * 10) % 10));
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  16;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_SO_PROGRESSION"
+            rect                        -64 208 336 20 1 1
+            decoration                  
+            visible                     when(int((((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 * 10) % 10) == 0);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            name                        "percentage_frame"
+            rect                        -64 215 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 * 10) % 10) == 0);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 215 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 * 10) % 10) == 0);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, ((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select(((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select(((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select(((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 215 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(int((((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 * 10) % 10) == 0);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            rect                        -64 208 336 20 1 1
+            decoration                  
+            visible                     when(int((((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100 * 10) % 10) == 0);
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_SP_STAT_NUM_PERCENT", int(((int(int(getprofiledata("percentCompleteSO")) / 100) + int(int(getprofiledata("percentCompleteSO")) % 100)) / (16 * 3)) * 100));
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  16;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_STARS_EARNED"
+            rect                        -64 228 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            name                        "@MENU_SP_STAT_TOTAL_STARS"
+            rect                        -64 231 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textalign                   4
+            textalignx                  18
+            textaligny                  -3
+            textscale                   0.375
+            textfont                    3
+            background                  "difficulty_star"
+            exp text                    locstring("@MENU_SP_STAT_NUM_RATIO", int(getprofiledata("percentCompleteSO")), (16 * 3));
+            exp rect x                  350 - 64;
+            exp rect w                  14;
+            exp rect h                  14;
+        }
+        itemDef
+        {
+            rect                        60 258 216 1 1 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "line_horizontal"
+            exp rect w                  175;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_MP_PLAY_TIME"
+            rect                        -64 268 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_TIME_FORMAT"
+            rect                        -64 268 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  75
+            textaligny                  -10
+            textscale                   0.25
+            textfont                    3
+            forecolor                   0.6 0.6 0.6 1
+        }
+        itemDef
+        {
+            rect                        -64 268 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  100
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_timeplayed_mp");
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_MP_PROGRESSION"
+            rect                        -64 288 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            name                        "percentage_frame"
+            rect                        -64 295 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 295 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  min(125, int(getprofiledata("percentCompleteMP")) * (125) / 100);
+            exp rect h                  6;
+            exp forecolor r             select(int(getprofiledata("percentCompleteMP")) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor g             select(int(getprofiledata("percentCompleteMP")) < 100, 0.35, 0.75 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+            exp forecolor b             select(int(getprofiledata("percentCompleteMP")) < 100, 0.35, 0.25 * ((sin(milliseconds() / 150) * 0.5 + 0.5) * 0.5 + 0.5));
+        }
+        itemDef
+        {
+            name                        "percentage_bar"
+            rect                        -64 295 336 20 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2 0.2 0.2 1
+            background                  "white"
+            exp rect x                  (0 * (125) / 100) + 350 - 64;
+            exp rect w                  1 / 1.5;
+            exp rect h                  6;
+        }
+        itemDef
+        {
+            rect                        -64 288 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   5
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp text                    locstring("@MENU_SP_STAT_NUM_PERCENT", int(getprofiledata("percentCompleteMP")));
+            exp rect x                  350 - 64;
+            exp rect w                  125;
+            exp rect h                  16;
+        }
+        itemDef
+        {
+            rect                        60 318 216 1 1 1
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            background                  "line_horizontal"
+            exp rect w                  175;
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_TOTAL_PLAY_TIME"
+            rect                        -64 328 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  -60
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+        }
+        itemDef
+        {
+            text                        "@MENU_SP_STAT_TIME_FORMAT"
+            rect                        -64 328 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  75
+            textaligny                  -10
+            textscale                   0.25
+            textfont                    3
+            forecolor                   0.6 0.6 0.6 1
+        }
+        itemDef
+        {
+            rect                        -64 328 336 20 1 1
+            decoration                  
+            visible                     when(1);
+            textalign                   6
+            textalignx                  100
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_timeplayed_total");
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 2;
+                setLocalVarString ui_ralign_group "stats";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 102;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running))))) && (!0) && (localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "stats"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running))))) && (localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "stats"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            execKey "f"
+            {
+                if (((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))))
+                {
+                    setLocalVarBool ui_vault_browse 0;
+                    setLocalVarBool ui_vault_load 0;
+                    execnow "incnosplitscreencontrol popup_friends";
+                    if (isprofilesignedin() && isusersignedintolive())
+                    {
+                        open popup_friends;
+                    }
+                    else
+                    {
+                        execnow "decnosplitscreencontrol popup_friends";
+                    }
+                }
+            }
+            exp text                    "@PLATFORM_FRIENDS_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "stats"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "stats"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "stats"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "stats";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 27;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((1) && (!0) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "stats"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "stats"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@PLATFORM_BACK_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "stats"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "stats"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "stats"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+        }
+    }
+}

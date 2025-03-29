@@ -1,0 +1,737 @@
+{
+    functionDef
+    {
+        name                        "FUNC_0"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 14) * (player("teamname") == "TEAM_ALLIES")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 14) * (player("teamname") == "TEAM_AXIS"));
+    }
+    functionDef
+    {
+        name                        "FUNC_1"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 15) * (player("teamname") == "TEAM_ALLIES")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 15) * (player("teamname") == "TEAM_AXIS"));
+    }
+    functionDef
+    {
+        name                        "FUNC_2"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 16) * (player("teamname") == "TEAM_ALLIES")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 16) * (player("teamname") == "TEAM_AXIS"));
+    }
+    functionDef
+    {
+        name                        "FUNC_3"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 14) * (player("teamname") == "TEAM_AXIS")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 14) * (player("teamname") == "TEAM_ALLIES"));
+    }
+    functionDef
+    {
+        name                        "FUNC_4"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 15) * (player("teamname") == "TEAM_AXIS")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 15) * (player("teamname") == "TEAM_ALLIES"));
+    }
+    functionDef
+    {
+        name                        "FUNC_5"
+        value                       (tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 16) * (player("teamname") == "TEAM_AXIS")) + (tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 16) * (player("teamname") == "TEAM_ALLIES"));
+    }
+    functionDef
+    {
+        name                        "FUNC_6"
+        value                       team("name") == "TEAM_ALLIES";
+    }
+    functionDef
+    {
+        name                        "FUNC_7"
+        value                       team("name") == "TEAM_AXIS";
+    }
+    functionDef
+    {
+        name                        "FUNC_8"
+        value                       ((team("name") == "TEAM_AXIS") * 1) + ((team("name") == "TEAM_ALLIES") * 2);
+    }
+    functionDef
+    {
+        name                        "FUNC_9"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 14);
+    }
+    functionDef
+    {
+        name                        "FUNC_10"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 15);
+    }
+    functionDef
+    {
+        name                        "FUNC_11"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("allieschar"), 16);
+    }
+    functionDef
+    {
+        name                        "FUNC_12"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 14);
+    }
+    functionDef
+    {
+        name                        "FUNC_13"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 15);
+    }
+    functionDef
+    {
+        name                        "FUNC_14"
+        value                       tablelookup("mp/factionTable.csv", 0, getmapcustom("axischar"), 16);
+    }
+    functionDef
+    {
+        name                        "FUNC_15"
+        value                       (FUNC_12() * FUNC_7()) + (FUNC_9() * FUNC_6());
+    }
+    functionDef
+    {
+        name                        "FUNC_16"
+        value                       (FUNC_13() * FUNC_7()) + (FUNC_10() * FUNC_6());
+    }
+    functionDef
+    {
+        name                        "FUNC_17"
+        value                       (FUNC_14() * FUNC_7()) + (FUNC_11() * FUNC_6());
+    }
+    functionDef
+    {
+        name                        "FUNC_18"
+        value                       (FUNC_12() * !(FUNC_7())) + (FUNC_9() * (!FUNC_6()));
+    }
+    functionDef
+    {
+        name                        "FUNC_19"
+        value                       (FUNC_13() * !(FUNC_7())) + (FUNC_10() * (!FUNC_6()));
+    }
+    functionDef
+    {
+        name                        "FUNC_20"
+        value                       (FUNC_14() * !(FUNC_7())) + (FUNC_11() * (!FUNC_6()));
+    }
+    functionDef
+    {
+        name                        "FUNC_21"
+        value                       max(0, (localvarint("ui_ac130timer") - milliseconds()) / 1000);
+    }
+    functionDef
+    {
+        name                        "FUNC_22"
+        value                       max(0, (localvarint("ui_remoteTankTimer") - milliseconds()) / 1000);
+    }
+    functionDef
+    {
+        name                        "FUNC_23"
+        value                       (getplayercardinfo(0, 0, 7) != 0) && (getplayercardinfo(8, 0, 7) && getplayercardinfo(8, 0, 7) == FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_24"
+        value                       (getplayercardinfo(0, 0, 8) != 0) && (getplayercardinfo(8, 0, 8) && getplayercardinfo(8, 0, 8) == FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_25"
+        value                       (getplayercardinfo(0, 0, 5) != 0) && (getplayercardinfo(8, 0, 5) && getplayercardinfo(8, 0, 5) == FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_26"
+        value                       (getplayercardinfo(0, 0, 7) != 0) && (!getplayercardinfo(8, 0, 7) || getplayercardinfo(8, 0, 7) != FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_27"
+        value                       (getplayercardinfo(0, 0, 8) != 0) && (!getplayercardinfo(8, 0, 8) || getplayercardinfo(8, 0, 8) != FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_28"
+        value                       (getplayercardinfo(0, 0, 5) != 0) && (!getplayercardinfo(8, 0, 5) || getplayercardinfo(8, 0, 5) != FUNC_8());
+    }
+    functionDef
+    {
+        name                        "FUNC_29"
+        value                       !isusingmatchrulesdata() || getmatchrulesdata("commonOption", "allowCustomClasses");
+    }
+    functionDef
+    {
+        name                        "FUNC_30"
+        value                       dvarbool(ui_multiplayer) && (dvarbool(cl_ingame) || dvarbool(sv_running));
+    }
+    functionDef
+    {
+        name                        "FUNC_31"
+        value                       dvarbool(cl_ingame) || dvarbool(sv_running) || inlobby();
+    }
+    functionDef
+    {
+        name                        "FUNC_32"
+        value                       (dvarstring(gameMode) == "so" && FUNC_31()) || (dvarstring(gameMode) == "mp" && FUNC_31());
+    }
+    functionDef
+    {
+        name                        "FUNC_33"
+        value                       FUNC_29() && (getplayerdata(localvarstring("ui_customClassLoc"), 0, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 1, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 2, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 3, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 4, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 5, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 6, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 7, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 8, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 9, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 10, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 11, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 12, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 13, "inUse") || getplayerdata(localvarstring("ui_customClassLoc"), 14, "inUse"));
+    }
+    functionDef
+    {
+        name                        "FUNC_34"
+        value                       localvarbool("ui_swfSelectionBarVis") || localvarbool("ui_swfPopupSelectionBarVis");
+    }
+    functionDef
+    {
+        name                        "FUNC_35"
+        value                       (localvarstring("ui_team") == "marines") || (team("name") == "TEAM_ALLIES");
+    }
+    functionDef
+    {
+        name                        "FUNC_36"
+        value                       (localvarstring("ui_team") == "opfor") || (team("name") == "TEAM_AXIS");
+    }
+    functionDef
+    {
+        name                        "FUNC_37"
+        value                       isusingmatchrulesdata() && ((FUNC_36() && getmatchrulesdata("defaultClasses", "axis", 0, "class", "inUse")) || (FUNC_35() && getmatchrulesdata("defaultClasses", "allies", 0, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_38"
+        value                       isusingmatchrulesdata() && ((FUNC_36() && getmatchrulesdata("defaultClasses", "axis", 1, "class", "inUse")) || (FUNC_35() && getmatchrulesdata("defaultClasses", "allies", 1, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_39"
+        value                       isusingmatchrulesdata() && ((FUNC_36() && getmatchrulesdata("defaultClasses", "axis", 2, "class", "inUse")) || (FUNC_35() && getmatchrulesdata("defaultClasses", "allies", 2, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_40"
+        value                       isusingmatchrulesdata() && ((FUNC_36() && getmatchrulesdata("defaultClasses", "axis", 3, "class", "inUse")) || (FUNC_35() && getmatchrulesdata("defaultClasses", "allies", 3, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_41"
+        value                       isusingmatchrulesdata() && ((FUNC_36() && getmatchrulesdata("defaultClasses", "axis", 4, "class", "inUse")) || (FUNC_35() && getmatchrulesdata("defaultClasses", "allies", 4, "class", "inUse")));
+    }
+    functionDef
+    {
+        name                        "FUNC_42"
+        value                       isusingmatchrulesdata() && (FUNC_37() || FUNC_38() || FUNC_39() || FUNC_40() || FUNC_41());
+    }
+    functionDef
+    {
+        name                        "FUNC_43"
+        value                       sin(localclientuimilliseconds() / 80) * 0.3 + 1;
+    }
+    functionDef
+    {
+        name                        "FUNC_44"
+        value                       sin(milliseconds() / 80) * 0.3 + 1;
+    }
+    functionDef
+    {
+        name                        "FUNC_45"
+        value                       sin(localclientuimilliseconds() / 90) * (0 - 0.35);
+    }
+    functionDef
+    {
+        name                        "FUNC_46"
+        value                       sin(milliseconds() / 90) * (0 - 0.35);
+    }
+    functionDef
+    {
+        name                        "FUNC_47"
+        value                       0.3 + (sin(milliseconds() / 80) + 1) * 0.7;
+    }
+    functionDef
+    {
+        name                        "FUNC_48"
+        value                       getplayerdata("surHUD_credits");
+    }
+    functionDef
+    {
+        name                        "FUNC_49"
+        value                       0;
+    }
+    functionDef
+    {
+        name                        "FUNC_50"
+        value                       getplayerdata("weaponNew", "iw5_m4") || getplayerdataanybooltrue("camoNew", "iw5_m4") || getplayerdataanybooltrue("attachmentNew", "iw5_m4");
+    }
+    functionDef
+    {
+        name                        "FUNC_51"
+        value                       getplayerdata("weaponNew", "iw5_m16") || getplayerdataanybooltrue("camoNew", "iw5_m16") || getplayerdataanybooltrue("attachmentNew", "iw5_m16");
+    }
+    functionDef
+    {
+        name                        "FUNC_52"
+        value                       getplayerdata("weaponNew", "iw5_scar") || getplayerdataanybooltrue("camoNew", "iw5_scar") || getplayerdataanybooltrue("attachmentNew", "iw5_scar");
+    }
+    functionDef
+    {
+        name                        "FUNC_53"
+        value                       getplayerdata("weaponNew", "iw5_cm901") || getplayerdataanybooltrue("camoNew", "iw5_cm901") || getplayerdataanybooltrue("attachmentNew", "iw5_cm901");
+    }
+    functionDef
+    {
+        name                        "FUNC_54"
+        value                       getplayerdata("weaponNew", "iw5_type95") || getplayerdataanybooltrue("camoNew", "iw5_type95") || getplayerdataanybooltrue("attachmentNew", "iw5_type95");
+    }
+    functionDef
+    {
+        name                        "FUNC_55"
+        value                       getplayerdata("weaponNew", "iw5_g36c") || getplayerdataanybooltrue("camoNew", "iw5_g36c") || getplayerdataanybooltrue("attachmentNew", "iw5_g36c");
+    }
+    functionDef
+    {
+        name                        "FUNC_56"
+        value                       getplayerdata("weaponNew", "iw5_acr") || getplayerdataanybooltrue("camoNew", "iw5_acr") || getplayerdataanybooltrue("attachmentNew", "iw5_acr");
+    }
+    functionDef
+    {
+        name                        "FUNC_57"
+        value                       getplayerdata("weaponNew", "iw5_mk14") || getplayerdataanybooltrue("camoNew", "iw5_mk14") || getplayerdataanybooltrue("attachmentNew", "iw5_mk14");
+    }
+    functionDef
+    {
+        name                        "FUNC_58"
+        value                       getplayerdata("weaponNew", "iw5_ak47") || getplayerdataanybooltrue("camoNew", "iw5_ak47") || getplayerdataanybooltrue("attachmentNew", "iw5_ak47");
+    }
+    functionDef
+    {
+        name                        "FUNC_59"
+        value                       getplayerdata("weaponNew", "iw5_fad") || getplayerdataanybooltrue("camoNew", "iw5_fad") || getplayerdataanybooltrue("attachmentNew", "iw5_fad");
+    }
+    functionDef
+    {
+        name                        "FUNC_60"
+        value                       getplayerdata("weaponNew", "iw5_mp5") || getplayerdataanybooltrue("camoNew", "iw5_mp5") || getplayerdataanybooltrue("attachmentNew", "iw5_mp5");
+    }
+    functionDef
+    {
+        name                        "FUNC_61"
+        value                       getplayerdata("weaponNew", "iw5_ump45") || getplayerdataanybooltrue("camoNew", "iw5_ump45") || getplayerdataanybooltrue("attachmentNew", "iw5_ump45");
+    }
+    functionDef
+    {
+        name                        "FUNC_62"
+        value                       getplayerdata("weaponNew", "iw5_pp90m1") || getplayerdataanybooltrue("camoNew", "iw5_pp90m1") || getplayerdataanybooltrue("attachmentNew", "iw5_pp90m1");
+    }
+    functionDef
+    {
+        name                        "FUNC_63"
+        value                       getplayerdata("weaponNew", "iw5_p90") || getplayerdataanybooltrue("camoNew", "iw5_p90") || getplayerdataanybooltrue("attachmentNew", "iw5_p90");
+    }
+    functionDef
+    {
+        name                        "FUNC_64"
+        value                       getplayerdata("weaponNew", "iw5_m9") || getplayerdataanybooltrue("camoNew", "iw5_m9") || getplayerdataanybooltrue("attachmentNew", "iw5_m9");
+    }
+    functionDef
+    {
+        name                        "FUNC_65"
+        value                       getplayerdata("weaponNew", "iw5_mp7") || getplayerdataanybooltrue("camoNew", "iw5_mp7") || getplayerdataanybooltrue("attachmentNew", "iw5_mp7");
+    }
+    functionDef
+    {
+        name                        "FUNC_66"
+        value                       getplayerdata("weaponNew", "iw5_sa80") || getplayerdataanybooltrue("camoNew", "iw5_sa80") || getplayerdataanybooltrue("attachmentNew", "iw5_sa80");
+    }
+    functionDef
+    {
+        name                        "FUNC_67"
+        value                       getplayerdata("weaponNew", "iw5_mg36") || getplayerdataanybooltrue("camoNew", "iw5_mg36") || getplayerdataanybooltrue("attachmentNew", "iw5_mg36");
+    }
+    functionDef
+    {
+        name                        "FUNC_68"
+        value                       getplayerdata("weaponNew", "iw5_pecheneg") || getplayerdataanybooltrue("camoNew", "iw5_pecheneg") || getplayerdataanybooltrue("attachmentNew", "iw5_pecheneg");
+    }
+    functionDef
+    {
+        name                        "FUNC_69"
+        value                       getplayerdata("weaponNew", "iw5_mk46") || getplayerdataanybooltrue("camoNew", "iw5_mk46") || getplayerdataanybooltrue("attachmentNew", "iw5_mk46");
+    }
+    functionDef
+    {
+        name                        "FUNC_70"
+        value                       getplayerdata("weaponNew", "iw5_m60") || getplayerdataanybooltrue("camoNew", "iw5_m60") || getplayerdataanybooltrue("attachmentNew", "iw5_m60");
+    }
+    functionDef
+    {
+        name                        "FUNC_71"
+        value                       getplayerdata("weaponNew", "iw5_barrett") || getplayerdataanybooltrue("camoNew", "iw5_barrett") || getplayerdataanybooltrue("attachmentNew", "iw5_barrett");
+    }
+    functionDef
+    {
+        name                        "FUNC_72"
+        value                       getplayerdata("weaponNew", "iw5_l96a1") || getplayerdataanybooltrue("camoNew", "iw5_l96a1") || getplayerdataanybooltrue("attachmentNew", "iw5_l96a1");
+    }
+    functionDef
+    {
+        name                        "FUNC_73"
+        value                       getplayerdata("weaponNew", "iw5_dragunov") || getplayerdataanybooltrue("camoNew", "iw5_dragunov") || getplayerdataanybooltrue("attachmentNew", "iw5_dragunov");
+    }
+    functionDef
+    {
+        name                        "FUNC_74"
+        value                       getplayerdata("weaponNew", "iw5_as50") || getplayerdataanybooltrue("camoNew", "iw5_as50") || getplayerdataanybooltrue("attachmentNew", "iw5_as50");
+    }
+    functionDef
+    {
+        name                        "FUNC_75"
+        value                       getplayerdata("weaponNew", "iw5_rsass") || getplayerdataanybooltrue("camoNew", "iw5_rsass") || getplayerdataanybooltrue("attachmentNew", "iw5_rsass");
+    }
+    functionDef
+    {
+        name                        "FUNC_76"
+        value                       getplayerdata("weaponNew", "iw5_msr") || getplayerdataanybooltrue("camoNew", "iw5_msr") || getplayerdataanybooltrue("attachmentNew", "iw5_msr");
+    }
+    functionDef
+    {
+        name                        "FUNC_77"
+        value                       getplayerdata("weaponNew", "iw5_usas12") || getplayerdataanybooltrue("camoNew", "iw5_usas12") || getplayerdataanybooltrue("attachmentNew", "iw5_usas12");
+    }
+    functionDef
+    {
+        name                        "FUNC_78"
+        value                       getplayerdata("weaponNew", "iw5_ksg") || getplayerdataanybooltrue("camoNew", "iw5_ksg") || getplayerdataanybooltrue("attachmentNew", "iw5_ksg");
+    }
+    functionDef
+    {
+        name                        "FUNC_79"
+        value                       getplayerdata("weaponNew", "iw5_spas12") || getplayerdataanybooltrue("camoNew", "iw5_spas12") || getplayerdataanybooltrue("attachmentNew", "iw5_spas12");
+    }
+    functionDef
+    {
+        name                        "FUNC_80"
+        value                       getplayerdata("weaponNew", "iw5_aa12") || getplayerdataanybooltrue("camoNew", "iw5_aa12") || getplayerdataanybooltrue("attachmentNew", "iw5_aa12");
+    }
+    functionDef
+    {
+        name                        "FUNC_81"
+        value                       getplayerdata("weaponNew", "iw5_striker") || getplayerdataanybooltrue("camoNew", "iw5_striker") || getplayerdataanybooltrue("attachmentNew", "iw5_striker");
+    }
+    functionDef
+    {
+        name                        "FUNC_82"
+        value                       getplayerdata("weaponNew", "iw5_1887") || getplayerdataanybooltrue("camoNew", "iw5_1887") || getplayerdataanybooltrue("attachmentNew", "iw5_1887");
+    }
+    functionDef
+    {
+        name                        "FUNC_83"
+        value                       getplayerdata("weaponNew", "riotshield") || getplayerdataanybooltrue("camoNew", "riotshield") || getplayerdataanybooltrue("attachmentNew", "riotshield");
+    }
+    functionDef
+    {
+        name                        "FUNC_84"
+        value                       getplayerdata("weaponNew", "iw5_fmg9") || getplayerdataanybooltrue("camoNew", "iw5_fmg9") || getplayerdataanybooltrue("attachmentNew", "iw5_fmg9");
+    }
+    functionDef
+    {
+        name                        "FUNC_85"
+        value                       getplayerdata("weaponNew", "iw5_mp9") || getplayerdataanybooltrue("camoNew", "iw5_mp9") || getplayerdataanybooltrue("attachmentNew", "iw5_mp9");
+    }
+    functionDef
+    {
+        name                        "FUNC_86"
+        value                       getplayerdata("weaponNew", "iw5_skorpion") || getplayerdataanybooltrue("camoNew", "iw5_skorpion") || getplayerdataanybooltrue("attachmentNew", "iw5_skorpion");
+    }
+    functionDef
+    {
+        name                        "FUNC_87"
+        value                       getplayerdata("weaponNew", "iw5_g18") || getplayerdataanybooltrue("camoNew", "iw5_g18") || getplayerdataanybooltrue("attachmentNew", "iw5_g18");
+    }
+    functionDef
+    {
+        name                        "FUNC_88"
+        value                       getplayerdata("weaponNew", "iw5_usp45") || getplayerdataanybooltrue("camoNew", "iw5_usp45") || getplayerdataanybooltrue("attachmentNew", "iw5_usp45");
+    }
+    functionDef
+    {
+        name                        "FUNC_89"
+        value                       getplayerdata("weaponNew", "iw5_p99") || getplayerdataanybooltrue("camoNew", "iw5_p99") || getplayerdataanybooltrue("attachmentNew", "iw5_p99");
+    }
+    functionDef
+    {
+        name                        "FUNC_90"
+        value                       getplayerdata("weaponNew", "iw5_mp412") || getplayerdataanybooltrue("camoNew", "iw5_mp412") || getplayerdataanybooltrue("attachmentNew", "iw5_mp412");
+    }
+    functionDef
+    {
+        name                        "FUNC_91"
+        value                       getplayerdata("weaponNew", "iw5_44magnum") || getplayerdataanybooltrue("camoNew", "iw5_44magnum") || getplayerdataanybooltrue("attachmentNew", "iw5_44magnum");
+    }
+    functionDef
+    {
+        name                        "FUNC_92"
+        value                       getplayerdata("weaponNew", "iw5_fnfiveseven") || getplayerdataanybooltrue("camoNew", "iw5_fnfiveseven") || getplayerdataanybooltrue("attachmentNew", "iw5_fnfiveseven");
+    }
+    functionDef
+    {
+        name                        "FUNC_93"
+        value                       getplayerdata("weaponNew", "iw5_deserteagle") || getplayerdataanybooltrue("camoNew", "iw5_deserteagle") || getplayerdataanybooltrue("attachmentNew", "iw5_deserteagle");
+    }
+    functionDef
+    {
+        name                        "FUNC_94"
+        value                       getplayerdata("weaponNew", "iw5_smaw") || getplayerdataanybooltrue("camoNew", "iw5_smaw") || getplayerdataanybooltrue("attachmentNew", "iw5_smaw");
+    }
+    functionDef
+    {
+        name                        "FUNC_95"
+        value                       getplayerdata("weaponNew", "javelin") || getplayerdataanybooltrue("camoNew", "javelin") || getplayerdataanybooltrue("attachmentNew", "javelin");
+    }
+    functionDef
+    {
+        name                        "FUNC_96"
+        value                       getplayerdata("weaponNew", "stinger") || getplayerdataanybooltrue("camoNew", "stinger") || getplayerdataanybooltrue("attachmentNew", "stinger");
+    }
+    functionDef
+    {
+        name                        "FUNC_97"
+        value                       getplayerdata("weaponNew", "xm25") || getplayerdataanybooltrue("camoNew", "xm25") || getplayerdataanybooltrue("attachmentNew", "xm25");
+    }
+    functionDef
+    {
+        name                        "FUNC_98"
+        value                       getplayerdata("weaponNew", "m320") || getplayerdataanybooltrue("camoNew", "m320") || getplayerdataanybooltrue("attachmentNew", "m320");
+    }
+    functionDef
+    {
+        name                        "FUNC_99"
+        value                       getplayerdata("weaponNew", "rpg") || getplayerdataanybooltrue("camoNew", "rpg") || getplayerdataanybooltrue("attachmentNew", "rpg");
+    }
+    functionDef
+    {
+        name                        "FUNC_100"
+        value                       FUNC_50() || FUNC_51() || FUNC_52() || FUNC_53() || FUNC_54() || FUNC_55() || FUNC_56() || FUNC_57() || FUNC_58() || FUNC_59();
+    }
+    functionDef
+    {
+        name                        "FUNC_101"
+        value                       FUNC_60() || FUNC_61() || FUNC_62() || FUNC_63() || FUNC_64() || FUNC_65();
+    }
+    functionDef
+    {
+        name                        "FUNC_102"
+        value                       FUNC_66() || FUNC_67() || FUNC_68() || FUNC_69() || FUNC_70();
+    }
+    functionDef
+    {
+        name                        "FUNC_103"
+        value                       FUNC_71() || FUNC_72() || FUNC_73() || FUNC_74() || FUNC_75() || FUNC_76();
+    }
+    functionDef
+    {
+        name                        "FUNC_104"
+        value                       FUNC_77() || FUNC_78() || FUNC_79() || FUNC_80() || FUNC_81() || FUNC_82();
+    }
+    functionDef
+    {
+        name                        "FUNC_105"
+        value                       FUNC_83();
+    }
+    functionDef
+    {
+        name                        "FUNC_106"
+        value                       FUNC_84() || FUNC_85() || FUNC_86() || FUNC_87();
+    }
+    functionDef
+    {
+        name                        "FUNC_107"
+        value                       FUNC_88() || FUNC_89() || FUNC_90() || FUNC_91() || FUNC_92() || FUNC_93();
+    }
+    functionDef
+    {
+        name                        "FUNC_108"
+        value                       FUNC_94() || FUNC_95() || FUNC_96() || FUNC_97() || FUNC_98() || FUNC_99();
+    }
+    functionDef
+    {
+        name                        "FUNC_109"
+        value                       getplayerdata("featureNew", "token_1") || getplayerdata("featureNew", "token_2") || getplayerdata("featureNew", "token_3") || getplayerdata("featureNew", "token_4") || getplayerdata("featureNew", "token_5") || getplayerdata("featureNew", "token_6") || getplayerdata("featureNew", "token_7") || getplayerdata("featureNew", "token_8") || getplayerdata("featureNew", "token_9") || getplayerdata("featureNew", "token_10") || getplayerdata("featureNew", "token_11") || getplayerdata("featureNew", "token_12") || getplayerdata("featureNew", "token_13") || getplayerdata("featureNew", "token_14") || getplayerdata("featureNew", "token_15") || getplayerdata("featureNew", "token_16") || getplayerdata("featureNew", "token_17") || getplayerdata("featureNew", "token_18") || getplayerdata("featureNew", "token_19") || getplayerdata("featureNew", "token_20") || getplayerdata("featureNew", "token_21") || getplayerdata("featureNew", "token_22") || getplayerdata("featureNew", "token_23");
+    }
+    functionDef
+    {
+        name                        "FUNC_110"
+        value                       getplayerdata("killstreakNew", "uav") || getplayerdata("killstreakNew", "airdrop_assault") || getplayerdata("killstreakNew", "ims") || getplayerdata("killstreakNew", "predator_missile") || getplayerdata("killstreakNew", "airdrop_sentry_minigun") || getplayerdata("killstreakNew", "precision_airstrike") || getplayerdata("killstreakNew", "helicopter") || getplayerdata("killstreakNew", "littlebird_flock") || getplayerdata("killstreakNew", "littlebird_support") || getplayerdata("killstreakNew", "remote_mortar") || getplayerdata("killstreakNew", "airdrop_remote_tank") || getplayerdata("killstreakNew", "ac130") || getplayerdata("killstreakNew", "helicopter_flares") || getplayerdata("killstreakNew", "airdrop_juggernaut") || getplayerdata("killstreakNew", "osprey_gunner");
+    }
+    functionDef
+    {
+        name                        "FUNC_111"
+        value                       getplayerdata("killstreakNew", "uav_support") || getplayerdata("killstreakNew", "counter_uav") || getplayerdata("killstreakNew", "deployable_vest") || getplayerdata("killstreakNew", "airdrop_trap") || getplayerdata("killstreakNew", "sam_turret") || getplayerdata("killstreakNew", "remote_uav") || getplayerdata("killstreakNew", "triple_uav") || getplayerdata("killstreakNew", "remote_mg_turret") || getplayerdata("killstreakNew", "stealth_airstrike") || getplayerdata("killstreakNew", "emp") || getplayerdata("killstreakNew", "airdrop_juggernaut_recon") || getplayerdata("killstreakNew", "escort_airdrop");
+    }
+    functionDef
+    {
+        name                        "FUNC_112"
+        value                       getplayerdata("killstreakNew", "specialty_longersprint_ks") || getplayerdata("killstreakNew", "specialty_fastreload_ks") || getplayerdata("killstreakNew", "specialty_scavenger_ks") || getplayerdata("killstreakNew", "specialty_blindeye_ks") || getplayerdata("killstreakNew", "specialty_paint_ks") || getplayerdata("killstreakNew", "specialty_hardline_ks") || getplayerdata("killstreakNew", "specialty_coldblooded_ks") || getplayerdata("killstreakNew", "specialty_quickdraw_ks") || getplayerdata("killstreakNew", "_specialty_blastshield_ks") || getplayerdata("killstreakNew", "specialty_detectexplosive_ks") || getplayerdata("killstreakNew", "specialty_autospot_ks") || getplayerdata("killstreakNew", "specialty_bulletaccuracy_ks") || getplayerdata("killstreakNew", "specialty_quieter_ks") || getplayerdata("killstreakNew", "specialty_stalker_ks");
+    }
+    functionDef
+    {
+        name                        "FUNC_113"
+        value                       getplayerdata("killstreakNew", "specialty_longersprint_ks_pro") || getplayerdata("killstreakNew", "specialty_fastreload_ks_pro") || getplayerdata("killstreakNew", "specialty_scavenger_ks_pro") || getplayerdata("killstreakNew", "specialty_blindeye_ks_pro") || getplayerdata("killstreakNew", "specialty_paint_ks_pro") || getplayerdata("killstreakNew", "specialty_hardline_ks_pro") || getplayerdata("killstreakNew", "specialty_coldblooded_ks_pro") || getplayerdata("killstreakNew", "specialty_quickdraw_ks_pro") || getplayerdata("killstreakNew", "_specialty_blastshield_ks_pro") || getplayerdata("killstreakNew", "specialty_detectexplosive_ks_pro") || getplayerdata("killstreakNew", "specialty_autospot_ks_pro") || getplayerdata("killstreakNew", "specialty_bulletaccuracy_ks_pro") || getplayerdata("killstreakNew", "specialty_quieter_ks_pro") || getplayerdata("killstreakNew", "specialty_stalker_ks_pro");
+    }
+    functionDef
+    {
+        name                        "FUNC_114"
+        value                       FUNC_112() || FUNC_113();
+    }
+    functionDef
+    {
+        name                        "FUNC_115"
+        value                       tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 2);
+    }
+    functionDef
+    {
+        name                        "FUNC_116"
+        value                       tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 7);
+    }
+    functionDef
+    {
+        name                        "FUNC_117"
+        value                       min((getplayerdata("experience") - FUNC_115()) / (FUNC_116() - FUNC_115()), 0.9999);
+    }
+    loadMenu { "ui/main.menu" }
+    loadMenu { "ui/main_selection.menu" }
+    loadMenu { "ui/main_campaign.menu" }
+    loadMenu { "ui/main_specops.menu" }
+    loadMenu { "ui/popup_modechoice.menu" }
+    loadMenu { "ui/popup_modechoice_simple.menu" }
+    loadMenu { "ui/resume_popmenu.menu" }
+    loadMenu { "ui/popmenu_overwrite_warning.menu" }
+    loadMenu { "ui/popmenu_autosave_warning.menu" }
+    loadMenu { "ui/popmenu_recommendation_so.menu" }
+    loadMenu { "ui/popmenu_recommendation_mp.menu" }
+    loadMenu { "ui/levels.menu" }
+    loadMenu { "ui/levels_act1.menu" }
+    loadMenu { "ui/levels_act2.menu" }
+    loadMenu { "ui/levels_act3.menu" }
+    loadMenu { "ui/popmenu_specops_mission.menu" }
+    loadMenu { "ui/popmenu_specops_survival.menu" }
+    loadMenu { "ui/survival_armory_frontend_root.menu" }
+    loadMenu { "ui/survival_armory_frontend_weapons.menu" }
+    loadMenu { "ui/survival_armory_frontend_pistol.menu" }
+    loadMenu { "ui/survival_armory_frontend_mpistol.menu" }
+    loadMenu { "ui/survival_armory_frontend_smg.menu" }
+    loadMenu { "ui/survival_armory_frontend_lmg.menu" }
+    loadMenu { "ui/survival_armory_frontend_asr.menu" }
+    loadMenu { "ui/survival_armory_frontend_sg.menu" }
+    loadMenu { "ui/survival_armory_frontend_sr.menu" }
+    loadMenu { "ui/survival_armory_frontend_upgrades.menu" }
+    loadMenu { "ui/survival_armory_frontend_equipment.menu" }
+    loadMenu { "ui/survival_armory_frontend_air_support.menu" }
+    loadMenu { "ui/levels_challenge.menu" }
+    loadMenu { "ui/popmenu_difficulty.menu" }
+    loadMenu { "ui/popmenu_levelselect_overwrite.menu" }
+    loadMenu { "ui/popmenu_specialops_difficulty.menu" }
+    loadMenu { "ui/popmenu_specialops_splitscreen_skip_difficulty.menu" }
+    loadMenu { "ui/popmenu_specialops_online_difficulty.menu" }
+    loadMenu { "ui/popmenu_specialops_splitscreen_difficulty_p1.menu" }
+    loadMenu { "ui/popmenu_specialops_splitscreen_difficulty_p2.menu" }
+    loadMenu { "ui/ingame_difficulty.menu" }
+    loadMenu { "ui/stats.menu" }
+    loadMenu { "ui/coop_lobby.menu" }
+    loadMenu { "ui/leave_lobby_warning.menu" }
+    loadMenu { "ui/player_popup_report.menu" }
+    loadMenu { "ui/menu_online_ended.menu" }
+    loadMenu { "ui/pc_options_video.menu" }
+    loadMenu { "ui/pc_options_audio.menu" }
+    loadMenu { "ui/pc_options_controls.menu" }
+    loadMenu { "ui/pc_options_voice.menu" }
+    loadMenu { "ui/pc_options_advanced_video.menu" }
+    loadMenu { "ui/apply_picmip_popmenu.menu" }
+    loadMenu { "ui/pc_options_movement.menu" }
+    loadMenu { "ui/pc_options_actions.menu" }
+    loadMenu { "ui/pc_options_look.menu" }
+    loadMenu { "ui/options_graphics.menu" }
+    loadMenu { "ui/options_graphics_texture.menu" }
+    loadMenu { "ui/options_control_defaults.menu" }
+    loadMenu { "ui/options_graphics_defaults.menu" }
+    loadMenu { "ui/brightness_adjust.menu" }
+    loadMenu { "ui/player_profile.menu" }
+    loadMenu { "ui/profile_create_popmenu.menu" }
+    loadMenu { "ui/profile_must_create_popmenu.menu" }
+    loadMenu { "ui/profile_del_sure_popmenu.menu" }
+    loadMenu { "ui/profile_exists_popmenu.menu" }
+    loadMenu { "ui/profile_create_fail_popmenu.menu" }
+    loadMenu { "ui/profile_create_too_many_popmenu.menu" }
+    loadMenu { "ui/profile_delete_fail_popmenu.menu" }
+    loadMenu { "ui/briefing.menu" }
+    loadMenu { "ui/connect.menu" }
+    loadMenu { "ui/quit_popmenu.menu" }
+    loadMenu { "ui/all_restart_popmenu.menu" }
+    loadMenu { "ui/vid_restart_popmenu.menu" }
+    loadMenu { "ui/sp_vid_restart_popmenu_listen.menu" }
+    loadMenu { "ui/mp_vid_restart_popmenu_listen.menu" }
+    loadMenu { "ui/vid_restart_popmenu_dead.menu" }
+    loadMenu { "ui/language_restart_popmenu.menu" }
+    loadMenu { "ui/snd_restart_popmenu.menu" }
+    loadMenu { "ui/popmenu_multi_only.menu" }
+    loadMenu { "ui/so_unlock_requirement.menu" }
+    loadMenu { "ui/so_locked_for_friend.menu" }
+    loadMenu { "ui/so_character_select_coop.menu" }
+    loadMenu { "ui/so_character_select_splitscreen.menu" }
+    loadMenu { "ui/only_host_can_choose.menu" }
+    loadMenu { "ui/offensive_warning.menu" }
+    loadMenu { "ui/offensive_warning_2.menu" }
+    loadMenu { "ui/save_load_menu.menu" }
+    loadMenu { "ui/load_sure_popmenu.menu" }
+    loadMenu { "ui/save_del_sure_popmenu.menu" }
+    loadMenu { "ui/save_overwrite_popmenu.menu" }
+    loadMenu { "ui/save_name_popmenu.menu" }
+    loadMenu { "ui/popup_friend_report.menu" }
+    loadMenu { "ui/popup_recent_report.menu" }
+    loadMenu { "ui/popup_facebook_report.menu" }
+    loadMenu { "ui/popup_clan_report.menu" }
+    loadMenu { "ui/popup_friend_list_actions.menu" }
+    loadMenu { "ui/popup_recent_list_actions.menu" }
+    loadMenu { "ui/popup_facebook_list_actions.menu" }
+    loadMenu { "ui/popup_clan_list_actions.menu" }
+    loadMenu { "ui/page_friends.menu" }
+    loadMenu { "ui/user_group_popup.menu" }
+    loadMenu { "ui/page_recent.menu" }
+    loadMenu { "ui/page_elite_clan.menu" }
+    loadMenu { "ui/page_facebook.menu" }
+    loadMenu { "ui/popup_friends.menu" }
+    loadMenu { "ui/popup_update_clan_motd_success.menu" }
+    loadMenu { "ui/popup_elite_clan_updating_motd.menu" }
+    loadMenu { "ui/popup_friend_invite_sent.menu" }
+    loadMenu { "ui/specops_barracks.menu" }
+    loadMenu { "ui/popup_statswarning.menu" }
+    loadMenu { "ui/popup_callsign.menu" }
+    loadMenu { "ui/popup_use_elite_title.menu" }
+    loadMenu { "ui/popup_use_elite_tag.menu" }
+    loadMenu { "ui/popup_playername.menu" }
+    loadMenu { "ui/popup_serverpassword.menu" }
+    loadMenu { "ui/popup_joinpassword.menu" }
+    loadMenu { "ui/menu_playercard_icon_popup.menu" }
+    loadMenu { "ui/menu_playercard_title_popup.menu" }
+    loadMenu { "ui/popup_gettinglb.menu" }
+    loadMenu { "ui/menu_so_leaderboards.menu" }
+    loadMenu { "ui/popup_lb_so_group.menu" }
+    loadMenu { "ui/popup_lb_duration_survival_solo_level.menu" }
+    loadMenu { "ui/menu_lb_filter_survival_solo_level.menu" }
+    loadMenu { "ui/popup_lb_duration_survival_team_level.menu" }
+    loadMenu { "ui/menu_lb_filter_survival_team_level.menu" }
+    loadMenu { "ui/popup_lb_duration_mission_solo_level.menu" }
+    loadMenu { "ui/menu_lb_filter_mission_solo_level.menu" }
+    loadMenu { "ui/popup_lb_duration_mission_team_level.menu" }
+    loadMenu { "ui/menu_lb_filter_mission_team_level.menu" }
+    loadMenu { "ui/menu_so_leaderboard.menu" }
+    loadMenu { "ui/menu_lb_survival_solo.menu" }
+    loadMenu { "ui/menu_lb_survival_team.menu" }
+    loadMenu { "ui/menu_lb_mission_solo.menu" }
+    loadMenu { "ui/menu_lb_mission_team.menu" }
+    loadMenu { "ui/popup_facebook_legal.menu" }
+    loadMenu { "ui/popup_facebook_legal2.menu" }
+    loadMenu { "ui/popup_facebook.menu" }
+    loadMenu { "ui/popup_facebook_authenticating.menu" }
+    loadMenu { "ui/popup_facebook_authentication_popup.menu" }
+    loadMenu { "ui/popup_facebook_unregister.menu" }
+    loadMenu { "ui/popup_facebook_unregistering.menu" }
+    loadMenu { "ui/popup_facebook_pc_username.menu" }
+    loadMenu { "ui/popup_facebook_pc_password.menu" }
+    loadMenu { "ui/popup_summary_so.menu" }
+    loadMenu { "ui/popup_summary_so_ss.menu" }
+    loadMenu { "ui/menu_so_leaderboard_sd.menu" }
+    loadMenu { "ui/menu_so_leaderboard_hd.menu" }
+    loadMenu { "ui/popup_gettinglb_main.menu" }
+}

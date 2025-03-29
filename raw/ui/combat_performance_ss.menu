@@ -1,0 +1,707 @@
+{
+    menuDef
+    {
+        name                        "combat_performance_ss"
+        rect                        2 -92 0 0 8 9
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        legacySplitScreenScale      
+        visible                     when((dvarint(so_survival) && getplayerdata("surHUD", "performance")) && dvarbool(splitscreen) && !ui_active());
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "gradient_fadein"
+            exp rect y                  0 - 4;
+            exp rect w                  0 - (300 + (iscoop() * 54));
+            exp rect h                  (6 + iscoop()) * 16 + (2 * 4);
+            exp rect x                  ((0) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             0.75 * max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   1 1 1 0.85
+            background                  "gradient_fadein"
+            exp rect y                  0 - 16 - 4;
+            exp rect w                  0 - (300 + (iscoop() * 54));
+            exp rect h                  16;
+            exp rect x                  ((0) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             0.35 * max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   1 1 1 0.85
+            background                  "gradient_fadein"
+            exp rect y                  (6 + iscoop()) * 16 + 4;
+            exp rect w                  0 - (300 + (iscoop() * 54));
+            exp rect h                  16;
+            exp rect x                  ((0) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             0.35 * max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((0 + iscoop()) * 300)) / 50, 0), 1)));
+            textalign                   2
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_TIME");
+            exp rect y                  ((0 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(("time" == "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((0 + iscoop()) * 300)) / 50, 0), 1)));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    int(getplayerdata("surHUD_performance", "time") / 1000) + "." + int((getplayerdata("surHUD_performance", "time") % 1000) / 100);
+            exp rect y                  ((0 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(("time" != "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((0 + iscoop()) * 300)) / 50, 0), 1)));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_POINT", getplayerdata("surHUD_performance", "time"));
+            exp rect y                  ((0 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((("time" == "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((0 + iscoop()) * 300)) / 50, 0), 1))) && iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    int(getplayerdata("surHUD_performance_p2", "time") / 1000) + "." + int((getplayerdata("surHUD_performance_p2", "time") % 1000) / 100);
+            exp rect y                  ((0 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46 + 54) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((("time" != "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((0 + iscoop()) * 300)) / 50, 0), 1))) && iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_POINT", getplayerdata("surHUD_performance_p2", "time"));
+            exp rect y                  ((0 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46 + 54) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((0 + iscoop()) * 300)) / 50, 0), 1)) && (getplayerdata("surHUD_performance_credit", "time") > 0));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   0.7 1 0.7 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_CREDIT_PLUS", int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + (0 + iscoop()) * 300) / 1000, 0), 1) * getplayerdata("surHUD_performance_credit", "time")));
+            exp rect y                  ((0 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((0 + iscoop()) * 300)) / 50, 0), 1)) && (getplayerdata("surHUD_performance_credit", "time") < 0));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.5 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_CREDIT_MINUS", int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + (0 + iscoop()) * 300) / 1000, 0), 1) * (0 - getplayerdata("surHUD_performance_credit", "time"))));
+            exp rect y                  ((0 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((1 + iscoop()) * 300)) / 50, 0), 1)));
+            textalign                   2
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_WAVEBONUS");
+            exp rect y                  ((1 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(("wavebonus" == "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((1 + iscoop()) * 300)) / 50, 0), 1)));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    int(getplayerdata("surHUD_performance", "wavebonus") / 1000) + "." + int((getplayerdata("surHUD_performance", "wavebonus") % 1000) / 100);
+            exp rect y                  ((1 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(("wavebonus" != "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((1 + iscoop()) * 300)) / 50, 0), 1)));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_POINT", getplayerdata("surHUD_performance", "wavebonus"));
+            exp rect y                  ((1 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((("wavebonus" == "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((1 + iscoop()) * 300)) / 50, 0), 1))) && iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    int(getplayerdata("surHUD_performance_p2", "wavebonus") / 1000) + "." + int((getplayerdata("surHUD_performance_p2", "wavebonus") % 1000) / 100);
+            exp rect y                  ((1 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46 + 54) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((("wavebonus" != "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((1 + iscoop()) * 300)) / 50, 0), 1))) && iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_POINT", getplayerdata("surHUD_performance_p2", "wavebonus"));
+            exp rect y                  ((1 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46 + 54) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((1 + iscoop()) * 300)) / 50, 0), 1)) && (getplayerdata("surHUD_performance_credit", "wavebonus") > 0));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   0.7 1 0.7 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_CREDIT_PLUS", int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + (1 + iscoop()) * 300) / 1000, 0), 1) * getplayerdata("surHUD_performance_credit", "wavebonus")));
+            exp rect y                  ((1 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((1 + iscoop()) * 300)) / 50, 0), 1)) && (getplayerdata("surHUD_performance_credit", "wavebonus") < 0));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.5 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_CREDIT_MINUS", int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + (1 + iscoop()) * 300) / 1000, 0), 1) * (0 - getplayerdata("surHUD_performance_credit", "wavebonus"))));
+            exp rect y                  ((1 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((2 + iscoop()) * 300)) / 50, 0), 1)));
+            textalign                   2
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_KILLS");
+            exp rect y                  ((2 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(("kill" == "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((2 + iscoop()) * 300)) / 50, 0), 1)));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    int(getplayerdata("surHUD_performance", "kill") / 1000) + "." + int((getplayerdata("surHUD_performance", "kill") % 1000) / 100);
+            exp rect y                  ((2 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(("kill" != "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((2 + iscoop()) * 300)) / 50, 0), 1)));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_POINT", getplayerdata("surHUD_performance", "kill"));
+            exp rect y                  ((2 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((("kill" == "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((2 + iscoop()) * 300)) / 50, 0), 1))) && iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    int(getplayerdata("surHUD_performance_p2", "kill") / 1000) + "." + int((getplayerdata("surHUD_performance_p2", "kill") % 1000) / 100);
+            exp rect y                  ((2 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46 + 54) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((("kill" != "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((2 + iscoop()) * 300)) / 50, 0), 1))) && iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_POINT", getplayerdata("surHUD_performance_p2", "kill"));
+            exp rect y                  ((2 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46 + 54) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((2 + iscoop()) * 300)) / 50, 0), 1)) && (getplayerdata("surHUD_performance_credit", "kill") > 0));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   0.7 1 0.7 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_CREDIT_PLUS", int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + (2 + iscoop()) * 300) / 1000, 0), 1) * getplayerdata("surHUD_performance_credit", "kill")));
+            exp rect y                  ((2 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((2 + iscoop()) * 300)) / 50, 0), 1)) && (getplayerdata("surHUD_performance_credit", "kill") < 0));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.5 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_CREDIT_MINUS", int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + (2 + iscoop()) * 300) / 1000, 0), 1) * (0 - getplayerdata("surHUD_performance_credit", "kill"))));
+            exp rect y                  ((2 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((3 + iscoop()) * 300)) / 50, 0), 1)));
+            textalign                   2
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_HEADSHOT");
+            exp rect y                  ((3 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(("headshot" == "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((3 + iscoop()) * 300)) / 50, 0), 1)));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    int(getplayerdata("surHUD_performance", "headshot") / 1000) + "." + int((getplayerdata("surHUD_performance", "headshot") % 1000) / 100);
+            exp rect y                  ((3 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(("headshot" != "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((3 + iscoop()) * 300)) / 50, 0), 1)));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_POINT", getplayerdata("surHUD_performance", "headshot"));
+            exp rect y                  ((3 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((("headshot" == "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((3 + iscoop()) * 300)) / 50, 0), 1))) && iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    int(getplayerdata("surHUD_performance_p2", "headshot") / 1000) + "." + int((getplayerdata("surHUD_performance_p2", "headshot") % 1000) / 100);
+            exp rect y                  ((3 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46 + 54) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((("headshot" != "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((3 + iscoop()) * 300)) / 50, 0), 1))) && iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_POINT", getplayerdata("surHUD_performance_p2", "headshot"));
+            exp rect y                  ((3 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46 + 54) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((3 + iscoop()) * 300)) / 50, 0), 1)) && (getplayerdata("surHUD_performance_credit", "headshot") > 0));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   0.7 1 0.7 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_CREDIT_PLUS", int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + (3 + iscoop()) * 300) / 1000, 0), 1) * getplayerdata("surHUD_performance_credit", "headshot")));
+            exp rect y                  ((3 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((3 + iscoop()) * 300)) / 50, 0), 1)) && (getplayerdata("surHUD_performance_credit", "headshot") < 0));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.5 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_CREDIT_MINUS", int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + (3 + iscoop()) * 300) / 1000, 0), 1) * (0 - getplayerdata("surHUD_performance_credit", "headshot"))));
+            exp rect y                  ((3 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((4 + iscoop()) * 300)) / 50, 0), 1)));
+            textalign                   2
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_ACCURACY");
+            exp rect y                  ((4 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(("accuracy" == "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((4 + iscoop()) * 300)) / 50, 0), 1)));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    int(getplayerdata("surHUD_performance", "accuracy") / 1000) + "." + int((getplayerdata("surHUD_performance", "accuracy") % 1000) / 100);
+            exp rect y                  ((4 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(("accuracy" != "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((4 + iscoop()) * 300)) / 50, 0), 1)));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_PERCENT", getplayerdata("surHUD_performance", "accuracy"));
+            exp rect y                  ((4 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((("accuracy" == "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((4 + iscoop()) * 300)) / 50, 0), 1))) && iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    int(getplayerdata("surHUD_performance_p2", "accuracy") / 1000) + "." + int((getplayerdata("surHUD_performance_p2", "accuracy") % 1000) / 100);
+            exp rect y                  ((4 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46 + 54) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((("accuracy" != "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((4 + iscoop()) * 300)) / 50, 0), 1))) && iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_PERCENT", getplayerdata("surHUD_performance_p2", "accuracy"));
+            exp rect y                  ((4 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46 + 54) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((4 + iscoop()) * 300)) / 50, 0), 1)) && (getplayerdata("surHUD_performance_credit", "accuracy") > 0));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   0.7 1 0.7 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_CREDIT_PLUS", int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + (4 + iscoop()) * 300) / 1000, 0), 1) * getplayerdata("surHUD_performance_credit", "accuracy")));
+            exp rect y                  ((4 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((4 + iscoop()) * 300)) / 50, 0), 1)) && (getplayerdata("surHUD_performance_credit", "accuracy") < 0));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.5 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_CREDIT_MINUS", int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + (4 + iscoop()) * 300) / 1000, 0), 1) * (0 - getplayerdata("surHUD_performance_credit", "accuracy"))));
+            exp rect y                  ((4 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((5 + iscoop()) * 300)) / 50, 0), 1)));
+            textalign                   2
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_DAMAGETAKEN");
+            exp rect y                  ((5 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(("damagetaken" == "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((5 + iscoop()) * 300)) / 50, 0), 1)));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    int(getplayerdata("surHUD_performance", "damagetaken") / 1000) + "." + int((getplayerdata("surHUD_performance", "damagetaken") % 1000) / 100);
+            exp rect y                  ((5 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(("damagetaken" != "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((5 + iscoop()) * 300)) / 50, 0), 1)));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_POINT", getplayerdata("surHUD_performance", "damagetaken"));
+            exp rect y                  ((5 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((("damagetaken" == "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((5 + iscoop()) * 300)) / 50, 0), 1))) && iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    int(getplayerdata("surHUD_performance_p2", "damagetaken") / 1000) + "." + int((getplayerdata("surHUD_performance_p2", "damagetaken") % 1000) / 100);
+            exp rect y                  ((5 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46 + 54) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((("damagetaken" != "time") && int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((5 + iscoop()) * 300)) / 50, 0), 1))) && iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_POINT", getplayerdata("surHUD_performance_p2", "damagetaken"));
+            exp rect y                  ((5 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46 + 54) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((5 + iscoop()) * 300)) / 50, 0), 1)) && (getplayerdata("surHUD_performance_credit", "damagetaken") > 0));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   0.7 1 0.7 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_CREDIT_PLUS", int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + (5 + iscoop()) * 300) / 1000, 0), 1) * getplayerdata("surHUD_performance_credit", "damagetaken")));
+            exp rect y                  ((5 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + ((5 + iscoop()) * 300)) / 50, 0), 1)) && (getplayerdata("surHUD_performance_credit", "damagetaken") < 0));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.5 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_CREDIT_MINUS", int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + (5 + iscoop()) * 300) / 1000, 0), 1) * (0 - getplayerdata("surHUD_performance_credit", "damagetaken"))));
+            exp rect y                  ((5 + iscoop()) + 1) * 16 + (0 - 2);
+            exp rect x                  ((106 + 46) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(1);
+            textscale                   0.35
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.85
+            exp text                    "@SO_SURVIVAL_WAVE_PERFORMANCE";
+            exp rect y                  0 - 4;
+            exp rect x                  ((4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    "@SPECIAL_OPS_PERFORMANCE_YOU";
+            exp rect y                  1 * 16;
+            exp rect x                  ((106 + 4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(iscoop());
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    "@SPECIAL_OPS_PERFORMANCE_PARTNER";
+            exp rect y                  1 * 16;
+            exp rect x                  ((106 + 46 + 54) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when(1);
+            textscale                   0.35
+            textstyle                   3
+            textfont                    9
+            forecolor                   0.7 1 0.7 0.85
+            exp text                    locstring("@SO_SURVIVAL_PERFORMANCE_REWARD", int(min(max((milliseconds() - localvarint("surHUD_performance_animate") + 6 * 300) / 1000, 0), 1) * getplayerdata("surHUD_performance_reward")));
+            exp rect y                  (7 + iscoop()) * 16 + 4;
+            exp rect x                  ((4) - (max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 0) / 250), 1), 0) * (300 + (iscoop() * 54)))) - (min(max((milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 250, 0), 1) * (300 + (iscoop() * 54)));
+            exp forecolor a             max(min((1 - (milliseconds() - localvarint("surHUD_performance_animate") + 9000) / 1000), 1), 0);
+        }
+    }
+}

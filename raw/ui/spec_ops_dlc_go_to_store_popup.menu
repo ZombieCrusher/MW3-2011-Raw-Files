@@ -1,0 +1,12 @@
+{
+    menuDef
+    {
+        name                        "spec_ops_dlc_go_to_store_popup"
+        rect                        0 0 0 0 0 0
+        onOpen
+        {
+            uiScript commerceShowStore;
+            close self;
+        }
+    }
+}

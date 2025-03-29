@@ -1,0 +1,22 @@
+{
+    menuDef
+    {
+        name                        "menu_so_leaderboard"
+        rect                        0 0 0 0 0 0
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        onOpen
+        {
+            close self;
+            if (dvarbool(widescreen))
+            {
+                open menu_so_leaderboard_hd;
+            }
+            else
+            {
+                open menu_so_leaderboard_sd;
+            }
+        }
+    }
+}

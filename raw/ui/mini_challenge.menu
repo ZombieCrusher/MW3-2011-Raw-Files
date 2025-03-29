@@ -1,0 +1,256 @@
+{
+    menuDef
+    {
+        name                        "mini_challenge"
+        rect                        2 -70 0 0 8 10
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        legacySplitScreenScale      
+        visible                     when((dvarint(so_survival) && getplayerdata("surHUD", "challenge")) && !ui_active());
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            borderSize                  1
+            visible                     when((FUNC_44() <= 500));
+            textscale                   0.55
+            forecolor                   0 0 0 0.5
+            bordercolor                 1 1 1 0.85
+            background                  "white"
+            exp rect h                  8;
+            exp rect w                  64;
+            exp rect y                  0 * (8 + 16);
+            exp rect x                  max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 0 * 500) / 200), 1), 0) * (0 - 256);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when((FUNC_44() <= 500));
+            textscale                   0.55
+            forecolor                   1 1 1 0.85
+            background                  "white"
+            exp rect h                  8 - 4;
+            exp rect w                  FUNC_42() * 64 - 2;
+            exp rect y                  0 * (8 + 16) + 2;
+            exp rect x                  1 + max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 0 * 500) / 200), 1), 0) * (0 - 256);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((FUNC_44() <= 500));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.85
+            exp text                    FUNC_40();
+            exp rect h                  8;
+            exp rect w                  64;
+            exp rect y                  0 * (8 + 16);
+            exp rect x                  max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 0 * 500) / 200), 1), 0) * (0 - 256);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((FUNC_44() <= 500));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.85
+            exp text                    locstring("@SO_SURVIVAL_CREDITS", int(FUNC_44()));
+            exp rect h                  8;
+            exp rect w                  64;
+            exp rect y                  10 + 0 * (8 + 16);
+            exp rect x                  64 + 4 + max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 0 * 500) / 200), 1), 0) * (256);
+            exp forecolor a             min(max((milliseconds() - localvarint("surHUD_ch_animate") + 0 * 500) / 200, 0), 1) * 0.75;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            borderSize                  1
+            visible                     when((FUNC_44() > 500));
+            textscale                   0.55
+            forecolor                   0 0 0 0.5
+            bordercolor                 1 0.9 0.5 0.85
+            background                  "white"
+            exp rect h                  8;
+            exp rect w                  64;
+            exp rect y                  0 * (8 + 16);
+            exp rect x                  max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 0 * 500) / 200), 1), 0) * (0 - 256);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when((FUNC_44() > 500));
+            textscale                   0.55
+            forecolor                   1 0.9 0.5 0.85
+            background                  "white"
+            exp rect h                  8 - 4;
+            exp rect w                  FUNC_42() * 64 - 2;
+            exp rect y                  0 * (8 + 16) + 2;
+            exp rect x                  1 + max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 0 * 500) / 200), 1), 0) * (0 - 256);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((FUNC_44() > 500));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    FUNC_40();
+            exp rect h                  8;
+            exp rect w                  64;
+            exp rect y                  0 * (8 + 16);
+            exp rect x                  max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 0 * 500) / 200), 1), 0) * (0 - 256);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((FUNC_44() > 500));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_CREDITS", int(FUNC_44()));
+            exp rect h                  8;
+            exp rect w                  64;
+            exp rect y                  10 + 0 * (8 + 16);
+            exp rect x                  64 + 4 + max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 0 * 500) / 200), 1), 0) * (256);
+            exp forecolor a             min(max((milliseconds() - localvarint("surHUD_ch_animate") + 0 * 500) / 200, 0), 1) * 0.75;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            borderSize                  1
+            visible                     when((FUNC_45() <= 500));
+            textscale                   0.55
+            forecolor                   0 0 0 0.5
+            bordercolor                 1 1 1 0.85
+            background                  "white"
+            exp rect h                  8;
+            exp rect w                  64;
+            exp rect y                  1 * (8 + 16);
+            exp rect x                  max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 1 * 500) / 200), 1), 0) * (0 - 256);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when((FUNC_45() <= 500));
+            textscale                   0.55
+            forecolor                   1 1 1 0.85
+            background                  "white"
+            exp rect h                  8 - 4;
+            exp rect w                  FUNC_43() * 64 - 2;
+            exp rect y                  1 * (8 + 16) + 2;
+            exp rect x                  1 + max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 1 * 500) / 200), 1), 0) * (0 - 256);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((FUNC_45() <= 500));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.85
+            exp text                    FUNC_41();
+            exp rect h                  8;
+            exp rect w                  64;
+            exp rect y                  1 * (8 + 16);
+            exp rect x                  max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 1 * 500) / 200), 1), 0) * (0 - 256);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((FUNC_45() <= 500));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 1 1 0.85
+            exp text                    locstring("@SO_SURVIVAL_CREDITS", int(FUNC_45()));
+            exp rect h                  8;
+            exp rect w                  64;
+            exp rect y                  10 + 1 * (8 + 16);
+            exp rect x                  64 + 4 + max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 1 * 500) / 200), 1), 0) * (256);
+            exp forecolor a             min(max((milliseconds() - localvarint("surHUD_ch_animate") + 1 * 500) / 200, 0), 1) * 0.75;
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            borderSize                  1
+            visible                     when((FUNC_45() > 500));
+            textscale                   0.55
+            forecolor                   0 0 0 0.5
+            bordercolor                 1 0.9 0.5 0.85
+            background                  "white"
+            exp rect h                  8;
+            exp rect w                  64;
+            exp rect y                  1 * (8 + 16);
+            exp rect x                  max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 1 * 500) / 200), 1), 0) * (0 - 256);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            style                       3
+            decoration                  
+            visible                     when((FUNC_45() > 500));
+            textscale                   0.55
+            forecolor                   1 0.9 0.5 0.85
+            background                  "white"
+            exp rect h                  8 - 4;
+            exp rect w                  FUNC_43() * 64 - 2;
+            exp rect y                  1 * (8 + 16) + 2;
+            exp rect x                  1 + max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 1 * 500) / 200), 1), 0) * (0 - 256);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((FUNC_45() > 500));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    FUNC_41();
+            exp rect h                  8;
+            exp rect w                  64;
+            exp rect y                  1 * (8 + 16);
+            exp rect x                  max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 1 * 500) / 200), 1), 0) * (0 - 256);
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((FUNC_45() > 500));
+            textscale                   0.3
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.9 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_CREDITS", int(FUNC_45()));
+            exp rect h                  8;
+            exp rect w                  64;
+            exp rect y                  10 + 1 * (8 + 16);
+            exp rect x                  64 + 4 + max(min((1 - (milliseconds() - localvarint("surHUD_ch_animate") + 1 * 500) / 200), 1), 0) * (256);
+            exp forecolor a             min(max((milliseconds() - localvarint("surHUD_ch_animate") + 1 * 500) / 200, 0), 1) * 0.75;
+        }
+    }
+}

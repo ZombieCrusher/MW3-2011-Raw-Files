@@ -1,0 +1,1820 @@
+{
+    menuDef
+    {
+        name                        "specops_barracks"
+        fullscreen                  1
+        rect                        0 0 640 480 0 0
+        focuscolor                  1 1 1 1
+        soundLoop                   "music_challenge_factory"
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        onOpen
+        {
+            setLocalVarInt ui_buttonNavGroupOffset 0;
+            setLocalVarInt ui_buttonNavGroupCurrent 0;
+            setLocalVarString ui_buttonNavGroupName "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            focusfirst;
+        }
+        onClose
+        {
+            execnow "decnosplitscreencontrol specops_barracks";
+        }
+        onESC
+        {
+            close self;
+        }
+        onFocusDueToClose
+        {
+            setLocalVarString ui_hint_text "";
+            focusfirst;
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image_blur_less"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(!(dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        240 372 540 16 1 1
+            style                       3
+            decoration                  
+            visible                     when(0);
+            textscale                   0.55
+            background                  "motd_ticker_bg"
+        }
+        itemDef
+        {
+            rect                        250 372 500 16 1 1
+            decoration                  
+            type                        20
+            visible                     when(0);
+            textscale                   0.34
+            speed                       50
+            newsfeed                    1
+        }
+        itemDef
+        {
+            rect                        237.5 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+            exp rect w                  localvarbool("ui_shelfEnabled") * select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5));
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  ((0 - 64) + 301.5) + (localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5))));
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  (0 - 64) + 301.5;
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+            exp forecolor a             localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0.75, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75)));
+        }
+        itemDef
+        {
+            rect                        -64 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+        }
+        itemDef
+        {
+            rect                        237.5 -36 640 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "dest_alpha_zero"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "background_image_blur_less_dest_alpha_masked"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "mw2_main_cloud_overlay_write_dest_alpha"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay_dest_alpha_masked"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        -64 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            background                  "mw2_main_cloud_overlay_write_dest_alpha"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay_dest_alpha_masked"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        -64 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 30 301.5 5.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_tick"
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_BARRACKS_CAPS");
+            exp forecolor a             select((getTextWidth(locstring("@MENU_BARRACKS_CAPS"), 9, 0.5) <= 200), 1, 0);
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.4
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_BARRACKS_CAPS");
+            exp forecolor a             select(((getTextWidth(locstring("@MENU_BARRACKS_CAPS"), 9, 0.5) > 200) && (getTextWidth(locstring("@MENU_BARRACKS_CAPS"), 9, 0.4) <= 200)), 1, 0);
+        }
+        itemDef
+        {
+            rect                        -64 1 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.3
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_BARRACKS_CAPS");
+            exp forecolor a             select((getTextWidth(locstring("@MENU_BARRACKS_CAPS"), 9, 0.4) > 200), 1, 0);
+        }
+        itemDef
+        {
+            rect                        -63.933 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when((("USE_SMALLER_TITLE_TEXT")));
+            textalign                   10
+            textscale                   0.4
+            textfont                    9
+            exp text                    "@MENU_BARRACKS_CAPS";
+        }
+        itemDef
+        {
+            rect                        -88 34.667 325.333 17.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionBarVis") && (localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + 0.667;
+        }
+        itemDef
+        {
+            rect                        213 34.667 21.333 16.5 1 1
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp text                    "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON";
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + (0.667);
+        }
+        itemDef
+        {
+            name                        "SWF_BUTTON_LIST_0"
+            rect                        -68 34.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_BUTTON_LIST_0";
+                setLocalVarInt ui_buttonNavGroupCurrent 0;
+                setLocalVarString ui_buttonNavGroupName "SWF_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((3 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (3 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+                setLocalVarString ui_hint_text "@MENU_SP_DESC_SO_LEADERBOARDS";
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    execWithResolve xrequirelivesignin;
+                    if (usercanplayonline())
+                    {
+                        open menu_so_leaderboards;
+                    }
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 0))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        219 37 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((0)) && (1))) && (0) && (localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST"));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 0)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        219 37 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((0)) && (1))) && (0) && (!(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST")));
+            textscale                   0.55
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 0)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        -64 33.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (0));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_LEADERBOARDS_CAP";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 0))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0.882 * select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.882));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0.655 * select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.655));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0.173 * select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.173));
+        }
+        itemDef
+        {
+            rect                        -64 33.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1) && !(0));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_LEADERBOARDS_CAP";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 0))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            name                        "SWF_BUTTON_LIST_1"
+            rect                        -68 54.667 305.333 20 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_BUTTON_LIST_1";
+                setLocalVarInt ui_buttonNavGroupCurrent 1;
+                setLocalVarString ui_buttonNavGroupName "SWF_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((3 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (3 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+                setLocalVarString ui_hint_text "@MENU_SP_DESC_SO_SURVIVAL_ARMORY";
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    open survival_armory_frontend_root;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 1))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        219 57 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((0)) && (1))) && (0) && (localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST"));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 1)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        219 57 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((0)) && (1))) && (0) && (!(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST")));
+            textscale                   0.55
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 1)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        -64 53.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1) && (0));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@SO_SURVIVAL_SURVIVAL_ARMORIES";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 1))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0.882 * select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.882));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0.655 * select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.655));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0.173 * select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.173));
+        }
+        itemDef
+        {
+            rect                        -64 53.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1) && !(0));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@SO_SURVIVAL_SURVIVAL_ARMORIES";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 1))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            rect                        -46.5 73.334 283.333 3.333 1 1
+            style                       3
+            decoration                  
+            visible                     when((1) && (((localvarint("ui_buttonNavGroupOffset") + (3 - 1)) >= (2) && (((2) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textscale                   0.55
+            background                  "navbar_tick"
+            exp rect x                  (0) + ((0 - 64)) + 0.667 + 17.5;
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 2))) + ((0 - 2.3333));
+        }
+        itemDef
+        {
+            rect                        -64 73.334 200.667 19.567 1 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when((!localvarbool("ui_centerPopup") && !localvarbool("ui_leftPopup")) && (((localvarint("ui_buttonNavGroupOffset") + (3 - 1)) >= (2) && (((2) - localvarint("ui_buttonNavGroupOffset")) >= 0))) && (0));
+            textalign                   10
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_hint_text");
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 2))) + ((0 - 1.333));
+            exp rect x                  (((301.5 / 2) - 77)) + ((0 - 64));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0.882 * select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.882));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0.655 * select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.655));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0.173 * select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.173));
+        }
+        itemDef
+        {
+            rect                        -64 73.334 200.667 19.567 1 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when((!localvarbool("ui_centerPopup") && !localvarbool("ui_leftPopup")) && (((localvarint("ui_buttonNavGroupOffset") + (3 - 1)) >= (2) && (((2) - localvarint("ui_buttonNavGroupOffset")) >= 0))) && !(0));
+            textalign                   10
+            textscale                   0.375
+            textfont                    3
+            exp text                    localvarstring("ui_hint_text");
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 2))) + ((0 - 1.333));
+            exp rect x                  (((301.5 / 2) - 77)) + ((0 - 64));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_BUTTON_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+        }
+        itemDef
+        {
+            rect                        -88 52 325.333 8.666 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionBarVis") && (localvarstring("ui_buttonNavGroupName") == "SWF_BUTTON_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + 0.667 + 17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 2;
+                setLocalVarString ui_ralign_group "specops_barracks";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 102;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running))))) && (!0) && (localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "specops_barracks"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running))))) && (localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "specops_barracks"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            execKey "f"
+            {
+                if (((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))))
+                {
+                    setLocalVarBool ui_vault_browse 0;
+                    setLocalVarBool ui_vault_load 0;
+                    execnow "incnosplitscreencontrol popup_friends";
+                    if (isprofilesignedin() && isusersignedintolive())
+                    {
+                        open popup_friends;
+                    }
+                    else
+                    {
+                        execnow "decnosplitscreencontrol popup_friends";
+                    }
+                }
+            }
+            exp text                    "@PLATFORM_FRIENDS_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "specops_barracks"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "specops_barracks"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "specops_barracks"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "specops_barracks";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 27;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((1) && (!0) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "specops_barracks"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "specops_barracks"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@PLATFORM_BACK_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "specops_barracks"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "specops_barracks"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "specops_barracks"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+        }
+        itemDef
+        {
+            rect                        76 33.967 293.333 50.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0.157 0.173 0.161 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        76 133.867 293.333 91.333 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0.212 0.231 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        76 84.667 293.333 49.333 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0.212 0.231 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        76 224.667 293.333 9.333 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0.306 0.349 0.275 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        76 151.333 293.333 14.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.148
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        76 180.667 293.333 14.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.148
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        76 210 293.333 14.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.148
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        80.033 134 129.4 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.929 0.933 0.933 1
+            exp text                    "@MENU_SP_KILLS_PRE";
+        }
+        itemDef
+        {
+            rect                        79.967 192.666 177.533 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.929 0.933 0.933 1
+            exp text                    "@MENU_SP_WAVES_SURVIVED_PRE";
+        }
+        itemDef
+        {
+            rect                        234.833 134 126.667 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   10
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.914 0.749 0.345 1
+            exp text                    string(getplayerdata("career", "kills"));
+        }
+        itemDef
+        {
+            rect                        163.067 192.833 198.467 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   10
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.914 0.749 0.345 1
+            exp text                    string(getplayerdata("career", "waves_survived"));
+        }
+        itemDef
+        {
+            rect                        80 148.666 128.6 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            exp text                    "@MENU_SP_KILLS_J_PRE";
+        }
+        itemDef
+        {
+            rect                        227.367 148.933 134.167 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   10
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.988 0.988 0.988 1
+            exp text                    string(getplayerdata("career", "kills_juggernaut"));
+        }
+        itemDef
+        {
+            rect                        80 163.466 153.367 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            exp text                    "@MENU_SP_HEADSHOTS_PRE";
+        }
+        itemDef
+        {
+            rect                        209.933 163.333 151.567 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   10
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.988 0.988 0.988 1
+            exp text                    string(getplayerdata("career", "headshots"));
+        }
+        itemDef
+        {
+            rect                        80 178 169.467 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            exp text                    "@MENU_SP_ACCURACY_PRE";
+        }
+        itemDef
+        {
+            rect                        177.133 178.133 184.367 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   10
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.988 0.988 0.988 1
+            exp text                    (string() ((int() (((int() (getplayerdata("career", "bullets_hit") * 10000 / getplayerdata("career", "bullets_fired"))) / 100)) + "." + ((string() ((int() (((int() (getplayerdata("career", "bullets_hit") * 10000 / getplayerdata("career", "bullets_fired"))) / 10)) % 10) + ((string() (((int() (getplayerdata("career", "bullets_hit") * 10000 / getplayerdata("career", "bullets_fired"))) % 10)) + "%"))))))));
+        }
+        itemDef
+        {
+            rect                        76 100.633 285.333 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   9
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.996 0.988 0.255 1
+            exp text                    locstring("@MENU_X_SLASH_Y_XP", int(getplayerdata("experience")), int(tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 7)));
+        }
+        itemDef
+        {
+            rect                        345.233 101 113.867 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            exp text                    tablelookup("sp/rankTable.csv", 0, (levelforexperienceso(getplayerdata("experience")) + 1), 14);
+        }
+        itemDef
+        {
+            rect                        106.533 101 109.167 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            exp text                    tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 14);
+        }
+        itemDef
+        {
+            rect                        76 81.733 293.333 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))));
+            textalign                   9
+            textscale                   0.340278
+            textstyle                   9
+            textfont                    3
+            exp text                    "@" + tablelookup("sp/ranktable.csv", 0, levelforexperienceso(getplayerdata("experience")), 5);
+        }
+        itemDef
+        {
+            rect                        81.467 120.7 279.333 7.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((dvarbool(widescreen)));
+            textscale                   0.55
+            backcolor                   0 0 0 1
+        }
+        itemDef
+        {
+            rect                        79.467 118.7 283.333 11.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(widescreen)));
+            textscale                   0.55
+            background                  "dest_alpha_zero"
+        }
+        itemDef
+        {
+            rect                        81.467 120.7 279.333 7.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(widescreen)));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+            exp rect w                  ((getplayerdata("experience") - tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 2)) / float(tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 7) - tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 2))) * 279.333;
+        }
+        itemDef
+        {
+            rect                        81.467 120.7 279.333 7.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(widescreen)));
+            textscale                   0.55
+            background                  "bar_progress_yellow_custom"
+        }
+        itemDef
+        {
+            rect                        316.333 92 26.667 26.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarbool(widescreen))) && ((levelforexperienceso(getplayerdata("experience")) < int(tablelookup("sp/rankTable.csv", 0, "maxrank", 1)))));
+            textscale                   0.55
+            exp material                tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")) + 1, 6);
+        }
+        itemDef
+        {
+            rect                        81 92 26.667 26.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((dvarbool(widescreen))) && (1));
+            textscale                   0.55
+            exp material                tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 6);
+        }
+        itemDef
+        {
+            rect                        -20 33.967 293.333 50.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0.157 0.173 0.161 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -20 133.867 293.333 91.333 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0.212 0.231 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -20 84.667 293.333 49.333 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0.212 0.231 0.22 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -20 224.667 293.333 9.333 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0.306 0.349 0.275 1
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -20 151.333 293.333 14.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.148
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -20 180.667 293.333 14.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.148
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -20 210 293.333 14.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textscale                   0.55
+            forecolor                   0 0 0 0.148
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -15.967 134 129.4 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.929 0.933 0.933 1
+            exp text                    "@MENU_SP_KILLS_PRE";
+        }
+        itemDef
+        {
+            rect                        -16.033 192.666 177.533 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.929 0.933 0.933 1
+            exp text                    "@MENU_SP_WAVES_SURVIVED_PRE";
+        }
+        itemDef
+        {
+            rect                        138.833 134 126.667 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   10
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.914 0.749 0.345 1
+            exp text                    string(getplayerdata("career", "kills"));
+        }
+        itemDef
+        {
+            rect                        67.067 192.833 198.467 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   10
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.914 0.749 0.345 1
+            exp text                    string(getplayerdata("career", "waves_survived"));
+        }
+        itemDef
+        {
+            rect                        -16 148.666 128.6 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            exp text                    "@MENU_SP_KILLS_J_PRE";
+        }
+        itemDef
+        {
+            rect                        131.367 148.933 134.167 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   10
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.988 0.988 0.988 1
+            exp text                    string(getplayerdata("career", "kills_juggernaut"));
+        }
+        itemDef
+        {
+            rect                        -16 163.466 153.367 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            exp text                    "@MENU_SP_HEADSHOTS_PRE";
+        }
+        itemDef
+        {
+            rect                        113.933 163.333 151.567 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   10
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.988 0.988 0.988 1
+            exp text                    string(getplayerdata("career", "headshots"));
+        }
+        itemDef
+        {
+            rect                        -16 178 169.467 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            exp text                    "@MENU_SP_ACCURACY_PRE";
+        }
+        itemDef
+        {
+            rect                        81.133 178.133 184.367 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   10
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.988 0.988 0.988 1
+            exp text                    (string() ((int() (((int() (getplayerdata("career", "bullets_hit") * 10000 / getplayerdata("career", "bullets_fired"))) / 100)) + "." + ((string() ((int() (((int() (getplayerdata("career", "bullets_hit") * 10000 / getplayerdata("career", "bullets_fired"))) / 10)) % 10) + ((string() (((int() (getplayerdata("career", "bullets_hit") * 10000 / getplayerdata("career", "bullets_fired"))) % 10)) + "%"))))))));
+        }
+        itemDef
+        {
+            rect                        -20 100.633 285.333 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   9
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.996 0.988 0.255 1
+            exp text                    locstring("@MENU_X_SLASH_Y_XP", int(getplayerdata("experience")), int(tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 7)));
+        }
+        itemDef
+        {
+            rect                        249.233 101 113.867 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            exp text                    tablelookup("sp/rankTable.csv", 0, (levelforexperienceso(getplayerdata("experience")) + 1), 14);
+        }
+        itemDef
+        {
+            rect                        10.533 101 109.167 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            exp text                    tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 14);
+        }
+        itemDef
+        {
+            rect                        -20 81.733 293.333 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))));
+            textalign                   9
+            textscale                   0.340278
+            textstyle                   9
+            textfont                    3
+            exp text                    "@" + tablelookup("sp/ranktable.csv", 0, levelforexperienceso(getplayerdata("experience")), 5);
+        }
+        itemDef
+        {
+            rect                        -14.533 120.7 279.333 7.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((!dvarbool(widescreen)));
+            textscale                   0.55
+            backcolor                   0 0 0 1
+        }
+        itemDef
+        {
+            rect                        -16.533 118.7 283.333 11.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((!dvarbool(widescreen)));
+            textscale                   0.55
+            background                  "dest_alpha_zero"
+        }
+        itemDef
+        {
+            rect                        -14.533 120.7 279.333 7.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((!dvarbool(widescreen)));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+            exp rect w                  ((getplayerdata("experience") - tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 2)) / float(tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 7) - tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 2))) * 279.333;
+        }
+        itemDef
+        {
+            rect                        -14.533 120.7 279.333 7.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((!dvarbool(widescreen)));
+            textscale                   0.55
+            background                  "bar_progress_yellow_custom"
+        }
+        itemDef
+        {
+            rect                        220.333 92 26.667 26.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))) && ((levelforexperienceso(getplayerdata("experience")) < int(tablelookup("sp/rankTable.csv", 0, "maxrank", 1)))));
+            textscale                   0.55
+            exp material                tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")) + 1, 6);
+        }
+        itemDef
+        {
+            rect                        -15 92 26.667 26.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))) && (1));
+            textscale                   0.55
+            exp material                tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 6);
+        }
+        itemDef
+        {
+            rect                        76 134 293.333 10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 96))) + (76));
+        }
+        itemDef
+        {
+            rect                        76 214 293.333 -10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, (0 - 96))) + (76));
+        }
+        itemDef
+        {
+            rect                        0 0 240 40 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  (83 + 20.666);
+            exp rect y                  (34 + 6);
+        }
+        itemDef
+        {
+            rect                        0 0 237.333 37.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0));
+            textscale                   0.55
+            background                  "playercard_scanlines_512"
+            exp rect x                  (83 + 20.666) + 1.333;
+            exp rect y                  (34 + 6) + 1.333;
+        }
+        itemDef
+        {
+            rect                        0 0 35.3 35.3 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && !localvarbool("browsingCardIcon"));
+            textscale                   0.55
+            exp material                tablelookupbyrow("mp/cardIconTable.csv", getplayercardinfo(2, 8, 0), 1);
+            exp rect x                  (83 + 20.666) + 2.533;
+            exp rect y                  (34 + 6) + 2.567;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 156.667 31.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && !localvarbool("browsingCardTitle"));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 2);
+            exp rect x                  (83 + 20.666) + 33.9;
+            exp rect y                  (34 + 6) + (0 - 4.1);
+            exp forecolor r             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 3);
+            exp forecolor g             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 4);
+            exp forecolor b             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 5);
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 28.8 28.8 2 1
+            style                       1
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 8, 0) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                "clanlvl_box";
+            exp rect x                  (83 + 20.666) + 33.9 + ((156.667) - (28 * 0.9));
+            exp rect y                  (34 + 6) + (0 - 4.1) - (11 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 14.4 14.4 2 1
+            style                       1
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 8, 0) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                getplayercardinfo(22, 8, 0);
+            exp rect x                  (83 + 20.666) + 33.9 + ((156.667) - (25.5 * 0.9));
+            exp rect y                  ((34 + 6) + (0 - 4.1)) - (3 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 14.4 14.4 2 1
+            style                       1
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 8, 0) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                getplayercardinfo(21, 8, 0);
+            exp rect x                  (83 + 20.666) + 33.9 + ((156.667) - (13.5 * 0.9));
+            exp rect y                  ((34 + 6) + (0 - 4.1)) - (3 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 156.667 31.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && !localvarbool("browsingCardTitle"));
+            textalign                   9
+            textscale                   0.375
+            textstyle                   8
+            textfont                    3
+            exp text                    getplayercardinfo(14, 8, 0);
+            exp rect x                  (83 + 20.666) + 33.9;
+            exp rect y                  (34 + 6) + (0 - 4.1);
+            exp forecolor r             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 3);
+            exp forecolor g             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 4);
+            exp forecolor b             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 5);
+            exp backcolor a             0;
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))) && (getplayercardinfo(0, 8, 0) != 0));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 8, 0);
+            exp rect x                  (83 + 20.666) + 40;
+            exp rect y                  (34 + 6) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 8, 0), 9, 0.375) <= 142), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))) && (getplayercardinfo(0, 8, 0) != 0));
+            textalign                   8
+            textscale                   0.3
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 8, 0);
+            exp rect x                  (83 + 20.666) + 40;
+            exp rect y                  (34 + 6) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 8, 0), 9, 0.375) > 142 && getTextWidth(getplayercardinfo(11, 8, 0), 9, 0.375) <= 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarbool(widescreen))) && (getplayercardinfo(0, 8, 0) != 0));
+            textalign                   8
+            textscale                   0.225
+            textstyle                   8
+            textfont                    9
+            exp text                    truncateTextWithEllipsis(getplayercardinfo(11, 8, 0), 9, (0.375 * 0.6), 140);
+            exp rect x                  (83 + 20.666) + 40;
+            exp rect y                  (34 + 6) + 22;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 8, 0), 9, 0.375) > 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 51.333 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && getplayercardinfo(12, 8, 0) != "");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    "[" + getplayercardinfo(12, 8, 0) + "]";
+            exp rect x                  (83 + 20.666) + 188;
+            exp rect y                  (34 + 6) + 2.5;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && (getplayercardinfo(4, 8, 0) >= 0) && dvarstring(gameMode) == "mp");
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, getplayercardinfo(4, 8, 0), (getplayercardinfo(5, 8, 0) + 1));
+            exp rect x                  (83 + 20.666) + 192;
+            exp rect y                  (34 + 6) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && (getplayercardinfo(4, 8, 0) >= 0) && dvarstring(gameMode) == "mp");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/rankTable.csv", 0, getplayercardinfo(4, 8, 0), 14);
+            exp rect x                  (83 + 20.666) + 212;
+            exp rect y                  (34 + 6) + 19.167;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && (getplayercardinfo(6, 8, 0) >= 0) && dvarstring(gameMode) == "so");
+            textscale                   0.55
+            exp material                tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 8, 0), 6);
+            exp rect x                  (83 + 20.666) + 192;
+            exp rect y                  (34 + 6) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && (getplayercardinfo(6, 8, 0) >= 0) && dvarstring(gameMode) == "so");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 8, 0), 14);
+            exp rect x                  (83 + 20.666) + 212;
+            exp rect y                  (34 + 6) + 19.167;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 29.333 29.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && getplayercardinfo(10, 8, 0));
+            textscale                   0.55
+            exp material                "xp";
+            exp rect x                  (83 + 20.666) + 228.667;
+            exp rect y                  (34 + 6) - 14.267;
+        }
+        itemDef
+        {
+            rect                        0 0 29.333 29.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && getplayercardinfo(15, 8, 0));
+            textscale                   0.55
+            exp material                "gxp";
+            exp rect x                  (83 + 20.666) + 228.667;
+            exp rect y                  select(getplayercardinfo(10, 8, 0), (34 + 6) - 1.1, (34 + 6) - 14.267);
+        }
+        itemDef
+        {
+            rect                        0 0 240 40 2 1
+            style                       3
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "white"
+            exp rect x                  ((0 - 13) + 20.666);
+            exp rect y                  (34 + 6);
+        }
+        itemDef
+        {
+            rect                        0 0 237.333 37.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0));
+            textscale                   0.55
+            background                  "playercard_scanlines_512"
+            exp rect x                  ((0 - 13) + 20.666) + 1.333;
+            exp rect y                  (34 + 6) + 1.333;
+        }
+        itemDef
+        {
+            rect                        0 0 35.3 35.3 2 1
+            style                       3
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && !localvarbool("browsingCardIcon"));
+            textscale                   0.55
+            exp material                tablelookupbyrow("mp/cardIconTable.csv", getplayercardinfo(2, 8, 0), 1);
+            exp rect x                  ((0 - 13) + 20.666) + 2.533;
+            exp rect y                  (34 + 6) + 2.567;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 156.667 31.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && !localvarbool("browsingCardTitle"));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 2);
+            exp rect x                  ((0 - 13) + 20.666) + 33.9;
+            exp rect y                  (34 + 6) + (0 - 4.1);
+            exp forecolor r             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 3);
+            exp forecolor g             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 4);
+            exp forecolor b             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 5);
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 28.8 28.8 2 1
+            style                       1
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 8, 0) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                "clanlvl_box";
+            exp rect x                  ((0 - 13) + 20.666) + 33.9 + ((156.667) - (28 * 0.9));
+            exp rect y                  (34 + 6) + (0 - 4.1) - (11 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 14.4 14.4 2 1
+            style                       1
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 8, 0) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                getplayercardinfo(22, 8, 0);
+            exp rect x                  ((0 - 13) + 20.666) + 33.9 + ((156.667) - (25.5 * 0.9));
+            exp rect y                  ((34 + 6) + (0 - 4.1)) - (3 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 14.4 14.4 2 1
+            style                       1
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && !localvarbool("browsingCardTitle") && (getplayercardinfo(20, 8, 0) > 0));
+            textscale                   0.55
+            backcolor                   1 1 1 1
+            exp material                getplayercardinfo(21, 8, 0);
+            exp rect x                  ((0 - 13) + 20.666) + 33.9 + ((156.667) - (13.5 * 0.9));
+            exp rect y                  ((34 + 6) + (0 - 4.1)) - (3 * 0.9);
+        }
+        itemDef
+        {
+            rect                        0 0 156.667 31.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && !localvarbool("browsingCardTitle"));
+            textalign                   9
+            textscale                   0.375
+            textstyle                   8
+            textfont                    3
+            exp text                    getplayercardinfo(14, 8, 0);
+            exp rect x                  ((0 - 13) + 20.666) + 33.9;
+            exp rect y                  (34 + 6) + (0 - 4.1);
+            exp forecolor r             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 3);
+            exp forecolor g             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 4);
+            exp forecolor b             tablelookupbyrow("mp/cardTitleTable.csv", getplayercardinfo(1, 8, 0), 5);
+            exp backcolor a             0;
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))) && (getplayercardinfo(0, 8, 0) != 0));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 8, 0);
+            exp rect x                  ((0 - 13) + 20.666) + 40;
+            exp rect y                  (34 + 6) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 8, 0), 9, 0.375) <= 142), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))) && (getplayercardinfo(0, 8, 0) != 0));
+            textalign                   8
+            textscale                   0.3
+            textstyle                   8
+            textfont                    9
+            exp text                    getplayercardinfo(11, 8, 0);
+            exp rect x                  ((0 - 13) + 20.666) + 40;
+            exp rect y                  (34 + 6) + 21.5;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 8, 0), 9, 0.375) > 142 && getTextWidth(getplayercardinfo(11, 8, 0), 9, 0.375) <= 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 146.7 16.6 2 1
+            style                       1
+            decoration                  
+            visible                     when(((!dvarbool(widescreen))) && (getplayercardinfo(0, 8, 0) != 0));
+            textalign                   8
+            textscale                   0.225
+            textstyle                   8
+            textfont                    9
+            exp text                    truncateTextWithEllipsis(getplayercardinfo(11, 8, 0), 9, (0.375 * 0.6), 140);
+            exp rect x                  ((0 - 13) + 20.666) + 40;
+            exp rect y                  (34 + 6) + 22;
+            exp forecolor r             0.941;
+            exp forecolor g             0.773;
+            exp forecolor b             0.361;
+            exp forecolor a             select((getTextWidth(getplayercardinfo(11, 8, 0), 9, 0.375) > 180), 1, 0);
+        }
+        itemDef
+        {
+            rect                        0 0 51.333 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && getplayercardinfo(12, 8, 0) != "");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            forecolor                   0.941 0.773 0.361 1
+            exp text                    "[" + getplayercardinfo(12, 8, 0) + "]";
+            exp rect x                  ((0 - 13) + 20.666) + 188;
+            exp rect y                  (34 + 6) + 2.5;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && (getplayercardinfo(4, 8, 0) >= 0) && dvarstring(gameMode) == "mp");
+            textscale                   0.55
+            exp material                tablelookup("mp/rankIconTable.csv", 0, getplayercardinfo(4, 8, 0), (getplayercardinfo(5, 8, 0) + 1));
+            exp rect x                  ((0 - 13) + 20.666) + 192;
+            exp rect y                  (34 + 6) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && (getplayercardinfo(4, 8, 0) >= 0) && dvarstring(gameMode) == "mp");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("mp/rankTable.csv", 0, getplayercardinfo(4, 8, 0), 14);
+            exp rect x                  ((0 - 13) + 20.666) + 212;
+            exp rect y                  (34 + 6) + 19.167;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 18.667 18.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && (getplayercardinfo(6, 8, 0) >= 0) && dvarstring(gameMode) == "so");
+            textscale                   0.55
+            exp material                tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 8, 0), 6);
+            exp rect x                  ((0 - 13) + 20.666) + 192;
+            exp rect y                  (34 + 6) + 18.9;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 22 18.033 2 1
+            style                       1
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && (getplayercardinfo(6, 8, 0) >= 0) && dvarstring(gameMode) == "so");
+            textalign                   8
+            textscale                   0.375
+            textstyle                   7
+            textfont                    3
+            exp text                    tablelookup("sp/rankTable.csv", 0, getplayercardinfo(6, 8, 0), 14);
+            exp rect x                  ((0 - 13) + 20.666) + 212;
+            exp rect y                  (34 + 6) + 19.167;
+            exp forecolor a             1;
+        }
+        itemDef
+        {
+            rect                        0 0 29.333 29.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && getplayercardinfo(10, 8, 0));
+            textscale                   0.55
+            exp material                "xp";
+            exp rect x                  ((0 - 13) + 20.666) + 228.667;
+            exp rect y                  (34 + 6) - 14.267;
+        }
+        itemDef
+        {
+            rect                        0 0 29.333 29.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((!dvarbool(widescreen)) && (getplayercardinfo(0, 8, 0) != 0) && getplayercardinfo(15, 8, 0));
+            textscale                   0.55
+            exp material                "gxp";
+            exp rect x                  ((0 - 13) + 20.666) + 228.667;
+            exp rect y                  select(getplayercardinfo(10, 8, 0), (34 + 6) - 1.1, (34 + 6) - 14.267);
+        }
+    }
+}

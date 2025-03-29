@@ -1,0 +1,78 @@
+{
+    menuDef
+    {
+        name                        "popmenu_specialops_splitscreen_skip_difficulty"
+        rect                        0 0 0 0 0 0
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        onOpen
+        {
+            if (dvarint(g_gameskill_player_1) >= dvarint(g_gameskill_player_2))
+            {
+                if (dvarint(g_gameskill_player_1) == 1)
+                {
+                    setdvar g_gameskill 1;
+                }
+                if (dvarint(g_gameskill_player_1) == 2)
+                {
+                    setdvar g_gameskill 2;
+                }
+                if (dvarint(g_gameskill_player_1) == 3)
+                {
+                    setdvar g_gameskill 3;
+                }
+            }
+            else
+            {
+                if (dvarint(g_gameskill_player_2) == 1)
+                {
+                    setdvar g_gameskill 1;
+                }
+                if (dvarint(g_gameskill_player_2) == 2)
+                {
+                    setdvar g_gameskill 2;
+                }
+                if (dvarint(g_gameskill_player_2) == 3)
+                {
+                    setdvar g_gameskill 3;
+                }
+            }
+            close self;
+            setLocalVarInt ui_specops_loading_level 1;
+            execondvarstringvalue ui_load_so_level so_survival_mp_dome "devmap so_survival_mp_dome";
+            execondvarstringvalue ui_load_so_level so_survival_mp_village "devmap so_survival_mp_village";
+            execondvarstringvalue ui_load_so_level so_survival_mp_carbon "devmap so_survival_mp_carbon";
+            execondvarstringvalue ui_load_so_level so_survival_mp_seatown "devmap so_survival_mp_seatown";
+            execondvarstringvalue ui_load_so_level so_survival_mp_radar "devmap so_survival_mp_radar";
+            execondvarstringvalue ui_load_so_level so_survival_mp_paris "devmap so_survival_mp_paris";
+            execondvarstringvalue ui_load_so_level so_survival_mp_alpha "devmap so_survival_mp_alpha";
+            execondvarstringvalue ui_load_so_level so_survival_mp_bravo "devmap so_survival_mp_bravo";
+            execondvarstringvalue ui_load_so_level so_survival_mp_plaza2 "devmap so_survival_mp_plaza2";
+            execondvarstringvalue ui_load_so_level so_survival_mp_mogadishu "devmap so_survival_mp_mogadishu";
+            execondvarstringvalue ui_load_so_level so_survival_mp_exchange "devmap so_survival_mp_exchange";
+            execondvarstringvalue ui_load_so_level so_survival_mp_underground "devmap so_survival_mp_underground";
+            execondvarstringvalue ui_load_so_level so_survival_mp_hardhat "devmap so_survival_mp_hardhat";
+            execondvarstringvalue ui_load_so_level so_survival_mp_bootleg "devmap so_survival_mp_bootleg";
+            execondvarstringvalue ui_load_so_level so_survival_mp_lambeth "devmap so_survival_mp_lambeth";
+            execondvarstringvalue ui_load_so_level so_survival_mp_interchange "devmap so_survival_mp_interchange";
+            execondvarstringvalue ui_load_so_level so_rescue_hijack "devmap so_rescue_hijack";
+            execondvarstringvalue ui_load_so_level so_ied_berlin "devmap so_ied_berlin";
+            execondvarstringvalue ui_load_so_level so_heliswitch_berlin "devmap so_heliswitch_berlin";
+            execondvarstringvalue ui_load_so_level so_zodiac2_ny_harbor "devmap so_zodiac2_ny_harbor";
+            execondvarstringvalue ui_load_so_level so_killspree_paris_a "devmap so_killspree_paris_a";
+            execondvarstringvalue ui_load_so_level so_jeep_paris_b "devmap so_jeep_paris_b";
+            execondvarstringvalue ui_load_so_level so_stealth_prague "devmap so_stealth_prague";
+            execondvarstringvalue ui_load_so_level so_stealth_warlord "devmap so_stealth_warlord";
+            execondvarstringvalue ui_load_so_level so_littlebird_payback "devmap so_littlebird_payback";
+            execondvarstringvalue ui_load_so_level so_timetrial_london "devmap so_timetrial_london";
+            execondvarstringvalue ui_load_so_level so_assassin_payback "devmap so_assassin_payback";
+            execondvarstringvalue ui_load_so_level so_milehigh_hijack "devmap so_milehigh_hijack";
+            execondvarstringvalue ui_load_so_level so_assault_rescue_2 "devmap so_assault_rescue_2";
+            execondvarstringvalue ui_load_so_level so_assaultmine "devmap so_assaultmine";
+            execondvarstringvalue ui_load_so_level so_deltacamp "devmap so_deltacamp";
+            execondvarstringvalue ui_load_so_level so_trainer2_so_deltacamp "devmap so_trainer2_so_deltacamp";
+            execondvarstringvalue ui_load_so_level so_nyse_ny_manhattan "devmap so_nyse_ny_manhattan";
+        }
+    }
+}

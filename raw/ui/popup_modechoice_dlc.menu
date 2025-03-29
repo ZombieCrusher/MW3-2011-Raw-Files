@@ -1,0 +1,535 @@
+{
+    menuDef
+    {
+        name                        "popup_modechoice_dlc"
+        rect                        0 0 0 0 2 2
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        popup                       
+        legacySplitScreenScale      
+        exp rect X                  0 - (460 * 0.5);
+        exp rect Y                  0 - (((((23 * 1) + (16.367 * 0)) + ((8 + (4 * (dvarint(content_allow_chaos_mode)))) * (20 + 2)) + 5) + 4) * 0.5);
+        exp rect W                  460;
+        exp rect H                  ((((23 * 1) + (16.367 * 0)) + ((8 + (4 * (dvarint(content_allow_chaos_mode)))) * (20 + 2)) + 5) + 4);
+        onOpen
+        {
+            setdvar ui_is_so_dlc 0;
+            setLocalVarInt ui_buttonNavGroupOffset_popup 0;
+            setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+            setLocalVarString ui_buttonNavGroupName_popup "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            setLocalVarBool ui_centerPopup 1;
+            play tabs_slide;
+            lerp x from - 460 to 0 over "0.05";
+            focusfirst;
+            if ((localvarint("popup_modechoice_focus") == 6) && (dvarint(content_allow_chaos_mode)))
+            {
+                setfocus Chaos;
+            }
+            else
+            {
+                if (localvarint("popup_modechoice_focus") == 5)
+                {
+                    setfocus Mission;
+                }
+                else
+                {
+                    setfocus Survival;
+                }
+            }
+            focusfirst;
+        }
+        onClose
+        {
+            setLocalVarBool ui_centerPopup 0;
+            play "";
+        }
+        onESC
+        {
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("popup_modechoice_dlc"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -131.333 -78.667 262.667 130.667 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  0 + "SWF_POPUP_GLOBAL_Y_OFFSET";
+            exp rect h                  ((((23 * 1) + (16.367 * 0)) + ((8 + (4 * (dvarint(content_allow_chaos_mode)))) * (20 + 2)) + 5) + 4) + 0;
+            exp rect x                  0 + "SWF_POPUP_GLOBAL_X_OFFSET";
+            exp rect w                  460;
+        }
+        itemDef
+        {
+            rect                        0 0 460 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  0;
+            exp rect y                  0;
+            exp rect h                  (1 * 22) + (16.367 * 0) + 2;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0 + "X_OFFSET");
+            exp rect y                  0 + (1 * 22) + (16.367 * 0);
+            exp rect w                  460;
+        }
+        itemDef
+        {
+            rect                        0 0 444 22 2 2
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   9
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    "@MENU_SP_SO_MODE_SELECT_CAPS";
+            exp rect x                  (0 + 8);
+            exp rect y                  (0 + 4) - 4;
+        }
+        itemDef
+        {
+            name                        "Survival"
+            rect                        3.667 0 460 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   12
+            textalignx                  8
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(MODE_POPUP,0)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+                setLocalVarString ui_buttonNavGroupName_popup "MODE_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "MODE_POPUP";
+                play mouse_over;
+                setLocalVarInt popup_modechoice_focus 4;
+            }
+            leaveFocus
+            {
+                setLocalVarInt popup_modechoice_focus 0;
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setdvar ui_is_so_dlc 0;
+                open popup_choose_content_survival;
+            }
+            exp rect y                  ((0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  460 - 0;
+            exp rect x                  ((0 - 8) + (0 + 8));
+            exp rect h                  88;
+        }
+        itemDef
+        {
+            rect                        3.667 0 460 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   12
+            textalignx                  8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_SP_SURVIVAL_MODE_CAPS";
+            exp rect y                  (((0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  460;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5));
+            exp rect x                  ((0 - 8) + (0 + 8));
+            exp rect h                  88;
+        }
+        itemDef
+        {
+            name                        "Mission"
+            rect                        3.667 0 460 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textalign                   12
+            textalignx                  8
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(MODE_POPUP,4)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 4;
+                setLocalVarString ui_buttonNavGroupName_popup "MODE_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "MODE_POPUP";
+                play mouse_over;
+                setLocalVarInt popup_modechoice_focus 5;
+            }
+            leaveFocus
+            {
+                setLocalVarInt popup_modechoice_focus 0;
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setdvar ui_is_so_dlc 0;
+                open popup_choose_content_mission;
+            }
+            exp rect y                  ((4 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  460 - 0;
+            exp rect x                  ((0 - 8) + (0 + 8));
+            exp rect h                  88;
+        }
+        itemDef
+        {
+            rect                        3.667 0 460 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   12
+            textalignx                  8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@MENU_SP_MISSION_MODE_CAPS";
+            exp rect y                  (((4 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  460;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,4)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5));
+            exp rect x                  ((0 - 8) + (0 + 8));
+            exp rect h                  88;
+        }
+        itemDef
+        {
+            name                        "Chaos"
+            rect                        3.667 0 460 22 2 2
+            style                       3
+            type                        1
+            visible                     when((dvarint(content_allow_chaos_mode)));
+            disabled                    when(0);
+            textalign                   12
+            textalignx                  8
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(MODE_POPUP,8)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 8;
+                setLocalVarString ui_buttonNavGroupName_popup "MODE_POPUP";
+                setLocalVarBool ui_swfPopupSelectionButtonVis (((dvarint(content_allow_chaos_mode))) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis ((dvarint(content_allow_chaos_mode)));
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "MODE_POPUP";
+                play mouse_over;
+                setLocalVarInt popup_modechoice_focus 6;
+            }
+            leaveFocus
+            {
+                setLocalVarInt popup_modechoice_focus 0;
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                setdvar ui_is_so_dlc 0;
+                if (!(getFirstSpecOpsDLCMap("chaos") != ""))
+                {
+                    open spec_ops_dlc_go_to_store_popup;
+                }
+                else
+                {
+                    if (dvarbool(solo_play) == 1)
+                    {
+                        setdvar so_ophud_player0 0;
+                        setdvar so_ophud_player1 0;
+                        execondvarstringvalue developer 0 "set developer_script 0";
+                        execnow "forcenosplitscreencontrol main_specops_SOLO";
+                        exec "stopPrivateListen; set arcademode_lives 2; set arcademode_combined_score 0; set splitscreen 0; set mblur_enable 0";
+                        setdvar specialops 1;
+                        open popmenu_specops_chaos;
+                        close self;
+                    }
+                    else
+                    {
+                        setdvar so_survival 1;
+                        setdvar survival_chaos 1;
+                        setdvar specops_map_groupnum 3;
+                        setdvar specops_map_itemnum 0;
+                        if (!dvarbool(coop_matching_type_search))
+                        {
+                            setdvar so_ophud_player0 0;
+                            setdvar so_ophud_player1 0;
+                            execondvarstringvalue developer 0 "set developer_script 0";
+                            exec xrequirelivesignin;
+                            exec "stopPrivateListen; coopStopSearch; set arcademode_lives 2; set arcademode_combined_score 0; set splitscreen 0; set mblur_enable 0";
+                            exec startPrivateListen;
+                            if (dvarint(specops_map_groupnum) == 1 || dvarint(specops_map_groupnum) == 3)
+                            {
+                                setdvar coop_mapName so_survival_mp_paris;
+                                setdvar coop_localUserChoiceMapName so_survival_mp_paris;
+                            }
+                            else
+                            {
+                                setdvar coop_mapName so_deltacamp;
+                                setdvar coop_localUserChoiceMapName so_deltacamp;
+                            }
+                        }
+                        else
+                        {
+                            setdvar so_ophud_player0 0;
+                            setdvar so_ophud_player1 0;
+                            execondvarstringvalue developer 0 "set developer_script 0";
+                            exec xrequirelivesignin;
+                            exec "stopPrivateListen; set arcademode_lives 2; set arcademode_combined_score 0; set splitscreen 0; set mblur_enable 0";
+                            exec "coopOnTwoPlayerMatching; coopSearchStart";
+                            if (dvarint(specops_map_groupnum) == 1 || dvarint(specops_map_groupnum) == 3)
+                            {
+                                setdvar coop_mapName so_survival_mp_paris;
+                                setdvar coop_localUserChoiceMapName so_survival_mp_paris;
+                            }
+                            else
+                            {
+                                setdvar coop_mapName so_deltacamp;
+                                setdvar coop_localUserChoiceMapName so_deltacamp;
+                            }
+                        }
+                    }
+                }
+            }
+            exp rect y                  ((8 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  460 - 0;
+            exp rect x                  ((0 - 8) + (0 + 8));
+            exp rect h                  88;
+        }
+        itemDef
+        {
+            rect                        3.667 0 460 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when(((dvarint(content_allow_chaos_mode))) && (1));
+            textalign                   12
+            textalignx                  8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@SO_SURVIVAL_CHAOS_MODE_CAPS";
+            exp rect y                  (((8 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  460;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,8)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,8)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,8)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,8)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,8)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(MODE_POPUP,8)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP", select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5));
+            exp rect x                  ((0 - 8) + (0 + 8));
+            exp rect h                  88;
+        }
+        itemDef
+        {
+            rect                        0 0 460 88 2 2
+            style                       3
+            decoration                  
+            visible                     when((localvarint("popup_modechoice_focus") == 4));
+            textscale                   0.55
+            exp material                "survival_color";
+            exp rect x                  ((0 + 0));
+            exp rect y                  ((0 - 3) + ((23 * 1) + (16.367 * 0)) + (0 + 4) + (0 * (20 + 2)));
+        }
+        itemDef
+        {
+            rect                        0 0 460 88 2 2
+            style                       3
+            decoration                  
+            visible                     when(!(localvarint("popup_modechoice_focus") == 4));
+            textscale                   0.55
+            exp material                "survival_desat";
+            exp rect x                  ((0 + 0));
+            exp rect y                  ((0 - 3) + ((23 * 1) + (16.367 * 0)) + (0 + 4) + (0 * (20 + 2)));
+        }
+        itemDef
+        {
+            rect                        0 0 460 88 2 2
+            style                       3
+            decoration                  
+            visible                     when((localvarint("popup_modechoice_focus") == 5));
+            textscale                   0.55
+            exp material                "missions_color";
+            exp rect x                  ((0 + 0));
+            exp rect y                  ((0 - 3) + ((23 * 1) + (16.367 * 0)) + (0 + 4) + (4 * (20 + 2)));
+        }
+        itemDef
+        {
+            rect                        0 0 460 88 2 2
+            style                       3
+            decoration                  
+            visible                     when(!(localvarint("popup_modechoice_focus") == 5));
+            textscale                   0.55
+            exp material                "missions_desat";
+            exp rect x                  ((0 + 0));
+            exp rect y                  ((0 - 3) + ((23 * 1) + (16.367 * 0)) + (0 + 4) + (4 * (20 + 2)));
+        }
+        itemDef
+        {
+            rect                        0 0 460 88 2 2
+            style                       3
+            decoration                  
+            visible                     when((localvarint("popup_modechoice_focus") == 6) && (dvarint(content_allow_chaos_mode)));
+            textscale                   0.55
+            exp material                "chaos_color";
+            exp rect x                  ((0 + 0));
+            exp rect y                  ((0 - 3) + ((23 * 1) + (16.367 * 0)) + (0 + 4) + (8 * (20 + 2)));
+        }
+        itemDef
+        {
+            rect                        0 0 460 88 2 2
+            style                       3
+            decoration                  
+            visible                     when(!(localvarint("popup_modechoice_focus") == 6) && (dvarint(content_allow_chaos_mode)));
+            textscale                   0.55
+            exp material                "chaos_desat";
+            exp rect x                  ((0 + 0));
+            exp rect y                  ((0 - 3) + ((23 * 1) + (16.367 * 0)) + (0 + 4) + (8 * (20 + 2)));
+        }
+        itemDef
+        {
+            rect                        0 0 460 12 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            exp material                "navbar_selection_bar_shadow";
+            exp rect x                  ((0 + 0));
+            exp rect y                  ((0 - 4) + ((23 * 1) + (16.367 * 0)) + (0 + 4) + (4 * (20 + 2)));
+        }
+        itemDef
+        {
+            rect                        0 0 460 12 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            exp material                "navbar_selection_bar_shadow";
+            exp rect x                  ((0 + 0));
+            exp rect y                  ((0 - 4) + ((23 * 1) + (16.367 * 0)) + (0 + 4) + (8 * (20 + 2)));
+        }
+        itemDef
+        {
+            rect                        0 0 460 12 2 2
+            style                       3
+            decoration                  
+            visible                     when((dvarint(content_allow_chaos_mode)));
+            textscale                   0.55
+            exp material                "navbar_selection_bar_shadow";
+            exp rect x                  ((0 + 0));
+            exp rect y                  ((0 - 4) + ((23 * 1) + (16.367 * 0)) + (0 + 4) + (12 * (20 + 2)));
+        }
+        itemDef
+        {
+            rect                        0 0 444 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when(1);
+            textalign                   4
+            textscale                   0.4375
+            textstyle                   8
+            textfont                    9
+            exp text                    "@MENU_SP_SURVIVAL_MODE_CAPS";
+            exp rect x                  ((0 + 8) + 0);
+            exp rect y                  ((0 - 4) + (3 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+            exp forecolor r             select((localvarint("popup_modechoice_focus") == 4), select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5);
+            exp forecolor g             select((localvarint("popup_modechoice_focus") == 4), select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5);
+            exp forecolor b             select((localvarint("popup_modechoice_focus") == 4), select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5);
+        }
+        itemDef
+        {
+            rect                        0 0 444 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when(1);
+            textalign                   4
+            textscale                   0.4375
+            textstyle                   8
+            textfont                    9
+            exp text                    "@MENU_SP_MISSION_MODE_CAPS";
+            exp rect x                  ((0 + 8) + 0);
+            exp rect y                  ((0 - 4) + (7 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+            exp forecolor r             select((localvarint("popup_modechoice_focus") == 5), select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5);
+            exp forecolor g             select((localvarint("popup_modechoice_focus") == 5), select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5);
+            exp forecolor b             select((localvarint("popup_modechoice_focus") == 5), select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5);
+        }
+        itemDef
+        {
+            rect                        0 0 444 20 2 2
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when((dvarint(content_allow_chaos_mode)));
+            textalign                   4
+            textscale                   0.4375
+            textstyle                   8
+            textfont                    9
+            exp text                    "@SO_SURVIVAL_CHAOS_MODE_CAPS";
+            exp rect x                  ((0 + 8) + 0);
+            exp rect y                  ((0 - 4) + (11 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) - 2.333;
+            exp forecolor r             select((localvarint("popup_modechoice_focus") == 6), select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5);
+            exp forecolor g             select((localvarint("popup_modechoice_focus") == 6), select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5);
+            exp forecolor b             select((localvarint("popup_modechoice_focus") == 6), select(isdemoplaying(), FUNC_44(), FUNC_43()), 0.5);
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON"
+            rect                        0 0 20 20 2 2
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName_popup") == "MODE_POPUP") && (localvarstring("ui_swfPopupContext") == "MODE_POPUP"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp rect x                  (0 + (0 + 460 - 24));
+            exp rect y                  ((20 + 2) * 3) + ((((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) - 1.167) - 1.8);
+        }
+    }
+}

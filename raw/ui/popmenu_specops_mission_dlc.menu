@@ -1,0 +1,1096 @@
+{
+    menuDef
+    {
+        name                        "popmenu_specops_mission_dlc"
+        fullscreen                  1
+        rect                        0 0 640 480 0 0
+        style                       1
+        focuscolor                  1 1 1 1
+        soundLoop                   "music_challenge_factory"
+        onOpen
+        {
+            setLocalVarString ui_level_extrainfo2 "";
+            setLocalVarString ui_level_extrainfo "";
+            setdvar gettinglb_mini_lb 1;
+            setdvar survival_chaos 0;
+            setLocalVarInt ui_mode_survival 0;
+            setLocalVarInt ui_player1_num 0;
+            setLocalVarInt ui_player2_num 1;
+            setLocalVarInt ui_specops_loading_level 0;
+            setLocalVarInt ui_level_showlb 1;
+            setLocalVarBool ui_levelunlocked 1;
+            setdvar ui_selectedFeederMapDirty 1;
+            setdvar ui_feederMapUpdateLBOnSelect 1;
+            if (!gamehost() && iscoop() && !dvarbool(splitscreen))
+            {
+                setLocalVarInt ui_player1_num 1;
+                setLocalVarInt ui_player2_num 0;
+            }
+            if (!iscoop())
+            {
+                setdvar specialops 1;
+            }
+            setLocalVarInt ui_buttonNavGroupOffset 0;
+            setLocalVarInt ui_buttonNavGroupCurrent 0;
+            setLocalVarString ui_buttonNavGroupName "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            focusfirst;
+            execnow upload_playercard;
+            if (dvarbool(ui_opensummary))
+            {
+                setLocalVarInt ui_autoopened 1;
+                if (dvarbool(specialops))
+                {
+                    if (dvarbool(splitscreen))
+                    {
+                        open popup_summary_so_ss;
+                    }
+                    else
+                    {
+                        open popup_summary_so;
+                    }
+                }
+                else
+                {
+                    if (dvarbool(xblive_privatematch))
+                    {
+                        open popup_summary;
+                    }
+                    else
+                    {
+                        if (dvarbool(splitscreen))
+                        {
+                            open popup_summary_splitscreen;
+                        }
+                        else
+                        {
+                            open popup_summary;
+                        }
+                    }
+                }
+                setdvar ui_opensummary 0;
+            }
+        }
+        onClose
+        {
+            close popup_gettinglb;
+            uiScript ClearLeaderboard;
+        }
+        onESC
+        {
+            if (localvarint("ui_specops_loading_level") == 0)
+            {
+                close popup_gettinglb;
+                uiScript ClearLeaderboard;
+                setdvar ui_last_played_level "";
+                if (!iscoop())
+                {
+                    setdvar specialops 0;
+                    close levels_challenge;
+                    open main_specops;
+                }
+                close self;
+            }
+        }
+        execKeyInt 167
+        {
+            if (localvarbool("ui_swfSelectionBarVis") && localvarbool("ui_levelunlocked"))
+            {
+                setLocalVarString ui_leaderboard_text "@" + tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 2);
+                setLocalVarBool so_lb_splitscreen_inc 1;
+                execnow "incnosplitscreencontrol menu_so_leaderboard";
+                if (isprofilesignedin() && isusersignedintolive())
+                {
+                    open menu_so_leaderboard;
+                }
+                else
+                {
+                    execnow "decnosplitscreencontrol menu_so_leaderboard";
+                }
+            }
+        }
+        execKeyInt 201
+        {
+            if (localvarbool("ui_swfSelectionBarVis") && localvarbool("ui_levelunlocked"))
+            {
+                setLocalVarString ui_leaderboard_text "@" + tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 2);
+                setLocalVarBool so_lb_splitscreen_inc 1;
+                execnow "incnosplitscreencontrol menu_so_leaderboard";
+                if (isprofilesignedin() && isusersignedintolive())
+                {
+                    open menu_so_leaderboard;
+                }
+                else
+                {
+                    execnow "decnosplitscreencontrol menu_so_leaderboard";
+                }
+            }
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when((dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image_blur_less"
+        }
+        itemDef
+        {
+            rect                        -426.667 -240 853.333 480 2 2
+            style                       3
+            decoration                  
+            visible                     when(!(dvarbool(ui_multiplayer) || (dvarstring(gameMode) == "so" && !menuistopmost("main_specops"))));
+            textscale                   0.55
+            background                  "background_image"
+        }
+        itemDef
+        {
+            rect                        0 0 1708 480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (0 - 107) - ((float(milliseconds() % 60000) / 60000) * (854));
+        }
+        itemDef
+        {
+            rect                        0 0 -1708 -480 0 0
+            style                       3
+            decoration                  
+            visible                     1
+            textscale                   0.55
+            forecolor                   0.35 0.35 0.35 1
+            background                  "mw2_main_cloud_overlay"
+            exp rect x                  (- 107 + 854) + ((float(milliseconds() % 50000) / 50000) * (854));
+        }
+        itemDef
+        {
+            rect                        237.5 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+            exp rect w                  localvarbool("ui_shelfEnabled") * select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5));
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  ((0 - 64) + 301.5) + (localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5))));
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  (0 - 64) + 301.5;
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+            exp forecolor a             localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0.75, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75)));
+        }
+        itemDef
+        {
+            rect                        -264 -236 501.5 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 30 301.5 5.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_tick"
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.5
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_SP_MISSION_MODE_CAPS");
+            exp forecolor a             select((getTextWidth(locstring("@MENU_SP_MISSION_MODE_CAPS"), 9, 0.5) <= 200), 1, 0);
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.4
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_SP_MISSION_MODE_CAPS");
+            exp forecolor a             select(((getTextWidth(locstring("@MENU_SP_MISSION_MODE_CAPS"), 9, 0.5) > 200) && (getTextWidth(locstring("@MENU_SP_MISSION_MODE_CAPS"), 9, 0.4) <= 200)), 1, 0);
+        }
+        itemDef
+        {
+            rect                        -64 1 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   14
+            textscale                   0.3
+            textstyle                   9
+            textfont                    9
+            exp text                    locstring("@MENU_SP_MISSION_MODE_CAPS");
+            exp forecolor a             select((getTextWidth(locstring("@MENU_SP_MISSION_MODE_CAPS"), 9, 0.4) > 200), 1, 0);
+        }
+        itemDef
+        {
+            rect                        91.8 49.433 272 103 2 1
+            style                       3
+            decoration                  
+            visible                     when((1));
+            textscale                   0.55
+            exp material                select(dvarstring(ui_selectedFeederMap) == "more_maps", "bonusmaps_leaderboard_thumb", tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 4));
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + (91.8) + (0);
+        }
+        itemDef
+        {
+            rect                        91.8 49.433 272 10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + ((91.8)) + (0);
+        }
+        itemDef
+        {
+            rect                        91.8 141.766 272 -10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + ((91.8)) + (0);
+        }
+        itemDef
+        {
+            rect                        91.8 33.1 272 16.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((1));
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + (91.8) + (0);
+        }
+        itemDef
+        {
+            rect                        91.8 29.767 272 20.833 2 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   9
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    select(dvarstring(ui_selectedFeederMap) == "more_maps", "@DLC_MAPS", locstring("@" + tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 2)));
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + ((91.8)) + (0);
+            exp forecolor a             select((getTextWidth(select(dvarstring(ui_selectedFeederMap) == "more_maps", "@DLC_MAPS", locstring("@" + tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 2))), 9, 0.43) <= 250), 1, 0);
+        }
+        itemDef
+        {
+            rect                        91.8 29.767 272 20.833 2 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   9
+            textscale                   0.315
+            textstyle                   9
+            textfont                    9
+            exp text                    select(dvarstring(ui_selectedFeederMap) == "more_maps", "@DLC_MAPS", locstring("@" + tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 2)));
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + ((91.8)) + (0);
+            exp forecolor a             select((getTextWidth(select(dvarstring(ui_selectedFeederMap) == "more_maps", "@DLC_MAPS", locstring("@" + tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 2))), 9, 0.43) > 250), 1, 0);
+        }
+        itemDef
+        {
+            rect                        91.8 152.433 272 198.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((1));
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + (91.8) + (0);
+            exp rect h                  100.667 + ((dvarstring(ui_selectedFeederMap) != "more_maps") * 98);
+        }
+        itemDef
+        {
+            rect                        91.8 252.433 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((1) && (dvarstring(ui_selectedFeederMap) != "more_maps"));
+            textscale                   0.55
+            forecolor                   0.431 0.459 0.451 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + (91.8) + (0);
+        }
+        itemDef
+        {
+            rect                        91.8 270.433 272 71.333 2 1
+            style                       3
+            decoration                  
+            visible                     when((1) && (dvarstring(ui_selectedFeederMap) != "more_maps"));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + (91.8) + (0);
+        }
+        itemDef
+        {
+            rect                        91.8 270.433 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((1) && (dvarstring(ui_selectedFeederMap) != "more_maps"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + (91.8) + (0);
+        }
+        itemDef
+        {
+            rect                        91.8 307.1 272 18 2 1
+            style                       3
+            decoration                  
+            visible                     when((1) && (dvarstring(ui_selectedFeederMap) != "more_maps"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.15
+            background                  "white"
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + (91.8) + (0);
+        }
+        itemDef
+        {
+            rect                        91.8 252.433 272 10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((1) && (dvarstring(ui_selectedFeederMap) != "more_maps"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + ((91.8)) + (0);
+        }
+        itemDef
+        {
+            rect                        91.8 331.1 272 -10.667 2 1
+            style                       3
+            decoration                  
+            visible                     when((1) && (dvarstring(ui_selectedFeederMap) != "more_maps"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + ((91.8)) + (0);
+        }
+        itemDef
+        {
+            rect                        94.7333 154.8 260 55.967 2 1
+            style                       1
+            decoration                  
+            autowrapped                 
+            visible                     when((1));
+            textalign                   4
+            textscale                   0.383333
+            textfont                    3
+            exp text                    select(dvarstring(ui_selectedFeederMap) == "more_maps", "@DLC_MAPS_DESC", ("@" + tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 3)));
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + (91.8) + (2.933);
+        }
+        itemDef
+        {
+            rect                        94.733 190.1 196.667 20.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            exp text                    "";
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + (91.8) + (2.933);
+        }
+        itemDef
+        {
+            rect                        94.733 209.6 196.667 20.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            exp text                    localvarstring("ui_level_extrainfo");
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + (91.8) + (2.933);
+        }
+        itemDef
+        {
+            rect                        94.733 229.1 196.667 20.333 2 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   8
+            textscale                   0.383333
+            textfont                    3
+            exp text                    localvarstring("ui_level_extrainfo2");
+            exp rect x                  ((select(dvarbool(widescreen), 0, 0 - 90))) + (91.8) + (2.933);
+        }
+        itemDef
+        {
+            rect                        219.9 389.8 16 16 1 1
+            style                       3
+            decoration                  
+            visible                     when((localvarint("ui_mode_survival") != 1));
+            textscale                   0.55
+            exp material                "difficulty_star";
+        }
+        itemDef
+        {
+            rect                        20.5 385.767 192.667 22.667 1 1
+            style                       1
+            decoration                  
+            visible                     when((localvarint("ui_mode_survival") != 1));
+            textalign                   10
+            textscale                   0.416667
+            textfont                    3
+            forecolor                   0.49 0.49 0.49 1
+            exp text                    locstring("@MENU_SP_STAT_TOTAL_STARS") + " - " + (localvarbool("ui_mode_survival") * int(coopplayer(localvarint("ui_player1_num"), "percentcompleteso") % 100) + (1 - localvarbool("ui_mode_survival")) * int(coopplayer(localvarint("ui_player1_num"), "percentcompleteso") / 100)) + "/" + (16 * 3);
+        }
+        itemDef
+        {
+            rect                        -68 52 305.333 8.666 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName") == "MAPLIST_BUTTON_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  (getFeederData("map_selection", "selection") * 20) + (34.667) + 0.667 + 17.333;
+        }
+        itemDef
+        {
+            rect                        -68 34.667 305.333 17.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName") == "MAPLIST_BUTTON_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect y                  (getFeederData("map_selection", "selection") * 20) + (34.667) + 0.667;
+        }
+        itemDef
+        {
+            rect                        213 34.667 21.333 16.5 1 1
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName") == "MAPLIST_BUTTON_LIST"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp text                    "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON";
+            exp rect y                  (getFeederData("map_selection", "selection") * 20) + (34.667) + 0.667;
+        }
+        itemDef
+        {
+            name                        "map_selection"
+            rect                        -64 30.8337 276.667 380 1 1
+            type                        6
+            visible                     1
+            textscale                   0.375
+            textstyle                   9
+            disablecolor                0.6 0.55 0.55 1
+            onFocus
+            {
+                setLocalVarString ui_buttonNavGroupName "MAPLIST_BUTTON_LIST";
+                setLocalVarBool ui_swfSelectionBarVis 1;
+                setLocalVarBool ui_swfSelectionButtonVis 1;
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+            }
+            exp rect y                  34.667;
+            exp rect w                  312.667;
+            exp rect h                  (20 * min(19, getFeederData("map_selection", "count"))) + 4;
+            noscrollbars                
+            elementwidth                20
+            elementheight               20
+            feeder                      46
+            columns                     2
+                                        0 -3 276 0 64 2
+                                        276 -3 18 17 100 0
+            doubleclick
+            {
+                play mouse_click;
+                if ((dvarstring(ui_selectedFeederMap) != "more_maps") && doubleclickwasrightclick())
+                {
+                    if (localvarbool("ui_swfSelectionBarVis"))
+                    {
+                        setLocalVarString ui_leaderboard_text "@" + tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 2);
+                        setLocalVarBool so_lb_splitscreen_inc 1;
+                        execnow "incnosplitscreencontrol menu_so_leaderboard";
+                        if (isprofilesignedin() && isusersignedintolive())
+                        {
+                            open menu_so_leaderboard;
+                        }
+                        else
+                        {
+                            execnow "decnosplitscreencontrol menu_so_leaderboard";
+                        }
+                    }
+                }
+                else
+                {
+                    if (dvarstring(ui_selectedFeederMap) == "more_maps")
+                    {
+                        open spec_ops_dlc_go_to_store_popup;
+                    }
+                    else
+                    {
+                        setdvar so_survival 0;
+                        if (iscoop() && !gamehost() && coopplayer(1, "exists") && !dvarbool(splitscreen))
+                        {
+                            open only_host_can_choose;
+                        }
+                        else
+                        {
+                            setdvar ui_is_so_dlc 1;
+                            setdvar credits 0;
+                            setdvar credits_active 0;
+                            setdvar specialops 1;
+                            setLocalVarString p_mapname_temp dvarstring(ui_selectedFeederMap);
+                            setdvar ui_load_so_level localvarstring ( p_mapname_temp );
+                            setdvar ui_last_played_level localvarstring ( p_mapname_temp );
+                            setdvar coop_mapName localvarstring ( p_mapname_temp );
+                            setdvar coop_localUserChoiceMapName localvarstring ( p_mapname_temp );
+                            if (iscoop())
+                            {
+                                close self;
+                                close levels_challenge;
+                            }
+                            else
+                            {
+                                if (tablelookup("sp/specOpsTable.csv", 1, localvarstring("p_mapname_temp"), 11) > 1)
+                                {
+                                    open popmenu_multi_only;
+                                }
+                                else
+                                {
+                                    open popmenu_specialops_difficulty;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        itemDef
+        {
+            rect                        -64 133.334 16 16 1 1
+            style                       3
+            decoration                  
+            visible                     when(((int(getcharbyindex(coopplayer(localvarint("ui_player1_num"), "missionSOHighestDifficulty"), (int(tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 0)) - 184))) >= 2)) && ("LOCK_VIS_ARG") && (((localvarint("ui_buttonNavGroupOffset") + (16 - 1)) >= (5) && (((5) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textscale                   0.55
+            background                  "difficulty_star"
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333)) - ((16 - 21) * 0.5);
+            exp rect x                  (519) + ((0 - 64)) - ((16 - 21) * 0.5);
+        }
+        itemDef
+        {
+            rect                        -64 133.334 16 16 1 1
+            style                       3
+            decoration                  
+            visible                     when((!(int(getcharbyindex(coopplayer(localvarint("ui_player1_num"), "missionSOHighestDifficulty"), (int(tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 0)) - 184))) >= 2)) && ("LOCK_VIS_ARG") && (((localvarint("ui_buttonNavGroupOffset") + (16 - 1)) >= (5) && (((5) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textscale                   0.55
+            background                  "difficulty_star_empty"
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333)) - ((16 - 21) * 0.5);
+            exp rect x                  (519) + ((0 - 64)) - ((16 - 21) * 0.5);
+        }
+        itemDef
+        {
+            rect                        -64 133.334 16 16 1 1
+            style                       3
+            decoration                  
+            visible                     when(((int(getcharbyindex(coopplayer(localvarint("ui_player1_num"), "missionSOHighestDifficulty"), (int(tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 0)) - 184))) >= 3)) && ("LOCK_VIS_ARG") && (((localvarint("ui_buttonNavGroupOffset") + (16 - 1)) >= (5) && (((5) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textscale                   0.55
+            background                  "difficulty_star"
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333)) - ((16 - 21) * 0.5);
+            exp rect x                  (519 + 17) + ((0 - 64)) - ((16 - 21) * 0.5);
+        }
+        itemDef
+        {
+            rect                        -64 133.334 16 16 1 1
+            style                       3
+            decoration                  
+            visible                     when((!(int(getcharbyindex(coopplayer(localvarint("ui_player1_num"), "missionSOHighestDifficulty"), (int(tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 0)) - 184))) >= 3)) && ("LOCK_VIS_ARG") && (((localvarint("ui_buttonNavGroupOffset") + (16 - 1)) >= (5) && (((5) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textscale                   0.55
+            background                  "difficulty_star_empty"
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333)) - ((16 - 21) * 0.5);
+            exp rect x                  (519 + 17) + ((0 - 64)) - ((16 - 21) * 0.5);
+        }
+        itemDef
+        {
+            rect                        -64 133.334 16 16 1 1
+            style                       3
+            decoration                  
+            visible                     when(((int(getcharbyindex(coopplayer(localvarint("ui_player1_num"), "missionSOHighestDifficulty"), (int(tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 0)) - 184))) >= 4)) && ("LOCK_VIS_ARG") && (((localvarint("ui_buttonNavGroupOffset") + (16 - 1)) >= (5) && (((5) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textscale                   0.55
+            background                  "difficulty_star"
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333)) - ((16 - 21) * 0.5);
+            exp rect x                  (519 + (17 * 2)) + ((0 - 64)) - ((16 - 21) * 0.5);
+        }
+        itemDef
+        {
+            rect                        -64 133.334 16 16 1 1
+            style                       3
+            decoration                  
+            visible                     when((!(int(getcharbyindex(coopplayer(localvarint("ui_player1_num"), "missionSOHighestDifficulty"), (int(tablelookup("sp/specOpsTable.csv", 1, dvarstring(ui_selectedFeederMap), 0)) - 184))) >= 4)) && ("LOCK_VIS_ARG") && (((localvarint("ui_buttonNavGroupOffset") + (16 - 1)) >= (5) && (((5) - localvarint("ui_buttonNavGroupOffset")) >= 0))));
+            textscale                   0.55
+            background                  "difficulty_star_empty"
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333)) - ((16 - 21) * 0.5);
+            exp rect x                  (519 + (17 * 2)) + ((0 - 64)) - ((16 - 21) * 0.5);
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when((((dvarstring(ui_selectedFeederMap) != "more_maps") && localvarbool("ui_levelunlocked") && usercanplayonline() && localvarstring("ui_level_displayname") != "@MENU_SP_CLASSIFIED" && (isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && (!dvarint(splitscreen) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))) && dvarbool(widescreen) && localvarbool("ui_swfSelectionBarVis")));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            forecolor                   0.7843 0.7843 0.7843 1
+            exp text                    "@PLATFORM_LEADERBOARDS_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_LEADERBOARDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_GAMESUMMARY_SHORTCUT"), 3, 0.375) + 5), 0) - select((((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running))))), (20 + getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 5), 0) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_LEADERBOARDS_SHORTCUT"), 3, 0.375);
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 3;
+                setLocalVarString ui_ralign_group "popmenu_specops_mission_a";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 103;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_GAMESUMMARY_SHORTCUT"), 3, 0.375) - select((((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running))))), (20 + getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 5), 0) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_GAMESUMMARY_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((1) && (!0) && (localvarint("ui_ralign_index") == 3 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_GAMESUMMARY_SHORTCUT"), 3, 0.375) - select((((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running))))), (20 + getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 5), 0) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_GAMESUMMARY_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 3 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_GAMESUMMARY_SHORTCUT"), 3, 0.375) - select((((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running))))), (20 + getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 5), 0) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_GAMESUMMARY_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            execKey "g"
+            {
+                if (dvarbool(specialops))
+                {
+                    if (dvarbool(splitscreen))
+                    {
+                        open popup_summary_so_ss;
+                    }
+                    else
+                    {
+                        open popup_summary_so;
+                    }
+                }
+                else
+                {
+                    if (dvarbool(xblive_privatematch))
+                    {
+                        open popup_summary;
+                    }
+                    else
+                    {
+                        if (dvarbool(splitscreen))
+                        {
+                            open popup_summary_splitscreen;
+                        }
+                        else
+                        {
+                            open popup_summary;
+                        }
+                    }
+                }
+            }
+            exp text                    "@PLATFORM_GAMESUMMARY_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_GAMESUMMARY_SHORTCUT"), 3, 0.375) - select((((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running))))), (20 + getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 5), 0) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_GAMESUMMARY_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 3 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 3 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 3 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 2;
+                setLocalVarString ui_ralign_group "popmenu_specops_mission_a";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 102;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running))))) && (!0) && (localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running))))) && (localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            execKey "f"
+            {
+                if (((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))))
+                {
+                    setLocalVarBool ui_vault_browse 0;
+                    setLocalVarBool ui_vault_load 0;
+                    execnow "incnosplitscreencontrol popup_friends";
+                    if (isprofilesignedin() && isusersignedintolive())
+                    {
+                        open popup_friends;
+                    }
+                    else
+                    {
+                        execnow "decnosplitscreencontrol popup_friends";
+                    }
+                }
+            }
+            exp text                    "@PLATFORM_FRIENDS_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "popmenu_specops_mission_a";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 27;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((1) && (!0) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@PLATFORM_BACK_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "popmenu_specops_mission_a"), select(isdemoplaying(), FUNC_44(), FUNC_43()), 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when((((dvarstring(ui_selectedFeederMap) != "more_maps") && localvarbool("ui_levelunlocked") && usercanplayonline() && localvarstring("ui_level_displayname") != "@MENU_SP_CLASSIFIED" && (isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && (!dvarint(splitscreen) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))) && !dvarbool(widescreen) && localvarbool("ui_swfSelectionBarVis")));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            forecolor                   0.7843 0.7843 0.7843 1
+            exp text                    "@PLATFORM_LEADERBOARDS_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_LEADERBOARDS_SHORTCUT"), 3, 0.375);
+            exp rect y                  (((0 - 20.667) - 22));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_LEADERBOARDS_SHORTCUT"), 3, 0.375);
+        }
+        itemDef
+        {
+            text                        "@MENU_RANK_CAPS"
+            rect                        413 307 1 1 0 0
+            decoration                  
+            visible                     when((dvarstring(ui_selectedFeederMap) != "more_maps"));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp rect x                  413 + ((0 - 90) * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            text                        "@MENU_PLAYER_CAPS"
+            rect                        495 307 1 1 0 0
+            decoration                  
+            visible                     when((dvarstring(ui_selectedFeederMap) != "more_maps"));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp rect x                  495 + ((0 - 90) * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            text                        "@MENU_SCORE_CAPS"
+            rect                        681 307 1 1 0 0
+            decoration                  
+            visible                     when((dvarstring(ui_selectedFeederMap) != "more_maps"));
+            textalign                   2
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.7 0.7 0.7 1
+            exp rect x                  681 + ((0 - 90) * !dvarbool(widescreen));
+        }
+        itemDef
+        {
+            name                        "leaderboard_solo_mission_friend_mini"
+            rect                        410 305 300 75 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when((dvarstring(ui_selectedFeederMap) != "more_maps") && dvarbool(solo_play) && (isusersignedintodemonware() && usercanplayonline()));
+            textscale                   0.375
+            textfont                    1
+            exp rect x                  410 - (select(dvarbool(widescreen), 0, 90));
+            noscrollbars                
+            elementwidth                120
+            elementheight               18
+            feeder                      26
+            columns                     5
+                                        0 0 30 0 55 0
+                                        2000 0 20 0 10 2
+                                        2200 0 20 0 10 1
+                                        80 0 125 0 100 0
+                                        218 0 50 0 100 2
+            selectBorder                0.8 0.95 1 0
+        }
+        itemDef
+        {
+            name                        "leaderboard_team_mission_friend_mini"
+            rect                        410 305 300 75 0 0
+            style                       1
+            decoration                  
+            type                        6
+            visible                     when((dvarstring(ui_selectedFeederMap) != "more_maps") && !dvarbool(solo_play) && (isusersignedintodemonware() && usercanplayonline()));
+            textscale                   0.375
+            textfont                    1
+            exp rect x                  410 - (select(dvarbool(widescreen), 0, 90));
+            exp rect y                  select(dvarbool(widescreen), 305, 287);
+            noscrollbars                
+            elementwidth                120
+            feeder                      26
+            columns                     6
+                                        0 0 30 0 55 0
+                                        2000 0 20 0 10 2
+                                        2000 0 20 0 10 1
+                                        80 0 125 0 100 0
+                                        2000 0 50 0 10 2
+                                        218 0 50 0 100 2
+            selectBorder                0.8 0.95 1 0
+            exp elementheight           select(dvarbool(widescreen), 18, 36);
+        }
+        itemDef
+        {
+            text                        "@SPECIAL_OPS_RANKING_NOT_AVAILABLE_OFFLINE"
+            rect                        415 323 0 0 0 0
+            decoration                  
+            visible                     when((dvarstring(ui_selectedFeederMap) != "more_maps") && (!isusersignedintodemonware() || !usercanplayonline()) && dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.4823 0.4823 0.4823 1
+        }
+        itemDef
+        {
+            text                        "@SPECIAL_OPS_RANKING_NOT_AVAILABLE_OFFLINE"
+            rect                        325 323 0 0 0 0
+            decoration                  
+            visible                     when((dvarstring(ui_selectedFeederMap) != "more_maps") && (!isusersignedintodemonware() || !usercanplayonline()) && !dvarbool(widescreen));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.4823 0.4823 0.4823 1
+        }
+        itemDef
+        {
+            text                        "@MENU_UNRANKED_CAPS"
+            rect                        415 323 0 0 0 0
+            decoration                  
+            visible                     when((dvarstring(ui_selectedFeederMap) != "more_maps") && isusersignedintodemonware() && usercanplayonline() && dvarbool(widescreen) && localvarbool("ui_levelunlocked") && !menuisopen("popup_gettinglb") && (getFeederData("leaderboard_team_mission_friend_mini", "count") == 0));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.4823 0.4823 0.4823 1
+        }
+        itemDef
+        {
+            text                        "@MENU_UNRANKED_CAPS"
+            rect                        325 323 0 0 0 0
+            decoration                  
+            visible                     when((dvarstring(ui_selectedFeederMap) != "more_maps") && isusersignedintodemonware() && usercanplayonline() && !dvarbool(widescreen) && localvarbool("ui_levelunlocked") && !menuisopen("popup_gettinglb") && (getFeederData("leaderboard_team_mission_friend_mini", "count") == 0));
+            textscale                   0.375
+            textfont                    1
+            forecolor                   0.4823 0.4823 0.4823 1
+        }
+        itemDef
+        {
+            rect                        -88 52 325.333 8.666 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionBarVis") && (localvarstring("ui_buttonNavGroupName") == "SO_LEVELS_BUTTON_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + 0.667 + 17.333;
+        }
+    }
+}

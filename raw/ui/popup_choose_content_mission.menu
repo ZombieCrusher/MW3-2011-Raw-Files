@@ -1,0 +1,417 @@
+{
+    menuDef
+    {
+        name                        "popup_choose_content_mission"
+        rect                        0 0 0 0 2 2
+        focuscolor                  1 1 1 1
+        outOfBoundsClick            
+        popup                       
+        legacySplitScreenScale      
+        exp rect X                  0 - (260 * 0.5);
+        exp rect Y                  0 - ((((23 * 1) + (16.367 * 0)) + (2 * (20 + 2)) + 5) * 0.5);
+        exp rect W                  260;
+        exp rect H                  (((23 * 1) + (16.367 * 0)) + (2 * (20 + 2)) + 5);
+        onOpen
+        {
+            setLocalVarInt ui_buttonNavGroupOffset_popup 0;
+            setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+            setLocalVarString ui_buttonNavGroupName_popup "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            setLocalVarBool ui_centerPopup 1;
+            play tabs_slide;
+            lerp x from - 460 to 0 over "0.05";
+            focusfirst;
+            setfocus SWF_COMMON_POPUP_NAME_0;
+            focusfirst;
+        }
+        onClose
+        {
+            setLocalVarBool ui_centerPopup 0;
+            play "";
+        }
+        onESC
+        {
+            close self;
+        }
+        itemDef
+        {
+            rect                        -1280 -480 2560 960 2 2
+            style                       3
+            decoration                  
+            visible                     when(menuistopmost("popup_choose_content_mission"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.8
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -131.333 -78.667 262.667 130.667 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.3098 0.349 0.2745 1
+            background                  "white"
+            exp rect y                  0 + "SWF_POPUP_GLOBAL_Y_OFFSET";
+            exp rect h                  (((23 * 1) + (16.367 * 0)) + (2 * (20 + 2)) + 5) + 0;
+            exp rect x                  0 + "SWF_POPUP_GLOBAL_X_OFFSET";
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            forecolor                   0.1569 0.1725 0.1608 1
+            background                  "white"
+            exp rect x                  0;
+            exp rect y                  0;
+            exp rect h                  (1 * 22) + (16.367 * 0) + 2;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(1 && 1);
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0 + "X_OFFSET");
+            exp rect y                  0 + (1 * 22) + (16.367 * 0);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 1 244 22 2 2
+            style                       1
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    9
+            exp text                    "@SO_SURVIVAL_OPTION_CHOOSE_CONTENT";
+            exp rect x                  (0 + 8);
+            exp rect y                  (0 + 4) - 4;
+        }
+        itemDef
+        {
+            rect                        0 0 260 1 2 2
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + (0 * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect h                  ((20 + 2) * 2) + 1;
+        }
+        itemDef
+        {
+            rect                        0 0 1 8.666 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME") && (localvarstring("ui_swfPopupContext") == "SWF_COMMON_POPUP_NAME"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) + (20 + 0.3333);
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME") && (localvarstring("ui_swfPopupContext") == "SWF_COMMON_POPUP_NAME"));
+            textscale                   0.55
+            forecolor                   0.6 0.6314 0.6 0.2
+            background                  "white"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            rect                        0 0 1 20 2 2
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionBarVis") && (localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME") && (localvarstring("ui_swfPopupContext") == "SWF_COMMON_POPUP_NAME"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect x                  (0 + 0);
+            exp rect y                  (0 - 3.5) + ((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0)));
+            exp rect w                  260;
+        }
+        itemDef
+        {
+            text                        "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON"
+            rect                        0 0 20 20 2 2
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfPopupSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME") && (localvarstring("ui_swfPopupContext") == "SWF_COMMON_POPUP_NAME"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp rect x                  (0 + (0 + 260 - 24));
+            exp rect y                  (((localvarint("ui_buttonNavGroupCurrent_popup") - localvarint("ui_buttonNavGroupOffset_popup")) * (20 + 2)) + ((0 + 4) + ((23 * 1) + (16.367 * 0))) - 1.167) - 1.8;
+        }
+        itemDef
+        {
+            name                        "SWF_COMMON_POPUP_NAME_0"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,0)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 0;
+                setLocalVarString ui_buttonNavGroupName_popup "SWF_COMMON_POPUP_NAME";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "SWF_COMMON_POPUP_NAME";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                close popup_modechoice_dlc;
+                close popup_modechoice_simple_dlc;
+                setdvar ui_is_so_dlc 0;
+                if (dvarbool(solo_play) == 1)
+                {
+                    setdvar so_ophud_player0 0;
+                    setdvar so_ophud_player1 0;
+                    execondvarstringvalue developer 0 "set developer_script 0";
+                    execnow "forcenosplitscreencontrol main_specops_SOLO";
+                    exec "stopPrivateListen; set arcademode_lives 2; set arcademode_combined_score 0; set splitscreen 0; set mblur_enable 0";
+                    setdvar specialops 1;
+                    open popmenu_specops_mission;
+                    close self;
+                }
+                else
+                {
+                    setdvar so_survival 0;
+                    setdvar survival_chaos 0;
+                    setdvar specops_map_groupnum 2;
+                    setdvar specops_map_itemnum 0;
+                    if (!dvarbool(coop_matching_type_search))
+                    {
+                        setdvar so_ophud_player0 0;
+                        setdvar so_ophud_player1 0;
+                        execondvarstringvalue developer 0 "set developer_script 0";
+                        exec xrequirelivesignin;
+                        exec "stopPrivateListen; coopStopSearch; set arcademode_lives 2; set arcademode_combined_score 0; set splitscreen 0; set mblur_enable 0";
+                        exec startPrivateListen;
+                        if (dvarint(specops_map_groupnum) == 1 || dvarint(specops_map_groupnum) == 3)
+                        {
+                            setdvar coop_mapName so_survival_mp_paris;
+                            setdvar coop_localUserChoiceMapName so_survival_mp_paris;
+                        }
+                        else
+                        {
+                            setdvar coop_mapName so_deltacamp;
+                            setdvar coop_localUserChoiceMapName so_deltacamp;
+                        }
+                    }
+                    else
+                    {
+                        setdvar so_ophud_player0 0;
+                        setdvar so_ophud_player1 0;
+                        execondvarstringvalue developer 0 "set developer_script 0";
+                        exec xrequirelivesignin;
+                        exec "stopPrivateListen; set arcademode_lives 2; set arcademode_combined_score 0; set splitscreen 0; set mblur_enable 0";
+                        exec "coopOnTwoPlayerMatching; coopSearchStart";
+                        if (dvarint(specops_map_groupnum) == 1 || dvarint(specops_map_groupnum) == 3)
+                        {
+                            setdvar coop_mapName so_survival_mp_paris;
+                            setdvar coop_localUserChoiceMapName so_survival_mp_paris;
+                        }
+                        else
+                        {
+                            setdvar coop_mapName so_deltacamp;
+                            setdvar coop_localUserChoiceMapName so_deltacamp;
+                        }
+                    }
+                }
+            }
+            exp rect y                  ((0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@SO_SURVIVAL_OPTION_ON_DISK";
+            exp rect y                  (((0 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,0)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            name                        "SWF_COMMON_POPUP_NAME_1"
+            rect                        11.667 0 260 22 2 2
+            style                       3
+            type                        1
+            visible                     when(1);
+            disabled                    when(0);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,1)";
+                setLocalVarInt ui_buttonNavGroupCurrent_popup 1;
+                setLocalVarString ui_buttonNavGroupName_popup "SWF_COMMON_POPUP_NAME";
+                setLocalVarBool ui_swfPopupSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfPopupSelectionBarVis (1);
+                setLocalVarBool ui_swfPopupSelectionDisabled (0);
+                setLocalVarString ui_swfPopupContext "SWF_COMMON_POPUP_NAME";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+                setLocalVarBool ui_swfPopupSelectionBarVis 0;
+                setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            }
+            action
+            {
+                play mouse_click;
+                close popup_modechoice_dlc;
+                close popup_modechoice_simple_dlc;
+                if ((getFirstSpecOpsDLCMap("mission") != ""))
+                {
+                    setdvar ui_is_so_dlc 1;
+                    close self;
+                    close popup_modechoice_dlc;
+                    close popup_modechoice_simple_dlc;
+                    if (dvarbool(coop_matching_type_search) && !(getFirstSpecOpsDLCMap("mission") != ""))
+                    {
+                        open spec_ops_dlc_missing_popup;
+                    }
+                    else
+                    {
+                        if (dvarbool(solo_play) == 1)
+                        {
+                            setdvar so_ophud_player0 0;
+                            setdvar so_ophud_player1 0;
+                            execondvarstringvalue developer 0 "set developer_script 0";
+                            execnow "forcenosplitscreencontrol main_specops_SOLO";
+                            exec "stopPrivateListen; set arcademode_lives 2; set arcademode_combined_score 0; set splitscreen 0; set mblur_enable 0";
+                            setdvar specialops 1;
+                            close self;
+                            open popmenu_specops_mission_dlc;
+                        }
+                        else
+                        {
+                            setdvar so_survival 0;
+                            setdvar survival_chaos 0;
+                            setdvar specops_map_groupnum 2;
+                            setdvar specops_map_itemnum 0;
+                            if (!dvarbool(coop_matching_type_search))
+                            {
+                                setdvar so_ophud_player0 0;
+                                setdvar so_ophud_player1 0;
+                                execondvarstringvalue developer 0 "set developer_script 0";
+                                exec xrequirelivesignin;
+                                exec "stopPrivateListen; coopStopSearch; set arcademode_lives 2; set arcademode_combined_score 0; set splitscreen 0; set mblur_enable 0";
+                                exec startPrivateListen;
+                                if (dvarint(specops_map_groupnum) == 1)
+                                {
+                                    setLocalVarString coop_mapNameTemp getFirstSpecOpsDLCMap("survival");
+                                    setdvar coop_mapName localVarString ( coop_mapNameTemp );
+                                    setdvar coop_localUserChoiceMapName localVarString ( coop_mapNameTemp );
+                                }
+                                else
+                                {
+                                    setLocalVarString coop_mapNameTemp getFirstSpecOpsDLCMap("mission");
+                                    setdvar coop_mapName localVarString ( coop_mapNameTemp );
+                                    setdvar coop_localUserChoiceMapName localVarString ( coop_mapNameTemp );
+                                }
+                            }
+                            else
+                            {
+                                setdvar so_ophud_player0 0;
+                                setdvar so_ophud_player1 0;
+                                execondvarstringvalue developer 0 "set developer_script 0";
+                                exec xrequirelivesignin;
+                                exec "stopPrivateListen; set arcademode_lives 2; set arcademode_combined_score 0; set splitscreen 0; set mblur_enable 0";
+                                exec "coopOnTwoPlayerMatching; coopSearchStart";
+                                if (dvarint(specops_map_groupnum) == 1)
+                                {
+                                    setLocalVarString coop_mapNameTemp getFirstSpecOpsDLCMap("survival");
+                                    setdvar coop_mapName localVarString ( coop_mapNameTemp );
+                                    setdvar coop_localUserChoiceMapName localVarString ( coop_mapNameTemp );
+                                }
+                                else
+                                {
+                                    setLocalVarString coop_mapNameTemp getFirstSpecOpsDLCMap("mission");
+                                    setdvar coop_mapName localVarString ( coop_mapNameTemp );
+                                    setdvar coop_localUserChoiceMapName localVarString ( coop_mapNameTemp );
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    close self;
+                    open spec_ops_dlc_go_to_store_popup;
+                }
+            }
+            exp rect y                  ((1 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + ((0 - 1.333));
+            exp rect w                  260 - 0;
+            exp rect x                  (0 + (0 + 8));
+        }
+        itemDef
+        {
+            rect                        11.667 0 260 19.567 2 2
+            style                       1
+            decoration                  
+            visible                     when((1) && (1));
+            textalign                   8
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@SO_SURVIVAL_OPTION_DLC";
+            exp rect y                  (((1 * (20 + 2)) + (0 + 4) + ((23 * 1) + (16.367 * 0))) + (0 - 1.333)) - 2.333;
+            exp rect w                  260;
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME", 0, 0.360784), select(localvarstring("ui_swf_selection") == "SWF_POPUP_BUTTON_NAME(SWF_COMMON_POPUP_NAME,1)" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName_popup") == "SWF_COMMON_POPUP_NAME", select(isdemoplaying(), FUNC_44(), FUNC_43()), 1));
+            exp rect x                  (0 + (0 + 8));
+        }
+    }
+}

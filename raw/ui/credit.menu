@@ -1,0 +1,68 @@
+{
+    menuDef
+    {
+        name                        "credit"
+        rect                        2 -10 0 0 8 10
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        legacySplitScreenScale      
+        visible                     when((dvarint(so_survival) && getplayerdata("surHUD", "credits")) && !ui_active());
+        itemDef
+        {
+            rect                        0 -64.6667 -261.333 56 8 10
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "hud_weaponbar_line"
+        }
+        itemDef
+        {
+            rect                        0 0 0 0 0 0
+            decoration                  
+            visible                     when((max(min((1 - (milliseconds() - localvarint("surHUD_credits_animate") + (1250 + 1750)) / 100), 1), 0) * min(max((milliseconds() - localvarint("surHUD_credits_animate") + (1250)) / 100, 0), 1)) < 1);
+            textscale                   0.45
+            textstyle                   3
+            textfont                    9
+            exp text                    locstring("@SO_SURVIVAL_CREDITS", int(FUNC_38() - ((max(min((1 - (milliseconds() - localvarint("surHUD_credits_animate") + 1250) / 1000), 1), 0) * FUNC_39()))));
+        }
+        itemDef
+        {
+            rect                        0 6 0 0 0 0
+            decoration                  
+            visible                     when((max(min((1 - (milliseconds() - localvarint("surHUD_credits_animate") + (1250 + 1750)) / 100), 1), 0) * min(max((milliseconds() - localvarint("surHUD_credits_animate") + (1250)) / 100, 0), 1)) == 1);
+            textscale                   0.6
+            textstyle                   3
+            textfont                    9
+            forecolor                   0.7 1 0.7 0.85
+            exp text                    locstring("@SO_SURVIVAL_CREDITS", int(FUNC_38() - ((max(min((1 - (milliseconds() - localvarint("surHUD_credits_animate") + 1250) / 1000), 1), 0) * FUNC_39()))));
+        }
+        itemDef
+        {
+            rect                        0 -4 0 0 0 0
+            decoration                  
+            visible                     when((max(min((1 - (milliseconds() - localvarint("surHUD_credits_animate") + 1250) / 1750), 1), 0) > 0) && (max(min((1 - (milliseconds() - localvarint("surHUD_credits_animate") + 1250) / 1750), 1), 0) < 1) && FUNC_39() > 0);
+            textscale                   0.35
+            textstyle                   3
+            textfont                    9
+            forecolor                   0.7 1 0.7 0.85
+            exp text                    locstring("@SO_SURVIVAL_CREDITS_PLUS", FUNC_39());
+            exp forecolor a             1 - max(min((1 - (milliseconds() - localvarint("surHUD_credits_animate") + 1250) / 200), 1), 0);
+            exp rect x                  140 + max(min((1 - (milliseconds() - localvarint("surHUD_credits_animate") + 1250) / 200), 1), 0) * 200;
+        }
+        itemDef
+        {
+            rect                        0 -4 0 0 0 0
+            decoration                  
+            visible                     when((max(min((1 - (milliseconds() - localvarint("surHUD_credits_animate") + 1250) / 1750), 1), 0) > 0) && (max(min((1 - (milliseconds() - localvarint("surHUD_credits_animate") + 1250) / 1750), 1), 0) < 1) && FUNC_39() < 0);
+            textscale                   0.35
+            textstyle                   3
+            textfont                    9
+            forecolor                   1 0.5 0.5 0.85
+            exp text                    locstring("@SO_SURVIVAL_CREDITS_MINUS", FUNC_39());
+            exp forecolor a             1 - max(min((1 - (milliseconds() - localvarint("surHUD_credits_animate") + 1250) / 200), 1), 0);
+            exp rect x                  140 + max(min((1 - (milliseconds() - localvarint("surHUD_credits_animate") + 1250) / 200), 1), 0) * 200;
+        }
+    }
+}

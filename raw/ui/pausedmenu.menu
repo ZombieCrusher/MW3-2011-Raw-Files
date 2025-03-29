@@ -1,0 +1,1234 @@
+{
+    menuDef
+    {
+        name                        "pausedmenu"
+        rect                        0 0 640 480 4 4
+        focuscolor                  1 1 1 1
+        fadeClamp                   1
+        fadeCycle                   1
+        fadeAmount                  0.1
+        allowedBinding              "pause"
+        onOpen
+        {
+            showMenu pause_blur;
+            setLocalVarInt ui_ingame 1;
+            setLocalVarBool ui_pauseMenuUp 1;
+            setLocalVarInt ui_navOffs 0;
+            setLocalVarInt ui_pauseMenuButtonsActive 1;
+            setLocalVarInt ui_buttonNavGroupOffset 0;
+            setLocalVarInt ui_buttonNavGroupCurrent 0;
+            setLocalVarString ui_buttonNavGroupName "invalid";
+            setLocalVarBool ui_swfSelectionButtonVis 0;
+            setLocalVarBool ui_swfSelectionBarVis 0;
+            setLocalVarBool ui_swfSelectionDisabled 0;
+            setLocalVarBool ui_swfPopupSelectionButtonVis 0;
+            setLocalVarBool ui_swfPopupSelectionBarVis 0;
+            setLocalVarBool ui_swfPopupSelectionDisabled 0;
+            setLocalVarString ui_swfPopupContext "invalid";
+            focusfirst;
+        }
+        onClose
+        {
+            setLocalVarBool ui_pauseMenuUp 0;
+            hideMenu pause_blur hideMenu objectiveinfo hideMenu overheadmap;
+        }
+        onESC
+        {
+            close pausedmenu;
+        }
+        onFocusDueToClose
+        {
+            focusfirst;
+        }
+        itemDef
+        {
+            rect                        237.5 -36 301.5 480 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+            exp rect w                  localvarbool("ui_shelfEnabled") * select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5));
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  ((0 - 64) + 301.5) + (localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 219.5, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 219.5))));
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+        }
+        itemDef
+        {
+            rect                        237.5 -236 13 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_shelfEnabled"));
+            textscale                   0.55
+            forecolor                   1 1 1 0.75
+            background                  "navbar_edge"
+            exp rect x                  (0 - 64) + 301.5;
+            exp forecolor r             0.596078;
+            exp forecolor g             0.654902;
+            exp forecolor b             0.603922;
+            exp forecolor a             localvarbool("ui_shelfEnabled") * (select(localvarbool("ui_shelfTimeInvert"), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0, (1 - (milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75), select((milliseconds() - localvarfloat("ui_shelfTime")) > 100, 0.75, ((milliseconds() - localvarfloat("ui_shelfTime")) / 100) * 0.75)));
+        }
+        itemDef
+        {
+            rect                        -264 -236 501.5 680 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0.4
+            background                  "white"
+        }
+        itemDef
+        {
+            rect                        -64 30 301.5 5.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(1);
+            textscale                   0.55
+            background                  "navbar_tick"
+        }
+        itemDef
+        {
+            rect                        -64 3 276.667 24.233 1 1
+            style                       1
+            decoration                  
+            visible                     when((!dvarbool(coop)));
+            textalign                   10
+            textscale                   0.5
+            textfont                    9
+            exp text                    "@MENU_PAUSED_CAP";
+        }
+        itemDef
+        {
+            rect                        -294.667 27 293.333 23.633 3 1
+            decoration                  
+            visible                     when(!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(dvarstring(mapname) == "sp_intro" && dvarbool(prologue_select)) && (dvarbool(specialops)) && !dvarbool(coop));
+            textalign                   10
+            textscale                   0.5833
+            textfont                    9
+            exp text                    "@" + tablelookup("sp/specopstable.csv", 1, dvarstring(ui_load_so_level), 2);
+        }
+        itemDef
+        {
+            rect                        -294.667 27 293.333 23.633 3 1
+            decoration                  
+            visible                     when(!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(dvarstring(mapname) == "sp_intro" && dvarbool(prologue_select)) && (dvarbool(specialops)) && dvarbool(coop));
+            textalign                   10
+            textscale                   0.5833
+            textfont                    9
+            exp text                    "@" + tablelookup("sp/specopstable.csv", 1, dvarstring(coop_mapname), 2);
+        }
+        itemDef
+        {
+            rect                        -294.667 27 293.333 23.633 3 1
+            decoration                  
+            type                        8
+            visible                     when(!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(dvarstring(mapname) == "sp_intro" && dvarbool(prologue_select)) && (dvarbool(specialops)));
+            ownerdraw                   99
+            textalign                   10
+            textscale                   0.5
+            textfont                    9
+        }
+        itemDef
+        {
+            rect                        -294.667 27 293.333 23.633 3 1
+            decoration                  
+            type                        8
+            visible                     when(!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(dvarstring(mapname) == "sp_intro" && dvarbool(prologue_select)) && !(dvarbool(specialops)));
+            ownerdraw                   99
+            textalign                   10
+            textscale                   0.5
+            textfont                    9
+        }
+        itemDef
+        {
+            name                        "objectivecheckbox"
+            rect                        -294.667 51 293.333 16 3 1
+            decoration                  
+            type                        8
+            visible                     when(!(dvarstring(mapname) == "sp_intro" && dvarbool(prologue_select)) && (dvarbool(hiDef) || !dvarbool(splitscreen)));
+            ownerdraw                   100
+            textalign                   10
+            textscale                   0.375
+            textstyle                   3
+            textfont                    3
+            exp rect y                  (3 + 48) + (dvarbool(specialops)) * 24;
+        }
+        itemDef
+        {
+            name                        "objectivecheckbox"
+            rect                        -294.667 51 293.333 16 3 1
+            decoration                  
+            type                        8
+            visible                     when(!(dvarstring(mapname) == "sp_intro" && dvarbool(prologue_select)) && (!dvarbool(hiDef) && dvarbool(splitscreen)));
+            ownerdraw                   100
+            textalign                   10
+            textscale                   0.5
+            textstyle                   3
+            textfont                    3
+            exp rect y                  (3 + 48) + (dvarbool(specialops)) * 24;
+        }
+        itemDef
+        {
+            name                        "intel_items_title"
+            rect                        -277.333 316.667 277.333 23.633 3 1
+            decoration                  
+            visible                     when(!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(dvarbool(specialops)) && !(dvarstring(mapname) == "sp_intro" && dvarbool(prologue_select)));
+            textalign                   10
+            textscale                   0.375
+            textfont                    9
+            exp text                    "@MENU_SP_CURRENT_LEVEL_INTEL_TITLE";
+        }
+        itemDef
+        {
+            name                        "intel_items"
+            rect                        -277.333 316.667 277.333 23.633 3 1
+            decoration                  
+            visible                     when(!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(dvarbool(specialops)) && !(dvarstring(mapname) == "sp_intro" && dvarbool(prologue_select)));
+            textalign                   10
+            textaligny                  16
+            textscale                   0.375
+            exp text                    locstring("@MENU_SP_CURRENT_LEVEL_INTELS", dvarint(ui_level_player_cheatpoints), dvarint(ui_level_cheatpoints));
+        }
+        itemDef
+        {
+            name                        "minimapTickerBorder"
+            rect                        78.333 259.333 133.333 133.333 1 1
+            decoration                  
+            type                        8
+            visible                     when(!dvarbool(ui_hidemap));
+            ownerdraw                   151
+            textscale                   0.55
+            background                  "minimap_tickertape_background"
+            exp rect w                  133.333 + 2;
+            exp rect h                  16;
+        }
+        itemDef
+        {
+            name                        "minimapTicker"
+            rect                        79.333 263.333 133.333 133.333 1 1
+            decoration                  
+            type                        8
+            visible                     when(!dvarbool(ui_hidemap));
+            ownerdraw                   146
+            textscale                   0.55
+            background                  "minimap_tickertape_mp"
+            exp rect h                  10;
+        }
+        itemDef
+        {
+            rect                        79.333 275.333 133.333 133.333 1 1
+            decoration                  
+            type                        8
+            visible                     when(!dvarbool(ui_hidemap));
+            ownerdraw                   159
+            textscale                   0.55
+            background                  "compass_map_default"
+        }
+        itemDef
+        {
+            rect                        79.333 275.333 133.333 133.333 1 1
+            decoration                  
+            type                        8
+            visible                     when(!dvarbool(ui_hidemap));
+            ownerdraw                   155
+            textscale                   0.55
+        }
+        itemDef
+        {
+            rect                        79.333 275.333 133.333 133.333 1 1
+            decoration                  
+            type                        8
+            visible                     when(!dvarbool(ui_hidemap));
+            ownerdraw                   153
+            textscale                   0.55
+            background                  "compassping_friendly"
+        }
+        itemDef
+        {
+            rect                        79.333 275.333 133.333 133.333 1 1
+            decoration                  
+            type                        8
+            visible                     when(!dvarbool(ui_hidemap));
+            ownerdraw                   150
+            textscale                   0.55
+            background                  "compassping_player"
+        }
+        itemDef
+        {
+            rect                        79.333 275.333 133.333 133.333 1 1
+            decoration                  
+            type                        8
+            visible                     when(!dvarbool(ui_hidemap));
+            ownerdraw                   152
+            textscale                   0.55
+            background                  "objective_line"
+        }
+        itemDef
+        {
+            name                        "minimapBG"
+            rect                        63.333 268.333 133.333 133.333 1 1
+            decoration                  
+            type                        8
+            visible                     when(!dvarbool(ui_hidemap));
+            ownerdraw                   151
+            textscale                   0.55
+            background                  "minimap_background"
+            exp rect w                  133.333 + 26;
+            exp rect h                  133.333 + 26;
+        }
+        itemDef
+        {
+            rect                        0 0 250 49.333 3 3
+            style                       3
+            decoration                  
+            visible                     when(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (dvarbool(specialops)))));
+            textscale                   0.55
+            forecolor                   0.2118 0.2314 0.22 1
+            background                  "white"
+            exp rect x                  (0 - 250);
+            exp rect y                  (((0 - 20.667) - (0 + 49.333) - 10)) + 0;
+        }
+        itemDef
+        {
+            rect                        0 0 250 18.033 3 3
+            style                       1
+            decoration                  
+            visible                     when(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (dvarbool(specialops)))));
+            textalign                   9
+            textscale                   0.340278
+            textfont                    3
+            forecolor                   0.996 0.988 0.255 1
+            exp text                    locstring("@MENU_X_SLASH_Y_XP", int(getplayerdata("experience")), int((tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 7))));
+            exp rect x                  (0 - 250);
+            exp rect y                  (((0 - 20.667) - (0 + 49.333) - 10)) + (0 + 15.966);
+        }
+        itemDef
+        {
+            rect                        0 0 0 18.033 3 3
+            style                       1
+            decoration                  
+            visible                     when(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (dvarbool(specialops)))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            exp text                    (tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 14));
+            exp rect x                  ((0 - 250)) + (5 + 29);
+            exp rect y                  (((0 - 20.667) - (0 + 49.333) - 10)) + (0 + 16.333);
+        }
+        itemDef
+        {
+            rect                        0 0 0 18.033 3 3
+            style                       1
+            decoration                  
+            visible                     when(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (dvarbool(specialops)))));
+            textalign                   8
+            textscale                   0.340278
+            textfont                    3
+            exp text                    (tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")) + 1, 14));
+            exp rect x                  ((0 - 250)) + ((250 - 5 - 29 - getTextWidth("88", 3, 0.340278)) + 29);
+            exp rect y                  (((0 - 20.667) - (0 + 49.333) - 10)) + (0 + 16.333);
+        }
+        itemDef
+        {
+            rect                        0 0 250 18.033 3 3
+            style                       1
+            decoration                  
+            visible                     when(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (dvarbool(specialops)))));
+            textalign                   9
+            textscale                   0.340278
+            textstyle                   9
+            textfont                    3
+            exp text                    ("@" + tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 5));
+            exp rect x                  (0 - 250);
+            exp rect y                  (((0 - 20.667) - (0 + 49.333) - 10)) + (0);
+        }
+        itemDef
+        {
+            rect                        0 0 26.667 26.667 3 3
+            style                       3
+            decoration                  
+            visible                     when(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (dvarbool(specialops)))));
+            textscale                   0.55
+            exp material                (tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 6));
+            exp rect x                  ((0 - 250)) + 5;
+            exp rect y                  (((0 - 20.667) - (0 + 49.333) - 10)) + (0 + 7.333);
+        }
+        itemDef
+        {
+            rect                        0 0 26.667 26.667 3 3
+            style                       3
+            decoration                  
+            visible                     when(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (dvarbool(specialops)))) && ((levelforexperienceso(getplayerdata("experience")) < int(tablelookup("sp/rankTable.csv", 0, "maxrank", 1)))));
+            textscale                   0.55
+            exp material                select(0, (tablelookup("sp/rankTable.csv", 0, 0, 6)), (tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")) + 1, 6)));
+            exp rect x                  ((0 - 250)) + (250 - 5 - 29 - getTextWidth("88", 3, 0.340278));
+            exp rect y                  (((0 - 20.667) - (0 + 49.333) - 10)) + (0 + 7.333);
+        }
+        itemDef
+        {
+            rect                        0 0 240 7.333 3 3
+            style                       1
+            decoration                  
+            visible                     when((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (dvarbool(specialops))));
+            textscale                   0.55
+            backcolor                   0 0 0 1
+            exp rect x                  ((0 - 250)) + 5;
+            exp rect y                  (((0 - 20.667) - (0 + 49.333) - 10)) + (0 + 36.033);
+        }
+        itemDef
+        {
+            rect                        0 0 244 11.333 3 3
+            style                       3
+            decoration                  
+            visible                     when((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (dvarbool(specialops))));
+            textscale                   0.55
+            background                  "dest_alpha_zero"
+            exp rect x                  ((0 - 250)) + 5 - 2;
+            exp rect y                  (((0 - 20.667) - (0 + 49.333) - 10)) + (0 + 36.033) - 2;
+        }
+        itemDef
+        {
+            rect                        0 0 0 7.333 3 3
+            style                       3
+            decoration                  
+            visible                     when((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (dvarbool(specialops))));
+            textscale                   0.55
+            background                  "dest_alpha_one"
+            exp rect x                  ((0 - 250)) + 5;
+            exp rect y                  (((0 - 20.667) - (0 + 49.333) - 10)) + (0 + 36.033);
+            exp rect w                  ((getplayerdata("experience") - (tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 2))) / float((tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 7)) - (tablelookup("sp/rankTable.csv", 0, levelforexperienceso(getplayerdata("experience")), 2)))) * (250 - 2 * 5);
+        }
+        itemDef
+        {
+            rect                        0 0 240 7.333 3 3
+            style                       3
+            decoration                  
+            visible                     when((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (dvarbool(specialops))));
+            textscale                   0.55
+            background                  "bar_progress_yellow_custom"
+            exp rect x                  ((0 - 250)) + 5;
+            exp rect y                  (((0 - 20.667) - (0 + 49.333) - 10)) + (0 + 36.033);
+        }
+        itemDef
+        {
+            rect                        -88 34.667 325.333 17.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionBarVis") && (localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar"
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + 0.667;
+        }
+        itemDef
+        {
+            rect                        213 34.667 21.333 16.5 1 1
+            style                       1
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionButtonVis") && (localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST"));
+            textalign                   10
+            textscale                   0.30625
+            textfont                    3
+            exp text                    "@PLATFORM_NAVBAR_BUTTON_FOCUSED_SELECTBUTTON";
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + (0.667);
+        }
+        itemDef
+        {
+            name                        "PAUSE_LIST_0"
+            rect                        -68 34.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "PAUSE_LIST_0";
+                setLocalVarInt ui_buttonNavGroupCurrent 0;
+                setLocalVarString ui_buttonNavGroupName "PAUSE_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((8 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (8 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    close pausedmenu;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 0))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        219 37 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((0)) && (1))) && (0) && (localvarstring("ui_swf_selection") == "PAUSE_LIST_0" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST"));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 0)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        219 37 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((0)) && (1))) && (0) && (!(localvarstring("ui_swf_selection") == "PAUSE_LIST_0" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST")));
+            textscale                   0.55
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 0)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        -64 33.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    select((dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"), "@MENU_RESUME_CREDITS", "@MENU_RESUMEGAME");
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 0))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "PAUSE_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "PAUSE_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "PAUSE_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_0" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+        }
+        itemDef
+        {
+            name                        "PAUSE_LIST_1"
+            rect                        -68 54.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when(1);
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "PAUSE_LIST_1";
+                setLocalVarInt ui_buttonNavGroupCurrent 1;
+                setLocalVarString ui_buttonNavGroupName "PAUSE_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((1) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (1);
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((8 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (8 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    if ((dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"))
+                    {
+                        setdvar credits_active 0;
+                        setdvar ui_play_credits "";
+                        close pausedmenu;
+                        exec disconnect;
+                    }
+                    else
+                    {
+                        execnow "set ui_allow_graphic_change 1";
+                        open pc_options_video_ingame;
+                        close pausedmenu;
+                    }
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 1))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        219 57 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((0)) && (1))) && (0) && (localvarstring("ui_swf_selection") == "PAUSE_LIST_1" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST"));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 1)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        219 57 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((0)) && (1))) && (0) && (!(localvarstring("ui_swf_selection") == "PAUSE_LIST_1" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST")));
+            textscale                   0.55
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 1)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        -64 53.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((1));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    select((dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"), "@PLATFORM_QUIT", "@MENU_OPTIONS");
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 1))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "PAUSE_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "PAUSE_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "PAUSE_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_1" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+        }
+        itemDef
+        {
+            name                        "PAUSE_LIST_2"
+            rect                        -68 74.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when(!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "PAUSE_LIST_2";
+                setLocalVarInt ui_buttonNavGroupCurrent 2;
+                setLocalVarString ui_buttonNavGroupName "PAUSE_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")) && !(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && ((dvarint(g_gameskill) == 0) || (dvarstring(mapname) == "trainer"))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops)))));
+                setLocalVarBool ui_swfSelectionBarVis (!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"));
+                setLocalVarBool ui_swfSelectionDisabled (((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && ((dvarint(g_gameskill) == 0) || (dvarstring(mapname) == "trainer"))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops))));
+                if ((8 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (8 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && ((dvarint(g_gameskill) == 0) || (dvarstring(mapname) == "trainer"))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops)))))
+                {
+                    play mouse_click;
+                    open ingame_difficulty;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 2))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        219 77 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && ((dvarint(g_gameskill) == 0) || (dvarstring(mapname) == "trainer"))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops))))) && (!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")))) && (0) && (localvarstring("ui_swf_selection") == "PAUSE_LIST_2" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST"));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 2)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        219 77 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && ((dvarint(g_gameskill) == 0) || (dvarstring(mapname) == "trainer"))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops))))) && (!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")))) && (0) && (!(localvarstring("ui_swf_selection") == "PAUSE_LIST_2" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST")));
+            textscale                   0.55
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 2)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        -64 73.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_LOWER_DIFFICULTY";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 2))) + ((0 - 1.333));
+            exp forecolor r             select(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && ((dvarint(g_gameskill) == 0) || (dvarstring(mapname) == "trainer"))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops))), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor g             select(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && ((dvarint(g_gameskill) == 0) || (dvarstring(mapname) == "trainer"))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops))), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor b             select(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && ((dvarint(g_gameskill) == 0) || (dvarstring(mapname) == "trainer"))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops))), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_2" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+        }
+        itemDef
+        {
+            name                        "PAUSE_LIST_3"
+            rect                        -68 94.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when(!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "PAUSE_LIST_3";
+                setLocalVarInt ui_buttonNavGroupCurrent 3;
+                setLocalVarString ui_buttonNavGroupName "PAUSE_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")) && !(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(!dvarbool(arcademode) && !dvarbool(coop) && !(dvarbool(specialops)))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops)))));
+                setLocalVarBool ui_swfSelectionBarVis (!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"));
+                setLocalVarBool ui_swfSelectionDisabled (((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(!dvarbool(arcademode) && !dvarbool(coop) && !(dvarbool(specialops)))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops))));
+                if ((8 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (8 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(!dvarbool(arcademode) && !dvarbool(coop) && !(dvarbool(specialops)))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops)))))
+                {
+                    play mouse_click;
+                    open last_checkpoint_warning;
+                    close pausedmenu;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 3))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        219 97 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(!dvarbool(arcademode) && !dvarbool(coop) && !(dvarbool(specialops)))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops))))) && (!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")))) && (0) && (localvarstring("ui_swf_selection") == "PAUSE_LIST_3" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST"));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 3)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        219 97 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(!dvarbool(arcademode) && !dvarbool(coop) && !(dvarbool(specialops)))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops))))) && (!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")))) && (0) && (!(localvarstring("ui_swf_selection") == "PAUSE_LIST_3" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST")));
+            textscale                   0.55
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 3)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        -64 93.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_LAST_CHECKPOINT";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 3))) + ((0 - 1.333));
+            exp forecolor r             select(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(!dvarbool(arcademode) && !dvarbool(coop) && !(dvarbool(specialops)))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops))), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor g             select(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(!dvarbool(arcademode) && !dvarbool(coop) && !(dvarbool(specialops)))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops))), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor b             select(((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && !(!dvarbool(arcademode) && !dvarbool(coop) && !(dvarbool(specialops)))) || (dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (dvarbool(specialops))), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_3" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+        }
+        itemDef
+        {
+            name                        "PAUSE_LIST_4"
+            rect                        -68 114.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when(!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "PAUSE_LIST_4";
+                setLocalVarInt ui_buttonNavGroupCurrent 4;
+                setLocalVarString ui_buttonNavGroupName "PAUSE_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")) && !((dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")));
+                setLocalVarBool ui_swfSelectionBarVis (!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"));
+                setLocalVarBool ui_swfSelectionDisabled ((dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"));
+                if ((8 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (8 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!((dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")))
+                {
+                    play mouse_click;
+                    close pausedmenu;
+                    open restart_warning;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 4))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        219 117 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when((((((dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"))) && (!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")))) && (0) && (localvarstring("ui_swf_selection") == "PAUSE_LIST_4" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST"));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 4)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        219 117 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when((((((dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"))) && (!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")))) && (0) && (!(localvarstring("ui_swf_selection") == "PAUSE_LIST_4" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST")));
+            textscale                   0.55
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 4)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        -64 113.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_RESTART_MISSION";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 4))) + ((0 - 1.333));
+            exp forecolor r             select((dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor g             select((dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor b             select((dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_4" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+        }
+        itemDef
+        {
+            name                        "PAUSE_LIST_5"
+            rect                        -68 134.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when(!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "PAUSE_LIST_5";
+                setLocalVarInt ui_buttonNavGroupCurrent 5;
+                setLocalVarString ui_buttonNavGroupName "PAUSE_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis ((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis (!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1"));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((8 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (8 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    if (!(dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") && !(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (!dvarbool(arcademode) && !dvarbool(coop) && !(dvarbool(specialops))) && (savegameavailable() && !dvarbool(splitscreen)))
+                    {
+                        close pausedmenu;
+                        open savegame_warning;
+                    }
+                    else
+                    {
+                        if (!(dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") && !(!dvarbool(arcademode) && !dvarbool(coop) && !(dvarbool(specialops))))
+                        {
+                            close pausedmenu;
+                            open savegame_warning_arcade;
+                        }
+                        else
+                        {
+                            if ((dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") || (!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (!dvarbool(arcademode) && !dvarbool(coop) && !(dvarbool(specialops))) && 0 == (savegameavailable() && !dvarbool(splitscreen))))
+                            {
+                                close pausedmenu;
+                                open savegame_warning_noprofile;
+                            }
+                        }
+                    }
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        219 137 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((0)) && (!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")))) && (0) && (localvarstring("ui_swf_selection") == "PAUSE_LIST_5" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST"));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 5)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        219 137 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((0)) && (!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")))) && (0) && (!(localvarstring("ui_swf_selection") == "PAUSE_LIST_5" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST")));
+            textscale                   0.55
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 5)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        -64 133.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when((!(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1")));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    select((!(dvarstring(mapname) == "ending" && dvarstring(ui_char_museum_mode) == "free") && !(dvarstring(mapname) == "sp_dubai" && dvarstring(ui_play_credits) == "1") && (!dvarbool(arcademode) && !dvarbool(coop) && !(dvarbool(specialops))) && (savegameavailable() && !dvarbool(splitscreen))), "@PLATFORM_SAVE_AND_QUIT", "@PLATFORM_QUIT");
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 5))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "PAUSE_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "PAUSE_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "PAUSE_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_5" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+        }
+        itemDef
+        {
+            name                        "PAUSE_LIST_6"
+            rect                        -68 154.667 305.333 17.333 1 1
+            style                       3
+            type                        1
+            visible                     when((dvarstring(mapname) == "airport"));
+            textscale                   0.55
+            forecolor                   0 0 0 0
+            background                  "white"
+            onFocus
+            {
+                setLocalVarString ui_swf_selection "PAUSE_LIST_6";
+                setLocalVarInt ui_buttonNavGroupCurrent 6;
+                setLocalVarString ui_buttonNavGroupName "PAUSE_LIST";
+                setLocalVarBool ui_swfSelectionButtonVis (((dvarstring(mapname) == "airport")) && !(0));
+                setLocalVarBool ui_swfSelectionBarVis ((dvarstring(mapname) == "airport"));
+                setLocalVarBool ui_swfSelectionDisabled (0);
+                if ((8 - 1) + localvarint("ui_buttonNavGroupOffset") < localvarint("ui_buttonNavGroupCurrent"))
+                {
+                    setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent") - (8 - 1));
+                }
+                else
+                {
+                    if (localvarint("ui_buttonNavGroupCurrent") < localvarint("ui_buttonNavGroupOffset"))
+                    {
+                        setLocalVarInt ui_buttonNavGroupOffset (localvarint("ui_buttonNavGroupCurrent"));
+                    }
+                }
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarBool ui_swfSelectionButtonVis 0;
+                setLocalVarBool ui_swfSelectionBarVis 0;
+                setLocalVarBool ui_swfSelectionDisabled 0;
+            }
+            action
+            {
+                if (!(0))
+                {
+                    play mouse_click;
+                    close pausedmenu;
+                    open offensive_skip_popup_confirm;
+                }
+            }
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 6))) + ((0 - 1.333));
+        }
+        itemDef
+        {
+            rect                        219 157 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((0)) && ((dvarstring(mapname) == "airport")))) && (0) && (localvarstring("ui_swf_selection") == "PAUSE_LIST_6" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST"));
+            textscale                   0.55
+            forecolor                   0 0 0 1
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 6)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        219 157 14.333 14.333 1 1
+            style                       3
+            decoration                  
+            visible                     when(((((0)) && ((dvarstring(mapname) == "airport")))) && (0) && (!(localvarstring("ui_swf_selection") == "PAUSE_LIST_6" && FUNC_34() && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST")));
+            textscale                   0.55
+            background                  "icon_lock"
+            exp rect y                  (((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + ((((34.667) + (20 * 6)) + 1.333)) - (0.667)) + 1.5;
+        }
+        itemDef
+        {
+            rect                        -64 153.334 276.667 19.567 1 1
+            style                       1
+            decoration                  
+            visible                     when(((dvarstring(mapname) == "airport")));
+            textalign                   10
+            textscale                   0.375
+            textstyle                   9
+            textfont                    3
+            exp text                    "@MENU_SP_SKIP_MISSION";
+            exp rect y                  ((0 - (localvarint("ui_buttonNavGroupOffset") * 20))) + (((34.667) + (20 * 6))) + ((0 - 1.333));
+            exp forecolor r             select(0, select(localvarstring("ui_swf_selection") == "PAUSE_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor g             select(0, select(localvarstring("ui_swf_selection") == "PAUSE_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+            exp forecolor b             select(0, select(localvarstring("ui_swf_selection") == "PAUSE_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", 0, 0.360784), select(localvarstring("ui_swf_selection") == "PAUSE_LIST_6" && select(localvarbool("ui_centerPopup"), localvarbool("ui_swfPopupSelectionBarVis"), localvarbool("ui_swfSelectionBarVis")) && localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST", select(isdemoplaying(), FUNC_47(), FUNC_46()), 1));
+        }
+        itemDef
+        {
+            rect                        -88 52 325.333 8.666 1 1
+            style                       3
+            decoration                  
+            visible                     when(localvarbool("ui_swfSelectionBarVis") && (localvarstring("ui_buttonNavGroupName") == "PAUSE_LIST"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect y                  ((localvarint("ui_buttonNavGroupCurrent") - localvarint("ui_buttonNavGroupOffset")) * 20) + (34.667) + 0.667 + 17.333;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 1;
+                setLocalVarString ui_ralign_group "pausedmenu";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 27;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((1) && (!0) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "pausedmenu"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((1) && (localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "pausedmenu"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(1);
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            exp text                    "@PLATFORM_BACK_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "pausedmenu"), select(isdemoplaying(), FUNC_47(), FUNC_46()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "pausedmenu"), select(isdemoplaying(), FUNC_47(), FUNC_46()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 1 && localvarstring("ui_ralign_group") == "pausedmenu"), select(isdemoplaying(), FUNC_47(), FUNC_46()), 1);
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            type                        1
+            visible                     when(((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            onFocus
+            {
+                setLocalVarInt ui_ralign_index 2;
+                setLocalVarString ui_ralign_group "pausedmenu";
+                play mouse_over;
+            }
+            leaveFocus
+            {
+                setLocalVarInt ui_ralign_index - 1;
+                setLocalVarString ui_ralign_group "";
+            }
+            action
+            {
+                play mouse_click;
+                uiscript simulateKeyPress 102;
+            }
+            exp rect x                  (0) - (0 * 5) - 20 - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 8.666 3 3
+            style                       3
+            decoration                  
+            visible                     when((((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running))))) && (!0) && (localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "pausedmenu"));
+            textscale                   0.55
+            background                  "navbar_selection_bar_shadow"
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667)) + 20;
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            style                       1
+            decoration                  
+            visible                     when((((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running))))) && (localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "pausedmenu"));
+            textscale                   0.55
+            backcolor                   0.6 0.6314 0.6 1
+            exp rect x                  (0) - (0 * 5) - (20) - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) + 20;
+        }
+        itemDef
+        {
+            rect                        0 0 0 20 3 3
+            decoration                  
+            visible                     when(((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))));
+            textalign                   8
+            textscale                   0.375
+            textfont                    3
+            execKey "f"
+            {
+                if (((isprofilesignedin() || anysplitscreenprofilesaresignedin()) && (isusersignedintolive() || isanyusersignedintolive()) && ((dvarbool(onlinegame) && (dvarbool(sv_running) || dvarbool(cl_ingame))) || (!dvarbool(cl_ingame) && !dvarbool(sv_running)))))
+                {
+                    setLocalVarBool ui_vault_browse 0;
+                    setLocalVarBool ui_vault_load 0;
+                    execnow "incnosplitscreencontrol popup_friends";
+                    if (isprofilesignedin() && isusersignedintolive())
+                    {
+                        open popup_friends;
+                    }
+                    else
+                    {
+                        execnow "decnosplitscreencontrol popup_friends";
+                    }
+                }
+            }
+            exp text                    "@PLATFORM_FRIENDS_SHORTCUT";
+            exp rect x                  (0) - (0 * 5) - (20 / 2) - getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375) - select((1), (20 + getTextWidth(locstring("@PLATFORM_BACK_SHORTCUT"), 3, 0.375) + 5), 0);
+            exp rect y                  ((0 - 20.667));
+            exp rect w                  getTextWidth(locstring("@PLATFORM_FRIENDS_SHORTCUT"), 3, 0.375);
+            exp forecolor r             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "pausedmenu"), select(isdemoplaying(), FUNC_47(), FUNC_46()), 1);
+            exp forecolor g             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "pausedmenu"), select(isdemoplaying(), FUNC_47(), FUNC_46()), 1);
+            exp forecolor b             select((localvarint("ui_ralign_index") == 2 && localvarstring("ui_ralign_group") == "pausedmenu"), select(isdemoplaying(), FUNC_47(), FUNC_46()), 1);
+        }
+    }
+}
