@@ -1,0 +1,43 @@
+{
+    menuDef
+    {
+        name                        "popmenu_specialops_splitscreen_skip_difficulty"
+        rect                        0 0 0 0 0 0
+        onOpen
+        {
+            if (dvarint(g_gameskill_player_1) >= dvarint(g_gameskill_player_2))
+            {
+                if (dvarint(g_gameskill_player_1) == 1)
+                {
+                    setdvar g_gameskill 1;
+                }
+                if (dvarint(g_gameskill_player_1) == 2)
+                {
+                    setdvar g_gameskill 2;
+                }
+                if (dvarint(g_gameskill_player_1) == 3)
+                {
+                    setdvar g_gameskill 3;
+                }
+            }
+            else
+            {
+                if (dvarint(g_gameskill_player_2) == 1)
+                {
+                    setdvar g_gameskill 1;
+                }
+                if (dvarint(g_gameskill_player_2) == 2)
+                {
+                    setdvar g_gameskill 2;
+                }
+                if (dvarint(g_gameskill_player_2) == 3)
+                {
+                    setdvar g_gameskill 3;
+                }
+            }
+            close self;
+            setLocalVarInt ui_specops_loading_level 1;
+            exec "devmap dvarstring(ui_load_so_level)";
+        }
+    }
+}

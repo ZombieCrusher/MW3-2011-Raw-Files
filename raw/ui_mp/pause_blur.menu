@@ -1,0 +1,10 @@
+{
+    menuDef
+    {
+        name                        "pause_blur"
+        rect                        0 0 640 480 0 0
+        focuscolor                  1 1 1 1
+        blurWorld                   4.8
+        legacySplitScreenScale      
+    }
+}
